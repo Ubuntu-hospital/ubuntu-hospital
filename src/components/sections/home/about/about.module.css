@@ -1,0 +1,151 @@
+.about-section {
+  overflow: hidden;
+  background: var(--white);
+}
+
+.about-orbit {
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid rgba(255, 109, 18, 0.12);
+  border-radius: 50%;
+}
+
+.about-orbit-one {
+  top: -160px;
+  right: -130px;
+  width: 430px;
+  height: 430px;
+}
+
+.about-orbit-two {
+  right: -40px;
+  bottom: -210px;
+  width: 340px;
+  height: 340px;
+}
+
+.about-layout {
+  display: grid;
+  gap: 36px;
+}
+
+.about-media {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: 3px 18px 18px 18px;
+  background: #d9e0e4;
+}
+
+.about-media img {
+  object-fit: cover;
+  transition: transform 700ms ease;
+}
+
+.about-media:hover img {
+  transform: scale(1.045);
+}
+
+.about-image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 38%, rgba(17, 24, 39, 0.78));
+}
+
+.about-image-caption {
+  position: absolute;
+  right: 17px;
+  bottom: 17px;
+  left: 17px;
+  padding: 14px 15px;
+  border-left: 3px solid var(--orange);
+  background: rgba(22, 30, 40, 0.56);
+  backdrop-filter: blur(12px);
+}
+
+.about-image-caption span {
+  display: block;
+  color: #ffc49d;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.about-image-caption strong {
+  display: block;
+  max-width: 390px;
+  margin-top: 7px;
+  color: var(--white);
+  font-size: 14px;
+  line-height: 1.52;
+}
+
+.about-highlight-list {
+  display: grid;
+  gap: 11px;
+  margin-top: 26px;
+}
+
+.about-highlight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.about-highlight span {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border-radius: 7px;
+  background: var(--orange-soft);
+  color: var(--orange-deep);
+}
+
+.about-highlight p {
+  margin: 0;
+  color: #354054;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+.about-stats > div {
+  display: grid;
+  gap: 7px;
+  padding: 16px 8px 0 0;
+}
+
+.about-stats strong {
+  color: var(--orange-deep);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 34px;
+  font-weight: 600;
+  letter-spacing: -0.05em;
+}
+
+.about-stats span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+@media (min-width: 980px) {
+.about-layout {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 68px;
+    align-items: center;
+  }
+
+.about-media {
+    min-height: 590px;
+  }
+}

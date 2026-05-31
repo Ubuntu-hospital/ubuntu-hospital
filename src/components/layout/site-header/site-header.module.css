@@ -1,0 +1,102 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(228, 231, 236, 0.82);
+  background: rgba(255, 255, 255, 0.93);
+  backdrop-filter: blur(18px);
+}
+
+.nav-shell {
+  display: flex;
+  min-height: 78px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.desktop-nav,
+.desktop-actions {
+  display: none;
+}
+
+.phone-link,
+.secondary-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 800;
+  transition: color 180ms ease;
+}
+
+.phone-link:hover,
+.secondary-action:hover {
+  color: var(--orange-deep);
+}
+
+.menu-button {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--white);
+  color: var(--ink);
+}
+
+.mobile-nav {
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.98);
+}
+
+.mobile-nav-inner {
+  display: grid;
+  gap: 3px;
+  padding: 14px 0 18px;
+}
+
+.mobile-nav-inner > a:not(.button) {
+  padding: 12px 4px;
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.mobile-nav-inner .button {
+  margin-top: 8px;
+}
+
+@media (min-width: 980px) {
+.desktop-nav,
+.desktop-actions {
+    display: flex;
+    align-items: center;
+  }
+
+.desktop-nav {
+    gap: 22px;
+  }
+
+.desktop-nav a {
+    color: #5d687a;
+    font-size: 12px;
+    font-weight: 800;
+    transition: color 180ms ease;
+  }
+
+.desktop-nav a:hover {
+    color: var(--orange-deep);
+  }
+
+.desktop-actions {
+    gap: 16px;
+  }
+
+.menu-button {
+    display: none;
+  }
+}

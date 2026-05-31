@@ -1,0 +1,132 @@
+.custom-control {
+  position: relative;
+}
+
+.custom-trigger {
+  display: flex;
+  width: 100%;
+  min-height: 43px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid #d7dce2;
+  border-radius: 6px;
+  padding: 12px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 13px;
+  text-align: left;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.custom-trigger:hover,
+.custom-trigger:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(255, 109, 18, 0.11);
+  outline: 0;
+}
+
+.custom-trigger svg {
+  flex: 0 0 auto;
+  color: var(--orange-deep);
+}
+
+.custom-placeholder {
+  color: #8a94a3;
+}
+
+.custom-chevron {
+  transition: transform 180ms ease;
+}
+
+.custom-chevron-open {
+  transform: rotate(180deg);
+}
+
+.custom-popover {
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 70;
+  margin-top: 7px;
+  border: 1px solid #dfe3e8;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.99);
+  box-shadow: 0 18px 44px rgba(25, 34, 44, 0.14);
+}
+
+.custom-calendar {
+  width: min(324px, calc(100vw - 50px));
+  padding: 11px;
+}
+
+.custom-calendar-header {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr) 32px;
+  gap: 8px;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.custom-calendar-header strong {
+  color: var(--ink);
+  font-size: 12px;
+  text-align: center;
+}
+
+.custom-calendar-header button {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--ink);
+}
+
+.custom-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.custom-calendar-weekdays {
+  margin-bottom: 5px;
+}
+
+.custom-calendar-weekdays span {
+  padding: 5px 0;
+  color: #8b95a4;
+  font-size: 9px;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.custom-date {
+  display: grid;
+  min-height: 34px;
+  place-items: center;
+  border: 0;
+  border-radius: 5px;
+  background: transparent;
+  color: #445065;
+  font-size: 11px;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.custom-date:hover,
+.custom-date.active {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.custom-date:disabled {
+  color: #ccd1d8;
+  cursor: not-allowed;
+}
