@@ -14,7 +14,6 @@ import { FacilityExplorer } from "./facility-explorer.client";
 import styles from "./facilities-page.module.css";
 import Reveal from "@/components/ui/reveal/reveal.client";
 import Tour from "../home/tour/tour.client";
-import FinalCta from "../home/final-cta/final-cta";
 
 export function FacilitiesPage() {
   const primaryPhone = hospitalConfig.contact.phoneNumbers[0];
@@ -205,7 +204,6 @@ export function FacilitiesPage() {
         </div>
       </section>
 
-      <FinalCta />
     </>
   );
 }

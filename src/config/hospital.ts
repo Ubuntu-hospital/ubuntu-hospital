@@ -7,6 +7,13 @@ export const hospitalConfig = {
     facility: "Hospital",
   },
 
+  branding: {
+    logoSrc: "/ubuntu-hospital-logo.png",
+    logomarkSrc: "/ubuntu-logomark.png",
+    logoAlt: "Ubuntu Orthopaedic and Spine Hospital logo",
+    logomarkAlt: "Ubuntu Orthopaedic and Spine Hospital symbol",
+  },
+
   shortName: "Ubuntu Hospital",
   tagline: "We are because you are.",
   description:
@@ -14,11 +21,33 @@ export const hospitalConfig = {
 
   navigation: [
     { label: "Home", href: "/" },
-    { label: "Services", href: "/services" },
-    { label: "About", href: "/about" },
-    { label: "Tour", href: "#tour" },
-    { label: "Specialists", href: "#specialists" },
-    { label: "Contact", href: "/contact" },
+    { label: "About Us", href: "/about" },
+    {
+      label: "Services",
+      href: "/services",
+      children: [
+        { label: "Service Overview", href: "/services#home" },
+        { label: "Clinical Services", href: "/services#services" },
+        { label: "Care Pathway", href: "/services#pathway" },
+        { label: "Before Your Visit", href: "/services#visit" },
+      ],
+    },
+    { label: "Tour", href: "/#tour" },
+    {
+      label: "Patients",
+      href: "/patients",
+      children: [
+        { label: "Emergency Care", href: "/patients#emergency-care" },
+        { label: "Visiting Hours", href: "/patients#visiting-hours" },
+        { label: "Inpatient Guide", href: "/patients#inpatient-guide" },
+        { label: "Outpatient Guide", href: "/patients#outpatient-guide" },
+      ],
+    },
+    { label: "Contact Us", href: "/contact" },
+    {
+      label: "Gallery",
+      href: "/gallery",
+    },
   ],
 
   contact: {
@@ -96,6 +125,30 @@ export const hospitalConfig = {
         title: "Compassionate Support",
         text: "Support at every stage of your journey.",
         icon: "heart-handshake",
+      },
+    ],
+
+    focusAreas: [
+      {
+        title: "Spine",
+        text: ["Back pain", "Disorders of the spine"],
+        image:
+          "https://images.pexels.com/photos/6749778/pexels-photo-6749778.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Clinical spine consultation with a patient and doctor",
+      },
+      {
+        title: "Trauma",
+        text: ["Bone injuries", "Muscle injuries", "Joint injuries"],
+        image:
+          "https://images.pexels.com/photos/7088524/pexels-photo-7088524.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Trauma-focused hospital care with a patient receiving support",
+      },
+      {
+        title: "General orthopaedics",
+        text: ["Joint replacement", "Sports medicine", "Rehabilitation"],
+        image:
+          "https://images.pexels.com/photos/5794042/pexels-photo-5794042.jpeg?auto=compress&cs=tinysrgb&w=1200",
+        alt: "Orthopaedic rehabilitation session with guided movement support",
       },
     ],
   },

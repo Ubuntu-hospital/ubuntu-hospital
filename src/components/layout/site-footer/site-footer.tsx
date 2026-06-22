@@ -4,6 +4,9 @@ import { hospitalConfig } from "@/config/hospital";
 import Brand from "@/components/layout/brand/brand";
 
 export default function SiteFooter() {
+  const patientLinks =
+    navigation.find((item) => item.label === "Patients")?.children ?? [];
+
   return (
     <footer className="footer texture-dark">
       <div className="shell footer-layout">
@@ -15,7 +18,20 @@ export default function SiteFooter() {
         <div>
           <h3>Explore</h3>
 
-          {navigation.slice(1).map((item) => (
+          {navigation
+            .filter((item) => item.label !== "Patients")
+            .slice(1)
+            .map((item) => (
+              <a href={item.href} key={item.href}>
+                {item.label}
+              </a>
+            ))}
+        </div>
+
+        <div>
+          <h3>Patients</h3>
+
+          {patientLinks.map((item) => (
             <a href={item.href} key={item.href}>
               {item.label}
             </a>
@@ -42,8 +58,8 @@ export default function SiteFooter() {
       <div className="footer-bottom">
         <div className="shell footer-bottom-layout">
           <p>
-            © {new Date().getFullYear()} {hospitalConfig.name}. All rights
-            reserved.
+            Copyright {new Date().getFullYear()} {hospitalConfig.name}. All
+            rights reserved.
           </p>
 
           <a

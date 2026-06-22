@@ -1,67 +1,59 @@
+import Image from "next/image";
+
 import "./brand.module.css";
 import { hospitalConfig } from "@/config/hospital";
-import { BrandMark } from "@/components/ui/icons/Icons";
 
-export default function Brand({ inverse = false }: { inverse?: boolean }) {
+export default function Brand({
+  inverse = false,
+  mobileLogomark = false,
+}: {
+  inverse?: boolean;
+  mobileLogomark?: boolean;
+}) {
   if (inverse) {
     return (
       <a
-        href="#home"
+        href="/"
         className="brand-inverse-card"
         aria-label={`${hospitalConfig.name} homepage`}
       >
-        <span className="brand-inverse-mark-panel">
-          <BrandMark className="brand-inverse-mark" />
-        </span>
-
-        <span className="brand-inverse-copy-panel">
-          <span className="brand-inverse-name">
-            <strong className="brand-inverse-primary">
-              {hospitalConfig.brandName.primary}
-            </strong>
-
-            <span className="brand-inverse-specialty">
-              {hospitalConfig.brandName.specialty}
-            </span>
-
-            <strong className="brand-inverse-facility">
-              {hospitalConfig.brandName.facility}
-            </strong>
-          </span>
-
-          <small className="brand-inverse-tagline">
-            {hospitalConfig.tagline}
-          </small>
-        </span>
+        <Image
+          src={hospitalConfig.branding.logoSrc}
+          alt={hospitalConfig.branding.logoAlt}
+          className="brand-inverse-logo"
+          width={604}
+          height={248}
+          sizes="(max-width: 699px) 268px, 302px"
+        />
       </a>
     );
   }
 
   return (
     <a
-      href="#home"
-      className="brand"
+      href="/"
+      className={mobileLogomark ? "brand brand-mobile-logomark" : "brand"}
       aria-label={`${hospitalConfig.name} homepage`}
     >
-      <BrandMark className="brand-mark" />
+      <Image
+        src={hospitalConfig.branding.logoSrc}
+        alt={hospitalConfig.branding.logoAlt}
+        className={mobileLogomark ? "brand-logo brand-logo-desktop" : "brand-logo"}
+        width={604}
+        height={248}
+        sizes="(max-width: 979px) 154px, 172px"
+      />
 
-      <span className="brand-copy">
-        <span className="brand-name">
-          <strong className="brand-primary">
-            {hospitalConfig.brandName.primary}
-          </strong>
-
-          <span className="brand-specialty">
-            {hospitalConfig.brandName.specialty}
-          </span>
-
-          <strong className="brand-facility">
-            {hospitalConfig.brandName.facility}
-          </strong>
-        </span>
-
-        <small className="brand-tagline">{hospitalConfig.tagline}</small>
-      </span>
+      {mobileLogomark ? (
+        <Image
+          src={hospitalConfig.branding.logomarkSrc}
+          alt={hospitalConfig.branding.logomarkAlt}
+          className="brand-logomark"
+          width={248}
+          height={248}
+          sizes="56px"
+        />
+      ) : null}
     </a>
   );
 }

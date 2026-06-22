@@ -185,6 +185,71 @@
   border-bottom: 3px solid var(--orange);
 }
 
+.tour-facilities-link {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: center;
+  width: 100%;
+  margin-top: 26px;
+  padding: 14px 15px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025)),
+    rgba(255, 255, 255, 0.035);
+  color: var(--white);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.tour-facilities-link::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  content: "";
+  background: var(--orange);
+}
+
+.tour-facilities-text {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.tour-facilities-text strong {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.tour-facilities-text small {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.tour-facilities-arrow {
+  color: #ffc49d;
+  transition: transform 180ms ease;
+}
+
+.tour-facilities-link:hover {
+  border-color: rgba(255, 109, 18, 0.38);
+  background-color: rgba(255, 255, 255, 0.055);
+  transform: translateY(-2px);
+}
+
+.tour-facilities-link:hover .tour-facilities-arrow {
+  transform: translateX(3px);
+}
+
 @media (min-width: 980px) {
 .tour-section {
     display: grid;

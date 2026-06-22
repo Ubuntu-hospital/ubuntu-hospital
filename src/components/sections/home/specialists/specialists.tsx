@@ -7,6 +7,14 @@ import SectionIntro from "@/components/ui/section-intro/section-intro";
 import Reveal from "@/components/ui/reveal/reveal.client";
 
 export default function Specialists() {
+  return <SpecialistsSection />;
+}
+
+export function SpecialistsSection({
+  showFullTeamLink = true,
+}: {
+  showFullTeamLink?: boolean;
+}) {
   const [lead, ...remaining] = hospitalConfig.specialists.people;
 
   return (
@@ -19,9 +27,11 @@ export default function Specialists() {
             text={hospitalConfig.specialists.text}
           />
 
-          <a className="text-link" href="#specialists">
-            Meet the full team
-          </a>
+          {showFullTeamLink ? (
+            <a className="text-link" href="/team">
+              Meet the full team
+            </a>
+          ) : null}
         </div>
 
         <div className="specialists-editorial">

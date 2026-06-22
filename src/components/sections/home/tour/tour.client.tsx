@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Maximize2, Play } from "lucide-react";
+import { Building2, ChevronRight, Maximize2, Play } from "lucide-react";
 import { useRef, useState } from "react";
 
 import { hospitalConfig } from "@/config/hospital";
@@ -44,6 +45,26 @@ export default function Tour() {
               </div>
             ))}
           </div>
+
+          <Link
+            href="/facilities"
+            className="tour-facilities-link"
+            aria-label="Explore Ubuntu Hospital facilities"
+          >
+            <span className="tour-facilities-text">
+              <strong>Explore the facility</strong>
+              <small>
+                Wards, theatres, consultation rooms and recovery spaces
+              </small>
+            </span>
+
+            <ChevronRight
+              className="tour-facilities-arrow"
+              size={18}
+              strokeWidth={2.4}
+              aria-hidden="true"
+            />
+          </Link>
         </div>
 
         <Reveal className="tour-video-shell">

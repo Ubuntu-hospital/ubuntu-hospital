@@ -144,6 +144,12 @@
   gap: 7px;
 }
 
+.booking-field-error {
+  color: #b42318;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
 .booking-form input,
 .booking-form textarea {
   width: 100%;
@@ -169,6 +175,32 @@
   resize: vertical;
 }
 
+.booking-feedback {
+  margin-top: 16px;
+  border-radius: 10px;
+  padding: 12px 13px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.booking-feedback-success {
+  border: 1px solid rgba(18, 140, 126, 0.16);
+  background: rgba(18, 140, 126, 0.08);
+  color: #0d6b62;
+}
+
+.booking-feedback-warning {
+  border: 1px solid rgba(176, 104, 8, 0.18);
+  background: rgba(255, 109, 18, 0.08);
+  color: #8b4c06;
+}
+
+.booking-feedback-error {
+  border: 1px solid rgba(180, 35, 24, 0.16);
+  background: rgba(180, 35, 24, 0.06);
+  color: #912018;
+}
+
 .booking-submit {
   width: 100%;
   min-height: 49px;
@@ -187,6 +219,12 @@
 .booking-submit:hover {
   background: var(--orange-deep);
   transform: translateY(-2px);
+}
+
+.booking-submit:disabled {
+  cursor: wait;
+  opacity: 0.76;
+  transform: none;
 }
 
 @media (min-width: 700px) {

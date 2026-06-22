@@ -1,7 +1,6 @@
-import { BrandMark } from "@/components/ui/icons/Icons";
 import { hospitalConfig } from "@/config/hospital";
 
-export function OpenGraphBrandCard() {
+export function OpenGraphBrandCard({ markSrc }: { markSrc: string }) {
   const phoneNumbers =
     hospitalConfig.contact.phoneNumbers.slice(0, 2);
 
@@ -35,10 +34,13 @@ export function OpenGraphBrandCard() {
             color: "#ffffff",
           }}
         >
-          <BrandMark
+          <img
+            src={markSrc}
+            alt={hospitalConfig.branding.logomarkAlt}
             style={{
-              width: "168px",
-              height: "142px",
+              width: "166px",
+              height: "166px",
+              objectFit: "contain",
             }}
           />
         </div>

@@ -11,10 +11,10 @@
 .hero {
   position: relative;
   overflow: clip;
-  padding: 132px 0 52px;
+  padding: 104px 0 48px;
   background:
     linear-gradient(180deg, rgba(247, 248, 249, 0.96), rgba(255, 255, 255, 1)),
-    radial-gradient(circle at top right, rgba(255, 109, 18, 0.12), transparent 42%);
+    radial-gradient(circle at top right, rgba(255, 109, 18, 0.1), transparent 42%);
 }
 
 .heroTexture,
@@ -26,10 +26,10 @@
 
 .heroTexture {
   inset: 0;
-  opacity: 0.34;
+  opacity: 0.26;
   background-image:
-    radial-gradient(rgba(255, 109, 18, 0.16) 0.75px, transparent 0.75px),
-    radial-gradient(rgba(17, 24, 39, 0.1) 0.6px, transparent 0.6px);
+    radial-gradient(rgba(255, 109, 18, 0.14) 0.75px, transparent 0.75px),
+    radial-gradient(rgba(17, 24, 39, 0.07) 0.6px, transparent 0.6px);
   background-position:
     0 0,
     8px 8px;
@@ -37,36 +37,35 @@
 }
 
 .heroGlow {
-  top: -160px;
-  right: -110px;
-  width: 420px;
-  height: 420px;
+  top: -180px;
+  right: -120px;
+  width: 440px;
+  height: 440px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(255, 109, 18, 0.2), transparent 68%);
+  background: radial-gradient(circle, rgba(255, 109, 18, 0.15), transparent 70%);
   filter: blur(16px);
 }
 
 .heroOrbit {
   right: 10%;
-  bottom: 48px;
-  width: 320px;
-  height: 320px;
-  border: 1px solid rgba(255, 109, 18, 0.18);
+  bottom: 36px;
+  width: 250px;
+  height: 250px;
+  border: 1px solid rgba(255, 109, 18, 0.14);
   border-radius: 999px;
 }
 
 .heroGrid {
   position: relative;
+  z-index: 2;
   display: grid;
   gap: 34px;
   align-items: center;
 }
 
 .heroCopy {
-  position: relative;
-  z-index: 1;
   display: grid;
-  gap: 28px;
+  gap: 22px;
 }
 
 .heroText {
@@ -78,34 +77,30 @@
 .browserHeading h2,
 .pathwayHeading h2,
 .supportCopy h2,
-.specialistsHeader h2,
 .finalCtaGrid h2 {
   margin: 0;
   color: var(--ink);
-  font-family: "Fraunces", serif;
-  font-size: clamp(2.5rem, 7vw, 4.7rem);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(2.25rem, 6vw, 4.1rem);
   font-weight: 600;
   letter-spacing: -0.05em;
-  line-height: 0.95;
+  line-height: 0.96;
 }
 
 .browserHeading h2,
 .pathwayHeading h2,
 .supportCopy h2,
-.specialistsHeader h2,
 .finalCtaGrid h2 {
-  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
   line-height: 1;
 }
 
 .heroText p,
-.browserHeading p,
 .pathwayHeading p,
 .supportCopy p,
-.specialistsHeader p,
 .finalCtaGrid p {
   margin: 0;
-  max-width: 640px;
+  max-width: 660px;
   color: var(--graphite);
   font-size: 1rem;
   line-height: 1.8;
@@ -113,7 +108,8 @@
 
 .heroActions,
 .serviceStageActions,
-.finalCtaActions {
+.finalCtaActions,
+.mobileServiceActions {
   display: flex;
   flex-wrap: wrap;
   gap: 14px;
@@ -126,204 +122,113 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  min-height: 52px;
-  padding: 0 22px;
-  border-radius: 999px;
-  font-size: 0.92rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  min-height: 47px;
+  padding: 14px 20px;
+  border: 0;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
   transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    background-color 180ms ease,
-    color 180ms ease,
-    border-color 180ms ease;
+    transform 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .primaryAction,
 .finalCtaPrimary {
+  border-radius: 8px;
   color: var(--white);
-  background: linear-gradient(135deg, var(--orange), var(--orange-deep));
-  box-shadow: 0 18px 36px rgba(217, 79, 0, 0.22);
+  background: var(--orange);
 }
 
 .secondaryAction,
 .finalCtaSecondary {
+  gap: 10px;
+  border-radius: 0;
   color: var(--ink);
-  border: 1px solid rgba(23, 32, 51, 0.12);
-  background: rgba(255, 255, 255, 0.82);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px rgba(255, 109, 18, 0.42);
 }
 
 .primaryAction:hover,
 .secondaryAction:hover,
 .finalCtaPrimary:hover,
 .finalCtaSecondary:hover {
+  color: var(--white);
+  background: var(--orange-deep);
+  box-shadow: 0 12px 26px rgba(217, 79, 0, 0.18);
   transform: translateY(-2px);
-}
-
-.heroStats {
-  display: grid;
-  gap: 14px;
-}
-
-.heroStats div {
-  display: grid;
-  gap: 4px;
-  padding: 18px 20px;
-  border: 1px solid rgba(23, 32, 51, 0.08);
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.8);
-  box-shadow: 0 20px 40px rgba(23, 32, 51, 0.06);
-}
-
-.heroStats strong {
-  color: var(--ink);
-  font-family: "Fraunces", serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  letter-spacing: -0.05em;
-}
-
-.heroStats span {
-  color: var(--muted);
-  font-size: 0.95rem;
 }
 
 .heroMedia {
   position: relative;
-  min-height: 500px;
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
 }
 
 .heroMedia img,
-.supportMedia img,
-.specialistImage img {
-  width: 100%;
-  height: 100%;
+.supportMedia img {
   object-fit: cover;
-}
-
-.heroMedia > img {
-  border-radius: 36px;
-  box-shadow: var(--shadow);
 }
 
 .heroMediaOverlay,
 .supportMediaOverlay {
   position: absolute;
-  inset: auto 18px 18px 18px;
-  display: grid;
-  gap: 14px;
-}
-
-.heroMediaCard,
-.supportMediaCard {
-  display: flex;
-  gap: 14px;
-  align-items: flex-start;
-  padding: 18px 20px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 24px;
-  color: var(--white);
-  background: rgba(23, 32, 51, 0.68);
-  backdrop-filter: blur(18px);
-}
-
-.heroMediaCard strong,
-.supportMediaCard strong,
-.heroMediaLabel strong {
-  display: block;
-  margin-bottom: 4px;
-  font-size: 0.98rem;
-}
-
-.heroMediaCard span,
-.supportMediaCard span,
-.heroMediaLabel span {
-  display: block;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 0.88rem;
-  line-height: 1.6;
-}
-
-.heroMediaLabel {
-  justify-self: end;
-  max-width: 260px;
-  padding: 16px 18px;
-  border-radius: 22px;
-  color: var(--white);
-  background: linear-gradient(135deg, rgba(255, 109, 18, 0.92), rgba(217, 79, 0, 0.92));
-  box-shadow: 0 18px 38px rgba(217, 79, 0, 0.24);
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(23, 32, 51, 0.02),
+    rgba(23, 32, 51, 0.28)
+  );
 }
 
 .emergencyStrip {
   position: relative;
-  z-index: 1;
-  margin-top: -10px;
-  padding-bottom: 24px;
+  z-index: 3;
+  padding: 20px 0 0;
+  background: var(--white);
 }
 
 .emergencyStripInner {
-  display: flex;
-  gap: 14px;
-  align-items: center;
   padding: 16px 20px;
-  border: 1px solid rgba(255, 109, 18, 0.14);
-  border-radius: 26px;
+  border-left: 3px solid var(--orange);
   color: var(--ink);
-  background: rgba(255, 240, 230, 0.92);
+  background: var(--orange-soft);
 }
 
 .emergencyStripInner p {
   margin: 0;
-  font-size: 0.95rem;
+  color: var(--graphite);
+  font-size: 0.96rem;
   line-height: 1.7;
 }
 
 .emergencyStripInner a {
   color: var(--orange-deep);
-  font-weight: 700;
-}
-
-.emergencyStripIcon {
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
-  color: var(--white);
-  background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+  font-weight: 800;
 }
 
 .browserSection {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(247, 248, 249, 0.85)),
-    radial-gradient(circle at top left, rgba(255, 109, 18, 0.08), transparent 38%);
+    radial-gradient(circle at top left, rgba(255, 109, 18, 0.06), transparent 38%);
 }
 
 .browserShell,
-.pathwayShell,
-.specialistsShell {
+.desktopBrowser,
+.pathwayShell {
   display: grid;
   gap: 28px;
 }
 
 .browserHeading {
   display: grid;
-  gap: 18px;
-}
-
-.browserSupport {
-  display: inline-flex;
-  gap: 10px;
-  align-items: center;
-  width: fit-content;
-  padding: 12px 16px;
-  border-radius: 999px;
-  color: var(--graphite-soft);
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 14px 30px rgba(23, 32, 51, 0.06);
+  gap: 12px;
+  max-width: 720px;
 }
 
 .categoryTabs {
@@ -333,14 +238,14 @@
 }
 
 .categoryTab {
-  min-height: 48px;
+  min-height: 46px;
   padding: 0 18px;
-  border: 1px solid rgba(23, 32, 51, 0.08);
-  border-radius: 999px;
+  border: 1px solid rgba(23, 32, 51, 0.1);
+  border-radius: 8px;
   color: var(--ink);
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.92);
   font-size: 0.9rem;
-  font-weight: 700;
+  font-weight: 800;
   transition:
     transform 180ms ease,
     border-color 180ms ease,
@@ -350,10 +255,10 @@
 
 .categoryTab:hover,
 .categoryTabActive {
-  transform: translateY(-2px);
   color: var(--white);
-  border-color: transparent;
-  background: linear-gradient(135deg, var(--ink), var(--graphite-soft));
+  border-color: var(--ink);
+  background: var(--ink);
+  transform: translateY(-2px);
 }
 
 .browserGrid {
@@ -368,15 +273,15 @@
 
 .serviceListButton {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: auto minmax(0, 1fr);
   gap: 16px;
   align-items: center;
   padding: 18px 20px;
   border: 1px solid rgba(23, 32, 51, 0.08);
-  border-radius: 28px;
+  border-radius: 14px;
   color: var(--ink);
   text-align: left;
-  background: rgba(255, 255, 255, 0.82);
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 16px 34px rgba(23, 32, 51, 0.04);
   transition:
     transform 180ms ease,
@@ -387,15 +292,16 @@
 
 .serviceListButton:hover,
 .serviceListButtonActive {
+  border-color: rgba(255, 109, 18, 0.38);
+  background: var(--white);
+  box-shadow: 0 20px 42px rgba(23, 32, 51, 0.08);
   transform: translateY(-2px);
-  border-color: rgba(255, 109, 18, 0.32);
-  background: rgba(255, 255, 255, 1);
-  box-shadow: 0 22px 42px rgba(23, 32, 51, 0.08);
 }
 
 .serviceListButton strong {
   display: block;
   margin-bottom: 5px;
+  color: var(--ink);
   font-size: 1rem;
 }
 
@@ -406,39 +312,25 @@
   line-height: 1.6;
 }
 
-.serviceListIndex,
-.serviceStageLabel {
+.serviceListIndex {
   color: var(--orange-deep);
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.serviceListIcon,
-.serviceStageIcon {
-  display: grid;
-  place-items: center;
-  flex: 0 0 auto;
-  width: 52px;
-  height: 52px;
-  border-radius: 18px;
-  color: var(--orange-deep);
-  background: rgba(255, 109, 18, 0.1);
 }
 
 .serviceStage {
   position: relative;
   overflow: hidden;
   padding: 30px;
-  border-radius: 36px;
-  background: linear-gradient(160deg, var(--ink), #20293f 72%);
-  box-shadow: 0 28px 70px rgba(15, 23, 42, 0.22);
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-left: 4px solid var(--orange);
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: 0 24px 58px rgba(23, 32, 51, 0.08);
 }
 
 .serviceStageContent {
-  position: relative;
-  z-index: 1;
   display: grid;
   gap: 20px;
 }
@@ -451,23 +343,36 @@
   justify-content: space-between;
 }
 
+.serviceStageKicker,
 .serviceStageLabel {
-  color: #ffc49d;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.17em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.serviceStageKicker {
+  color: var(--orange-deep);
+}
+
+.serviceStageLabel {
+  color: var(--muted);
 }
 
 .serviceStage h3 {
   margin: 0;
-  color: var(--white);
-  font-family: "Fraunces", serif;
-  font-size: clamp(1.8rem, 4vw, 2.7rem);
+  color: var(--ink);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
   font-weight: 600;
   letter-spacing: -0.05em;
-  line-height: 0.98;
+  line-height: 1;
 }
 
 .serviceStageDescription {
   margin: 0;
-  color: rgba(255, 255, 255, 0.78);
+  color: var(--graphite);
   font-size: 0.98rem;
   line-height: 1.8;
 }
@@ -475,62 +380,158 @@
 .serviceHighlights,
 .supportPoints {
   display: grid;
-  gap: 12px;
+  gap: 0;
+  border-top: 1px solid rgba(23, 32, 51, 0.1);
 }
 
 .serviceHighlights span,
 .supportPoints span {
-  display: inline-flex;
-  gap: 10px;
-  align-items: center;
-  width: fit-content;
-  padding: 12px 16px;
-  border-radius: 999px;
-  font-size: 0.9rem;
+  position: relative;
+  padding: 13px 0 13px 22px;
+  border-bottom: 1px solid rgba(23, 32, 51, 0.1);
+  color: var(--graphite);
+  font-size: 0.94rem;
   font-weight: 600;
+  line-height: 1.55;
 }
 
-.serviceHighlights span {
-  color: var(--white);
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.supportPoints span {
-  color: var(--ink);
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 14px 28px rgba(23, 32, 51, 0.05);
-}
-
-.stageOrbitLarge,
-.stageOrbitSmall,
-.finalCtaOrbitOne,
-.finalCtaOrbitTwo {
+.serviceHighlights span::before,
+.supportPoints span::before {
   position: absolute;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
+  top: 23px;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  content: "";
+  background: var(--orange);
 }
 
-.stageOrbitLarge {
-  top: -40px;
-  right: -52px;
-  width: 240px;
-  height: 240px;
+.mobileServices {
+  display: none;
 }
 
-.stageOrbitSmall {
-  right: 92px;
-  bottom: -54px;
-  width: 140px;
-  height: 140px;
+.mobileServiceGroup {
+  display: grid;
+  gap: 14px;
+}
+
+.mobileServiceGroupHead {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(23, 32, 51, 0.1);
+}
+
+.mobileServiceGroupHead span {
+  color: var(--orange-deep);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.mobileServiceGroupHead h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1.18rem, 5vw, 1.45rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+}
+
+.mobileServiceCards {
+  display: grid;
+  gap: 14px;
+}
+
+.mobileServiceCard {
+  display: grid;
+  gap: 14px;
+  padding: 20px;
+  border: 1px solid rgba(23, 32, 51, 0.08);
+  border-left: 3px solid var(--orange);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 18px 36px rgba(23, 32, 51, 0.05);
+}
+
+.mobileServiceTopline {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.mobileServiceTopline span {
+  color: var(--orange-deep);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.mobileServiceTopline strong {
+  color: var(--ink);
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.mobileServiceShort,
+.mobileServiceDescription {
+  margin: 0;
+}
+
+.mobileServiceShort {
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.mobileServiceDescription {
+  color: var(--graphite);
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+.mobileServiceHighlights {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(23, 32, 51, 0.1);
+}
+
+.mobileServiceHighlights span {
+  position: relative;
+  padding: 12px 0 12px 20px;
+  border-bottom: 1px solid rgba(23, 32, 51, 0.1);
+  color: var(--graphite);
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.mobileServiceHighlights span::before {
+  position: absolute;
+  top: 22px;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  content: "";
+  background: var(--orange);
 }
 
 .pathwaySection {
-  background: linear-gradient(180deg, rgba(255, 245, 239, 0.86), rgba(255, 255, 255, 1));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 245, 239, 0.72),
+    rgba(255, 255, 255, 1)
+  );
 }
 
 .pathwayHeading {
   display: grid;
   gap: 18px;
+  max-width: 760px;
 }
 
 .pathwayTrack {
@@ -549,8 +550,8 @@
   gap: 12px;
   padding: 24px;
   border: 1px solid rgba(23, 32, 51, 0.08);
-  border-radius: 30px;
-  background: rgba(255, 255, 255, 0.88);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
   box-shadow: 0 18px 34px rgba(23, 32, 51, 0.05);
 }
 
@@ -560,9 +561,8 @@
   justify-content: center;
   width: 52px;
   height: 52px;
-  border-radius: 18px;
   color: var(--white);
-  background: linear-gradient(135deg, var(--orange), var(--orange-deep));
+  background: var(--orange);
   font-size: 0.88rem;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -583,7 +583,7 @@
 .supportSection {
   background:
     linear-gradient(180deg, rgba(247, 248, 249, 0.92), rgba(255, 255, 255, 1)),
-    radial-gradient(circle at right center, rgba(255, 109, 18, 0.08), transparent 38%);
+    radial-gradient(circle at right center, rgba(255, 109, 18, 0.06), transparent 38%);
 }
 
 .supportGrid {
@@ -594,11 +594,9 @@
 
 .supportMedia {
   position: relative;
-  min-height: 460px;
-}
-
-.supportMedia > img {
-  border-radius: 34px;
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: 18px;
   box-shadow: var(--shadow);
 }
 
@@ -607,68 +605,19 @@
   gap: 20px;
 }
 
-.specialistsSection {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(247, 248, 249, 0.88));
-}
-
-.specialistsHeader {
-  display: grid;
-  gap: 18px;
-}
-
-.specialistsGrid {
-  display: grid;
-  gap: 18px;
-}
-
-.specialistCard {
-  overflow: hidden;
-  border: 1px solid rgba(23, 32, 51, 0.08);
-  border-radius: 30px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 20px 40px rgba(23, 32, 51, 0.05);
-}
-
-.specialistImage {
-  position: relative;
-  height: 320px;
-}
-
-.specialistOverlay {
-  position: absolute;
-  inset: auto 16px 16px auto;
-  padding: 11px 14px;
-  border-radius: 999px;
-  color: var(--white);
-  background: rgba(23, 32, 51, 0.78);
-  backdrop-filter: blur(16px);
-  font-size: 0.84rem;
-  font-weight: 700;
-}
-
-.specialistBody {
-  display: grid;
-  gap: 6px;
-  padding: 20px 20px 22px;
-}
-
-.specialistBody strong {
-  color: var(--ink);
-  font-size: 1rem;
-}
-
-.specialistBody p {
-  margin: 0;
-  color: var(--muted);
-  line-height: 1.7;
-}
-
 .finalCta {
   position: relative;
   overflow: clip;
   padding: 88px 0;
   color: var(--white);
   background: linear-gradient(145deg, #101a2d, #263351 74%);
+}
+
+.finalCtaOrbitOne,
+.finalCtaOrbitTwo {
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
 }
 
 .finalCtaOrbitOne {
@@ -712,12 +661,21 @@
   color: rgba(255, 255, 255, 0.76);
 }
 
-@media (min-width: 700px) {
-  .heroStats,
-  .specialistsGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.finalCtaPrimary {
+  background: var(--orange);
+}
 
+.finalCtaSecondary {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
+}
+
+.finalCtaSecondary:hover {
+  background: var(--orange-deep);
+}
+
+@media (min-width: 700px) {
   .pathwayTrack {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -725,26 +683,21 @@
 
 @media (min-width: 980px) {
   .hero {
-    padding: 150px 0 64px;
+    padding: 118px 0 58px;
   }
 
   .heroGrid,
-  .supportGrid,
-  .finalCtaGrid {
-    grid-template-columns: minmax(0, 1.05fr) minmax(420px, 0.95fr);
+  .supportGrid {
+    grid-template-columns: minmax(0, 1fr) minmax(420px, 0.96fr);
   }
 
-  .heroStats {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-
-  .browserHeading {
-    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.66fr);
-    align-items: end;
+  .heroMedia,
+  .supportMedia {
+    min-height: 430px;
   }
 
   .browserGrid {
-    grid-template-columns: minmax(0, 0.88fr) minmax(360px, 0.92fr);
+    grid-template-columns: minmax(0, 0.86fr) minmax(380px, 0.94fr);
     align-items: start;
   }
 
@@ -759,18 +712,63 @@
     right: 52px;
     display: block;
     height: 1px;
-    background: linear-gradient(90deg, rgba(255, 109, 18, 0.3), rgba(23, 32, 51, 0.12));
-  }
-
-  .supportGrid {
-    grid-template-columns: minmax(380px, 0.86fr) minmax(0, 1fr);
-  }
-
-  .specialistsGrid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    background: linear-gradient(
+      90deg,
+      rgba(255, 109, 18, 0.3),
+      rgba(23, 32, 51, 0.12)
+    );
   }
 
   .finalCtaGrid {
     grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
+
+@media (max-width: 699px) {
+  .hero {
+    padding: 92px 0 42px;
+  }
+
+  .heroCopy {
+    gap: 18px;
+  }
+
+  .heroMedia,
+  .supportMedia {
+    min-height: 340px;
+    border-radius: 14px;
+  }
+
+  .primaryAction,
+  .secondaryAction,
+  .finalCtaPrimary,
+  .finalCtaSecondary {
+    width: 100%;
+  }
+
+  .secondaryAction {
+    border: 1px solid rgba(255, 109, 18, 0.48);
+    border-radius: 0;
+  }
+
+  .desktopBrowser {
+    display: none;
+  }
+
+  .mobileServices {
+    display: grid;
+    gap: 28px;
+  }
+
+  .browserShell {
+    gap: 24px;
+  }
+
+  .serviceStage {
+    padding: 24px;
+  }
+
+  .finalCta {
+    padding: 64px 0;
   }
 }

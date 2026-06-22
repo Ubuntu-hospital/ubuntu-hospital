@@ -2,14 +2,10 @@ export type ServiceCategoryId =
   | "access"
   | "diagnostics"
   | "treatment"
-  | "support";
+  | "medication";
 
 export type ServiceIconName =
   | "activity"
-  | "bed"
-  | "building"
-  | "coffee"
-  | "cross"
   | "flask"
   | "pill"
   | "scan"
@@ -34,26 +30,11 @@ export const servicesPageContent = {
     image:
       "https://images.pexels.com/photos/33812023/pexels-photo-33812023.jpeg?auto=compress&cs=tinysrgb&w=1800",
     imageAlt: "Modern hospital corridor with seating and clinical rooms",
-    stats: [
-      {
-        value: "10",
-        label: "Hospital services",
-      },
-      {
-        value: "01",
-        label: "Coordinated pathway",
-      },
-      {
-        value: "360",
-        label: "Recovery support",
-      },
-    ],
   },
 
   browser: {
     eyebrow: "Explore services",
     title: "Find the right care.",
-    text: "Select a service category, then choose the service that best matches your needs before your visit.",
   },
 
   pathway: {
@@ -98,12 +79,6 @@ export const servicesPageContent = {
     ],
   },
 
-  specialists: {
-    eyebrow: "Specialist support",
-    title: "Care led by the right team.",
-    text: "Each hospital service stays strongest when specialist guidance, clinical decisions, and recovery support remain connected.",
-  },
-
   finalCta: {
     eyebrow: "Your next step",
     title: "Start with the right team.",
@@ -125,8 +100,8 @@ export const serviceCategories = [
     label: "Treatment and recovery",
   },
   {
-    id: "support",
-    label: "Patient support",
+    id: "medication",
+    label: "Medication support",
   },
 ] as const;
 
@@ -136,7 +111,7 @@ export const hospitalServices: readonly HospitalService[] = [
     title: "Emergency",
     shortText: "Prompt support when urgent care cannot wait.",
     description:
-      "The emergency service provides a clear first point of contact for patients who need immediate medical attention and guidance.",
+      "Emergency care provides a clear first point of contact for patients who need urgent medical attention and arrival guidance.",
     icon: "siren",
     category: "access",
     highlights: [
@@ -150,7 +125,7 @@ export const hospitalServices: readonly HospitalService[] = [
     title: "OPD",
     shortText: "Specialist consultations and patient assessments.",
     description:
-      "The outpatient department supports consultations, clinical reviews, and the first steps towards an appropriate care plan.",
+      "The outpatient department supports consultations, clinical reviews, and the first step towards an appropriate care plan.",
     icon: "stethoscope",
     category: "access",
     highlights: [
@@ -164,7 +139,7 @@ export const hospitalServices: readonly HospitalService[] = [
     title: "X-Ray",
     shortText: "On-site imaging for faster clinical decisions.",
     description:
-      "On-site X-ray services support timely imaging and help the medical team make informed clinical decisions without unnecessary delays.",
+      "X-Ray services support timely imaging and help the medical team make informed clinical decisions without unnecessary delays.",
     icon: "scan",
     category: "diagnostics",
     highlights: [
@@ -188,48 +163,6 @@ export const hospitalServices: readonly HospitalService[] = [
     ],
   },
   {
-    id: "pharmacy",
-    title: "Pharmacy",
-    shortText: "Convenient access to prescribed medication.",
-    description:
-      "The pharmacy gives patients convenient access to prescribed medication and helps keep the care experience connected within the hospital.",
-    icon: "pill",
-    category: "diagnostics",
-    highlights: [
-      "Prescription support",
-      "Convenient access",
-      "Patient guidance",
-    ],
-  },
-  {
-    id: "operating-rooms",
-    title: "Operating Rooms",
-    shortText: "Purpose-built spaces for specialist procedures.",
-    description:
-      "The operating rooms are designed to support specialist procedures within a controlled clinical environment.",
-    icon: "cross",
-    category: "treatment",
-    highlights: [
-      "Purpose-built spaces",
-      "Specialist procedures",
-      "Clinical coordination",
-    ],
-  },
-  {
-    id: "wards",
-    title: "Wards",
-    shortText: "Comfortable spaces for attentive inpatient care.",
-    description:
-      "Hospital wards provide a calm environment for patients who require attentive monitoring, support, and recovery care.",
-    icon: "bed",
-    category: "treatment",
-    highlights: [
-      "Inpatient support",
-      "Comfortable spaces",
-      "Attentive care",
-    ],
-  },
-  {
     id: "physiotherapy",
     title: "Physiotherapy",
     shortText: "Guided rehabilitation focused on safe recovery.",
@@ -244,30 +177,16 @@ export const hospitalServices: readonly HospitalService[] = [
     ],
   },
   {
-    id: "administration",
-    title: "Administration",
-    shortText: "Clear support throughout your hospital experience.",
+    id: "pharmacy",
+    title: "Pharmacy",
+    shortText: "Convenient access to prescribed medication.",
     description:
-      "The administration team helps patients and visitors navigate appointments, enquiries, and the practical steps involved in receiving care.",
-    icon: "building",
-    category: "support",
+      "The pharmacy gives patients convenient access to prescribed medication and helps keep treatment support connected within the hospital.",
+    icon: "pill",
+    category: "medication",
     highlights: [
-      "Appointment guidance",
-      "Patient enquiries",
-      "Visitor support",
-    ],
-  },
-  {
-    id: "cafeteria",
-    title: "Cafeteria",
-    shortText: "A comfortable refreshment area for visitors.",
-    description:
-      "The cafeteria provides a convenient space for patients, visitors, and families during their time at the hospital.",
-    icon: "coffee",
-    category: "support",
-    highlights: [
-      "Visitor comfort",
-      "Refreshment area",
+      "Prescription support",
+      "Medication guidance",
       "Convenient access",
     ],
   },

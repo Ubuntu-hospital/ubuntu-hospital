@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 
 import { OpenGraphBrandCard } from "@/components/layout/brand/opengraph-brand-card";
@@ -12,7 +14,16 @@ export const size = {
 
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export const runtime = "nodejs";
+
+export default async function OpenGraphImage() {
+  const logomarkBuffer = await readFile(
+    join(process.cwd(), "public", "ubuntu-logomark.png"),
+  );
+
+  const logomarkSrc =
+    `data:image/png;base64,${logomarkBuffer.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -181,7 +192,7 @@ export default function OpenGraphImage() {
             display: "flex",
           }}
         >
-          <OpenGraphBrandCard />
+          <OpenGraphBrandCard markSrc={logomarkSrc} />
         </div>
       </div>
     ),
