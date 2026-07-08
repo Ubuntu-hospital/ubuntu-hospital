@@ -208,8 +208,8 @@ export const hospitalConfig = {
 
   about: {
     eyebrow: "About the hospital",
-    title: "Care with intention.",
-    text: "Ubuntu brings consultation, diagnosis, treatment, and rehabilitation into one coordinated specialist experience.",
+    title: "We are because you are.",
+    text: "At Ubuntu Orthopaedic and spine Hospital, its all about HUMANITY",
 
     image:
       "https://images.pexels.com/photos/8312841/pexels-photo-8312841.jpeg?auto=compress&cs=tinysrgb&w=1400",
@@ -236,14 +236,14 @@ export const hospitalConfig = {
 
     mission: {
       eyebrow: "Our mission",
-      title: "Better care. Clearer outcomes.",
-      text: "To provide specialist orthopaedic and spine care through skilled teams, modern facilities, and a patient experience built on trust.",
+      title: "Innovative and exceptional care.",
+      text: "To provide innovative and exceptional care in the diagnosis, treatment, and rehabilitation of musculoskeletal and spinal conditions. We are dedicated to improving the quality of life for our patients through advanced medical technologies, innovative treatment options, and a compassionate approach.",
     },
 
     vision: {
       eyebrow: "Our vision",
-      title: "A higher standard for recovery.",
-      text: "To become a trusted benchmark for specialist orthopaedic and spine care in Ghana.",
+      title: "Premier orthopaedic and spine care.",
+      text: "To be the premier centre for orthopaedic and spine care in West Africa and beyond, dedicated to innovative treatment, patient-centred services, and community education. This vision emphasises the hospital's commitment to excellence in specialised medical care, highlighting the need for advanced treatment modalities that cater to the unique needs of the West African population. Our multidisciplinary team of specialists is committed to fostering a healing environment that promotes recovery. Together, we strive to be a leader in orthopaedic and spine health, empowering our patients to lead active, fulfilling lives.",
 
       image:
         "https://images.pexels.com/photos/18445755/pexels-photo-18445755.jpeg?auto=compress&cs=tinysrgb&w=1400",
@@ -256,32 +256,32 @@ export const hospitalConfig = {
       {
         letter: "U",
         word: "Unity",
-        text: "Working as one team around every patient's recovery.",
+        text: "Unity of purpose.",
       },
       {
         letter: "B",
-        word: "Build",
-        text: "Building confidence through dependable care.",
+        word: "Best quality",
+        text: "Best quality services.",
       },
       {
         letter: "U",
         word: "Universal",
-        text: "Treating every patient with dignity and respect.",
+        text: "Universal and non-discriminatory.",
       },
       {
         letter: "N",
-        word: "Nurture",
-        text: "Supporting recovery with patience and empathy.",
+        word: "Novel",
+        text: "Novel and innovative.",
       },
       {
         letter: "T",
-        word: "Trust",
-        text: "Earning confidence through honesty and responsibility.",
+        word: "Teamwork",
+        text: "Teamwork.",
       },
       {
         letter: "U",
-        word: "Uplift",
-        text: "Helping patients return to life with renewed independence.",
+        word: "Upholding",
+        text: "Upholding discipline.",
       },
     ],
   },

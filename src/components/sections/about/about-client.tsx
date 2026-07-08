@@ -30,7 +30,7 @@ export function AboutPage() {
 
   return (
     <>
-      <section className={styles.hero}>
+      {/* <section className={styles.hero}>
         <div className={styles.heroTexture} />
         <div className={styles.heroGlow} />
         <div className={styles.heroOrbitLarge} />
@@ -106,8 +106,6 @@ export function AboutPage() {
         </div>
       </section>
 
-      <About />
-
       <section className={styles.storySection}>
         <div className={styles.storyTexture} />
 
@@ -139,11 +137,13 @@ export function AboutPage() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       <UbuntuStandard />
 
-      <section className={styles.commitmentSection}>
+       <About />
+
+      {/* <section className={styles.commitmentSection}>
         <div className={styles.commitmentOrbitOne} />
         <div className={styles.commitmentOrbitTwo} />
 
@@ -197,7 +197,7 @@ export function AboutPage() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </section> */}
 
       <Facilities />
       <Testimonials />

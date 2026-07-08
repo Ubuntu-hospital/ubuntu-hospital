@@ -177,6 +177,13 @@
   transform: none;
 }
 
+.signOutButton:disabled {
+  cursor: wait;
+  opacity: 0.72;
+  box-shadow: none;
+  transform: none;
+}
+
 .dashboardPanel {
   padding: 28px;
 }

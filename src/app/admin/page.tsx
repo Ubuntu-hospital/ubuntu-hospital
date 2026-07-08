@@ -10,6 +10,7 @@ import { listBookings } from "@/lib/bookings";
 import type { BookingRecord, BookingStatus } from "@/types/booking";
 
 import styles from "./admin.module.css";
+import { SignOutButton } from "./sign-out-button.client";
 
 export const metadata: Metadata = {
   title: `Admin Dashboard | ${hospitalConfig.name}`,
@@ -128,9 +129,7 @@ export default async function AdminDashboardPage({
           </div>
 
           <form action={signOutAdminAction}>
-            <button className={styles.signOutButton} type="submit">
-              Sign out
-            </button>
+            <SignOutButton />
           </form>
         </div>
 

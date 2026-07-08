@@ -1,6 +1,4 @@
 import Hero from "@/components/sections/home/hero/hero.client";
-// import HeroHighlights from "@/components/sections/home/hero-highlights/hero-highlights";
-import About from "@/components/sections/home/about/about";
 import Tour from "@/components/sections/home/tour/tour.client";
 import Booking from "@/components/sections/home/booking/booking";
 import Testimonials from "@/components/sections/home/testimonials/testimonials.client";
@@ -11,8 +9,6 @@ export default function HomePage() {
   return (
     <main>
       <Hero />
-      {/* <HeroHighlights /> */}
-      <About />
       <Tour />
       <Specialists />
       <PatientJourney />
