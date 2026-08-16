@@ -77,7 +77,14 @@ export default function Hero() {
 
       <div className="shell hero-shell">
         <div className="hero-top">
-          <p className="hero-hospital-name">{hospitalConfig.name}</p>
+          <p className="hero-hospital-name" aria-label={hospitalConfig.name}>
+            <span className="hero-hospital-brand">
+              {hospitalConfig.brandName.primary}
+            </span>
+            <span>
+              {hospitalConfig.brandName.specialty} {hospitalConfig.brandName.facility}
+            </span>
+          </p>
 
           <div className="hero-controls" aria-label="Focused care areas">
             {focusAreas.map((area, index) => {

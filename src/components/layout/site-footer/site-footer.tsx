@@ -1,6 +1,7 @@
 import "./site-footer.module.css";
 import { navigation } from "@/config/navigation";
 import { hospitalConfig } from "@/config/hospital";
+import { legalSiteContent } from "@/content/legal";
 import Brand from "@/components/layout/brand/brand";
 
 export default function SiteFooter() {
@@ -58,17 +59,16 @@ export default function SiteFooter() {
       <div className="footer-bottom">
         <div className="shell footer-bottom-layout">
           <p>
-            Copyright {new Date().getFullYear()} {hospitalConfig.name}. All
-            rights reserved.
+            {legalSiteContent.footer.copyright}
           </p>
 
-          <a
-            href={hospitalConfig.credits.spineHref}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {hospitalConfig.credits.spineLabel}
-          </a>
+          <nav className="footer-legal-links" aria-label="Legal information">
+            {legalSiteContent.footer.links.map((link) => (
+              <a href={link.href} key={link.href}>
+                {link.label}
+              </a>
+            ))}
+          </nav>
         </div>
       </div>
     </footer>

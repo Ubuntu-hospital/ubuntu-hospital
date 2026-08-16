@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 import Reveal from "@/components/ui/reveal/reveal.client";
 import { hospitalConfig } from "@/config/hospital";
@@ -12,70 +13,100 @@ import {
 
 import styles from "./services-page.module.css";
 
-const serviceGroups = serviceCategories.map((category) => ({
-  ...category,
-  services: hospitalServices.filter((service) => service.category === category.id),
-}));
+const initialService = hospitalServices[0];
 
-const initialCategory = serviceGroups[0];
+type DesktopServiceListLayout = "compact" | "detailed";
+
+// Change this value to "detailed" to restore the single-column list with descriptions.
+export const serviceBrowserOptions: {
+  desktopListLayout: DesktopServiceListLayout;
+} = {
+  desktopListLayout: "compact",
+};
 
 export default function ServiceBrowser() {
   const primaryPhone = hospitalConfig.contact.phoneNumbers[0];
-  const [activeCategoryId, setActiveCategoryId] = useState(initialCategory.id);
+  const serviceButtonRefs = useRef<Array<HTMLButtonElement | null>>([]);
   const [activeServiceId, setActiveServiceId] = useState(
-    initialCategory.services[0]?.id ?? "",
+    initialService?.id ?? "",
   );
+  const [expandedMobileServiceId, setExpandedMobileServiceId] = useState("");
 
-  const activeGroup =
-    serviceGroups.find((group) => group.id === activeCategoryId) ?? initialCategory;
+  useEffect(() => {
+    const buttons = serviceButtonRefs.current.filter(
+      (button): button is HTMLButtonElement => button !== null,
+    );
+
+    if (
+      !buttons.length ||
+      serviceBrowserOptions.desktopListLayout === "compact" ||
+      window.matchMedia("(max-width: 699px)").matches
+    ) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+        const serviceId = visibleEntry?.target.getAttribute("data-service-id");
+
+        if (serviceId) {
+          setActiveServiceId(serviceId);
+        }
+      },
+      {
+        rootMargin: "-30% 0px -52% 0px",
+        threshold: [0, 0.25, 0.5, 0.75, 1],
+      },
+    );
+
+    buttons.forEach((button) => observer.observe(button));
+
+    return () => observer.disconnect();
+  }, []);
+
   const activeService =
-    activeGroup.services.find((service) => service.id === activeServiceId) ??
-    activeGroup.services[0];
+    hospitalServices.find((service) => service.id === activeServiceId) ??
+    initialService;
+  const activeServiceCategory =
+    serviceCategories.find(
+      (category) => category.id === activeService?.category,
+    )?.label ?? "Service";
 
   return (
     <section className={`${styles.browserSection} section`}>
       <div className={`shell ${styles.browserShell}`}>
         <Reveal className={styles.browserHeading}>
-          <p className={styles.eyebrow}>{servicesPageContent.browser.eyebrow}</p>
+          <p className={styles.eyebrow}>
+            {servicesPageContent.browser.eyebrow}
+          </p>
           <h2>{servicesPageContent.browser.title}</h2>
         </Reveal>
 
-        <div className={styles.categoryTabs} role="tablist" aria-label="Service categories">
-          {serviceGroups.map((group) => {
-            const isActive = group.id === activeGroup.id;
-
-            return (
-              <button
-                key={group.id}
-                type="button"
-                role="tab"
-                aria-selected={isActive}
-                className={
-                  isActive
-                    ? `${styles.categoryTab} ${styles.categoryTabActive}`
-                    : styles.categoryTab
-                }
-                onClick={() => {
-                  setActiveCategoryId(group.id);
-                  setActiveServiceId(group.services[0]?.id ?? "");
-                }}
-              >
-                {group.label}
-              </button>
-            );
-          })}
-        </div>
-
         <div className={styles.desktopBrowser}>
           <div className={styles.browserGrid}>
-            <div className={styles.serviceList}>
-              {activeGroup.services.map((service, index) => {
+            <div
+              className={`${styles.serviceList} ${
+                serviceBrowserOptions.desktopListLayout === "compact"
+                  ? styles.serviceListCompact
+                  : styles.serviceListDetailed
+              }`}
+            >
+              {hospitalServices.map((service, index) => {
                 const isActive = service.id === activeService?.id;
 
                 return (
                   <button
                     key={service.id}
+                    ref={(button) => {
+                      serviceButtonRefs.current[index] = button;
+                    }}
                     type="button"
+                    data-service-id={service.id}
+                    aria-pressed={isActive}
                     className={
                       isActive
                         ? `${styles.serviceListButton} ${styles.serviceListButtonActive}`
@@ -97,16 +128,18 @@ export default function ServiceBrowser() {
             </div>
 
             {activeService ? (
-              <Reveal className={styles.serviceStage} key={activeService.id}>
+              <div className={styles.serviceStage}>
                 <div className={styles.serviceStageContent}>
                   <div className={styles.serviceStageTopline}>
-                    <span className={styles.serviceStageKicker}>Selected service</span>
+                    <span className={styles.serviceStageKicker}>
+                      Selected service
+                    </span>
                     <span className={styles.serviceStageLabel}>
-                      {activeGroup.label}
+                      {activeServiceCategory}
                     </span>
                   </div>
 
-                  <div>
+                  <div aria-live="polite">
                     <h3>{activeService.title}</h3>
                     <p className={styles.serviceStageDescription}>
                       {activeService.description}
@@ -127,60 +160,88 @@ export default function ServiceBrowser() {
                       Request appointment
                     </a>
 
-                    <a className={styles.secondaryAction} href={primaryPhone.href}>
+                    <a
+                      className={styles.secondaryAction}
+                      href={primaryPhone.href}
+                    >
                       Call hospital
                     </a>
                   </div>
                 </div>
-              </Reveal>
+              </div>
             ) : null}
           </div>
         </div>
 
         <div className={styles.mobileServices}>
-          {serviceGroups.map((group) => (
-            <Reveal className={styles.mobileServiceGroup} key={group.id}>
-              <div className={styles.mobileServiceGroupHead}>
-                <span>{String(group.services.length).padStart(2, "0")}</span>
-                <h3>{group.label}</h3>
-              </div>
+          <div className={styles.mobileServiceCards}>
+            {hospitalServices.map((service, index) => {
+              const isExpanded = expandedMobileServiceId === service.id;
+              const detailsId = `mobile-service-details-${service.id}`;
 
-              <div className={styles.mobileServiceCards}>
-                {group.services.map((service, index) => (
-                  <article className={styles.mobileServiceCard} key={service.id}>
-                    <div className={styles.mobileServiceTopline}>
+              return (
+                <Reveal className={styles.mobileServiceCard} key={service.id}>
+                  <button
+                    type="button"
+                    className={styles.mobileServiceTrigger}
+                    aria-expanded={isExpanded}
+                    aria-controls={detailsId}
+                    onClick={() =>
+                      setExpandedMobileServiceId(isExpanded ? "" : service.id)
+                    }
+                  >
+                    <span className={styles.mobileServiceTopline}>
                       <span>{String(index + 1).padStart(2, "0")}</span>
                       <strong>{service.title}</strong>
+                    </span>
+
+                    <span className={styles.mobileServiceCta}>
+                      {isExpanded ? "Show less" : "Learn more"}
+                      <ChevronDown
+                        aria-hidden="true"
+                        className={isExpanded ? styles.mobileServiceChevronOpen : ""}
+                        size={18}
+                        strokeWidth={2}
+                      />
+                    </span>
+                  </button>
+
+                  {isExpanded ? (
+                    <div className={styles.mobileServiceDetails} id={detailsId}>
+                      <p className={styles.mobileServiceShort}>
+                        {service.shortText}
+                      </p>
+                      <p className={styles.mobileServiceDescription}>
+                        {service.description}
+                      </p>
+
+                      <div className={styles.mobileServiceHighlights}>
+                        {service.highlights.map((highlight) => (
+                          <span key={highlight}>{highlight}</span>
+                        ))}
+                      </div>
+
+                      <div className={styles.mobileServiceActions}>
+                        <a
+                          className={styles.primaryAction}
+                          href={hospitalConfig.contact.appointmentHref}
+                        >
+                          Request appointment
+                        </a>
+
+                        <a
+                          className={styles.secondaryAction}
+                          href={primaryPhone.href}
+                        >
+                          Call hospital
+                        </a>
+                      </div>
                     </div>
-
-                    <p className={styles.mobileServiceShort}>{service.shortText}</p>
-                    <p className={styles.mobileServiceDescription}>
-                      {service.description}
-                    </p>
-
-                    <div className={styles.mobileServiceHighlights}>
-                      {service.highlights.map((highlight) => (
-                        <span key={highlight}>{highlight}</span>
-                      ))}
-                    </div>
-
-                    <div className={styles.mobileServiceActions}>
-                      <a
-                        className={styles.primaryAction}
-                        href={hospitalConfig.contact.appointmentHref}
-                      >
-                        Request appointment
-                      </a>
-
-                      <a className={styles.secondaryAction} href={primaryPhone.href}>
-                        Call hospital
-                      </a>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            </Reveal>
-          ))}
+                  ) : null}
+                </Reveal>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

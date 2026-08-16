@@ -84,14 +84,28 @@
 }
 
 .hero-hospital-name {
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
   margin: 0;
   color: var(--white);
-  font-size: clamp(0.76rem, 0.86vw, 0.95rem);
+  font-size: clamp(0.8rem, 1.05vw, 1rem);
   font-weight: 900;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.1em;
   line-height: 1.4;
   text-transform: uppercase;
   text-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.hero-hospital-brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 12px;
+  color: var(--white);
+  background: var(--orange);
+  box-shadow: 0 12px 28px rgba(217, 79, 0, 0.3);
+  letter-spacing: 0.14em;
 }
 
 .hero-controls {
@@ -166,7 +180,7 @@
   width: fit-content;
   margin: 0 0 20px;
   color: #ffc49d;
-  font-size: 10px;
+  font-size: clamp(0.8rem, 1.25vw, 0.95rem);
   font-weight: 800;
   letter-spacing: 0.18em;
   line-height: 1.4;
@@ -324,11 +338,18 @@
   }
 
   .hero-hospital-name {
+    flex-wrap: wrap;
     max-width: 100%;
-    font-size: 0.68rem;
-    letter-spacing: 0.1em;
+    gap: 9px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
     line-height: 1.5;
     text-wrap: balance;
+  }
+
+  .hero-hospital-brand {
+    min-height: 30px;
+    padding: 6px 9px;
   }
 
   .hero-controls {
@@ -347,8 +368,8 @@
 
   .hero-label {
     margin-bottom: 16px;
-    font-size: 9px;
-    letter-spacing: 0.16em;
+    font-size: 0.8rem;
+    letter-spacing: 0.19em;
   }
 
   .hero-copy-slide {

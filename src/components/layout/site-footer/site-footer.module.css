@@ -57,9 +57,26 @@
 .footer-bottom p,
 .footer-bottom a {
   margin: 0;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 9px;
-  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.64);
+  font-size: 12px;
+  line-height: 1.65;
+}
+
+.footer-legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+}
+
+.footer-bottom a {
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 109, 18, 0.5);
+  text-underline-offset: 4px;
+}
+
+.footer-bottom a:hover {
+  color: var(--white);
+  text-decoration-color: var(--orange);
 }
 
 @media (min-width: 700px) {

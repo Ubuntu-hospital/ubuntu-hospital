@@ -213,9 +213,11 @@
 }
 
 .browserSection {
+  position: relative;
+  overflow: clip;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(247, 248, 249, 0.85)),
-    radial-gradient(circle at top left, rgba(255, 109, 18, 0.06), transparent 38%);
+    linear-gradient(180deg, rgba(255, 255, 255, 1), rgba(247, 248, 249, 0.92)),
+    radial-gradient(circle at top left, rgba(255, 109, 18, 0.08), transparent 38%);
 }
 
 .browserShell,
@@ -226,9 +228,19 @@
 }
 
 .browserHeading {
+  position: relative;
   display: grid;
   gap: 12px;
   max-width: 720px;
+  padding-left: 22px;
+}
+
+.browserHeading::before {
+  position: absolute;
+  inset: 2px auto 2px 0;
+  width: 4px;
+  content: "";
+  background: var(--orange);
 }
 
 .categoryTabs {
@@ -268,15 +280,35 @@
 
 .serviceList {
   display: grid;
-  gap: 12px;
+  gap: 10px;
+}
+
+.serviceListCompact {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.serviceListCompact .serviceListButton {
+  min-height: 76px;
+  padding: 15px 16px;
+}
+
+.serviceListCompact .serviceListButton p {
+  display: none;
+}
+
+.serviceListCompact .serviceListButton strong {
+  margin-bottom: 0;
 }
 
 .serviceListButton {
+  position: relative;
+  overflow: hidden;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   gap: 16px;
   align-items: center;
-  padding: 18px 20px;
+  min-height: 92px;
+  padding: 18px 22px;
   border: 1px solid rgba(23, 32, 51, 0.08);
   border-radius: 14px;
   color: var(--ink);
@@ -287,15 +319,25 @@
     transform 180ms ease,
     border-color 180ms ease,
     box-shadow 180ms ease,
-    background-color 180ms ease;
+    background-color 180ms ease,
+    color 180ms ease;
 }
 
-.serviceListButton:hover,
-.serviceListButtonActive {
+.serviceListButton:hover {
   border-color: rgba(255, 109, 18, 0.38);
   background: var(--white);
   box-shadow: 0 20px 42px rgba(23, 32, 51, 0.08);
-  transform: translateY(-2px);
+  transform: translateX(4px);
+}
+
+.serviceListButtonActive,
+.serviceListButtonActive:hover {
+  border-color: var(--orange);
+  border-radius: 0;
+  color: var(--white);
+  background: var(--orange);
+  box-shadow: 0 20px 44px rgba(217, 79, 0, 0.24);
+  transform: translateX(8px);
 }
 
 .serviceListButton strong {
@@ -312,6 +354,16 @@
   line-height: 1.6;
 }
 
+.serviceListButtonActive strong,
+.serviceListButtonActive p,
+.serviceListButtonActive .serviceListIndex {
+  color: var(--white);
+}
+
+.serviceListButtonActive p {
+  color: rgba(255, 255, 255, 0.84);
+}
+
 .serviceListIndex {
   color: var(--orange-deep);
   font-size: 0.76rem;
@@ -322,17 +374,31 @@
 .serviceStage {
   position: relative;
   overflow: hidden;
-  padding: 30px;
-  border: 1px solid rgba(23, 32, 51, 0.08);
+  padding: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-left: 4px solid var(--orange);
-  border-radius: 14px;
-  background: var(--white);
-  box-shadow: 0 24px 58px rgba(23, 32, 51, 0.08);
+  border-radius: 0;
+  background: var(--graphite-deep);
+  box-shadow: 0 30px 70px rgba(23, 32, 51, 0.2);
+}
+
+.serviceStage::after {
+  position: absolute;
+  top: -90px;
+  right: -90px;
+  width: 230px;
+  height: 230px;
+  border: 1px solid rgba(255, 109, 18, 0.18);
+  border-radius: 999px;
+  content: "";
+  pointer-events: none;
 }
 
 .serviceStageContent {
+  position: relative;
+  z-index: 1;
   display: grid;
-  gap: 20px;
+  gap: 24px;
 }
 
 .serviceStageTopline {
@@ -353,16 +419,16 @@
 }
 
 .serviceStageKicker {
-  color: var(--orange-deep);
+  color: var(--white);
 }
 
 .serviceStageLabel {
-  color: var(--muted);
+  color: rgba(255, 255, 255, 0.62);
 }
 
 .serviceStage h3 {
   margin: 0;
-  color: var(--ink);
+  color: var(--white);
   font-family: "Fraunces", Georgia, serif;
   font-size: clamp(1.9rem, 4vw, 2.8rem);
   font-weight: 600;
@@ -372,7 +438,7 @@
 
 .serviceStageDescription {
   margin: 0;
-  color: var(--graphite);
+  color: rgba(255, 255, 255, 0.76);
   font-size: 0.98rem;
   line-height: 1.8;
 }
@@ -382,6 +448,21 @@
   display: grid;
   gap: 0;
   border-top: 1px solid rgba(23, 32, 51, 0.1);
+}
+
+.serviceStage .serviceHighlights {
+  border-top-color: rgba(255, 255, 255, 0.14);
+}
+
+.serviceStage .serviceHighlights span {
+  border-bottom-color: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.serviceStage .secondaryAction {
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
 }
 
 .serviceHighlights span,
@@ -445,9 +526,7 @@
 }
 
 .mobileServiceCard {
-  display: grid;
-  gap: 14px;
-  padding: 20px;
+  overflow: hidden;
   border: 1px solid rgba(23, 32, 51, 0.08);
   border-left: 3px solid var(--orange);
   border-radius: 14px;
@@ -455,10 +534,57 @@
   box-shadow: 0 18px 36px rgba(23, 32, 51, 0.05);
 }
 
+.mobileServiceTrigger {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 82px;
+  padding: 20px;
+  border: 0;
+  color: var(--ink);
+  text-align: left;
+  background: transparent;
+  cursor: pointer;
+}
+
+.mobileServiceTrigger:hover,
+.mobileServiceTrigger:focus-visible,
+.mobileServiceTrigger[aria-expanded="true"] {
+  background: var(--orange-soft);
+}
+
 .mobileServiceTopline {
   display: flex;
   gap: 12px;
   align-items: center;
+}
+
+.mobileServiceCta {
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 6px;
+  align-items: center;
+  color: var(--orange-deep);
+  font-size: 0.76rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.mobileServiceCta svg {
+  transition: transform 180ms ease;
+}
+
+.mobileServiceChevronOpen {
+  transform: rotate(180deg);
+}
+
+.mobileServiceDetails {
+  display: grid;
+  gap: 14px;
+  padding: 2px 20px 20px;
+  border-top: 1px solid rgba(255, 109, 18, 0.16);
 }
 
 .mobileServiceTopline span {
@@ -701,6 +827,15 @@
     align-items: start;
   }
 
+  .serviceStage {
+    position: sticky;
+    top: 112px;
+    max-height: calc(100vh - 136px);
+    overflow-y: auto;
+    scrollbar-color: var(--orange) rgba(255, 255, 255, 0.08);
+    scrollbar-width: thin;
+  }
+
   .pathwayTrack {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
@@ -766,6 +901,10 @@
 
   .serviceStage {
     padding: 24px;
+  }
+
+  .browserHeading {
+    padding-left: 16px;
   }
 
   .finalCta {

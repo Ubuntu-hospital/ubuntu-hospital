@@ -133,22 +133,22 @@ export const hospitalConfig = {
         title: "Spine",
         text: ["Back pain", "Disorders of the spine"],
         image:
-          "https://images.pexels.com/photos/6749778/pexels-photo-6749778.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Clinical spine consultation with a patient and doctor",
+          "/images/hospital/ubuntu-spinal-pain.png",
+        alt: "An image showing the spinal column",
       },
       {
         title: "Trauma",
         text: ["Bone injuries", "Muscle injuries", "Joint injuries"],
         image:
-          "https://images.pexels.com/photos/7088524/pexels-photo-7088524.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Trauma-focused hospital care with a patient receiving support",
+          "/images/hospital/ubuntu-knee-replacement.png",
+        alt: "A total knee joint replacement",
       },
       {
         title: "General orthopaedics",
         text: ["Joint replacement", "Sports medicine", "Rehabilitation"],
         image:
-          "https://images.pexels.com/photos/5794042/pexels-photo-5794042.jpeg?auto=compress&cs=tinysrgb&w=1200",
-        alt: "Orthopaedic rehabilitation session with guided movement support",
+          "/images/hospital/emergency_room_wound_care.png",
+        alt: "An image showing a traumatic hand fracture",
       },
     ],
   },
@@ -220,12 +220,6 @@ export const hospitalConfig = {
       "Specialist medical teams",
       "Modern clinical environments",
       "Coordinated recovery support",
-    ],
-
-    stats: [
-      { value: "10", label: "Hospital services" },
-      { value: "360°", label: "Recovery support" },
-      { value: "01", label: "Focused care journey" },
     ],
   },
 
@@ -501,19 +495,15 @@ export const hospitalConfig = {
     },
   ],
 
-  map: {
-    label: "Visit Ubuntu Hospital",
-    title: "Ubuntu Orthopaedic and Spine Hospital location",
+map: {
+  label: "Visit Ubuntu Hospital",
+  title: "Ubuntu Orthopaedic and Spine Hospital location",
 
-    iframeSrc: "https://www.google.com/maps?q=Accra,Ghana&output=embed",
+  iframeSrc:
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.652566077575!2d-2.3786560249989854!3d7.392771992617036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdac900080dde87%3A0x80a1760fee5785f3!2sUbuntu%20Orthopedic%20%26%20Spine%20Hospital!5e0!3m2!1sen!2sgh!4v1786878325880!5m2!1sen!2sgh",
 
-    directionsHref:
-      "https://www.google.com/maps/search/?api=1&query=Accra%2C%20Ghana",
-  },
+  directionsHref:
+    "https://www.google.com/maps/dir/?api=1&destination=7.392771992617036,-2.3786560249989854",
+},
 
-  credits: {
-    spineLabel: "Spine illustration source",
-    spineHref:
-      "https://commons.wikimedia.org/wiki/File:Vertebral_column,_lateral,_Sobo_1909.png",
-  },
 } as const;

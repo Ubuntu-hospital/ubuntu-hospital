@@ -1,14 +1,12 @@
 import { hospitalConfig } from "@/config/hospital";
 import { servicesPageContent } from "@/content/services";
 import { patientPageContent } from "@/content/patients";
-import { teamPageContent } from "@/content/team";
 
 export type GalleryCategory =
   | "all"
   | "hospital"
   | "care"
   | "facilities"
-  | "team"
   | "patients";
 
 export type GalleryImage = {
@@ -41,10 +39,6 @@ export const galleryCategories: {
     label: "Facilities",
   },
   {
-    id: "team",
-    label: "Team",
-  },
-  {
     id: "patients",
     label: "Patients",
   },
@@ -58,16 +52,6 @@ const facilityImages: GalleryImage[] = hospitalConfig.facilities.items.map(
     image: item.image,
     alt: item.alt,
     featured: index === 0,
-  }),
-);
-
-const specialistImages: GalleryImage[] = hospitalConfig.specialists.people.map(
-  (person, index) => ({
-    id: `specialist-${index + 1}`,
-    title: person.role,
-    category: "team",
-    image: person.image,
-    alt: person.name,
   }),
 );
 
@@ -104,13 +88,6 @@ const galleryImages: GalleryImage[] = [
     featured: true,
   },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
   {
-    id: "team-hero",
-    title: "Hospital team",
-    category: "team",
-    image: teamPageContent.hero.image,
-    alt: teamPageContent.hero.imageAlt,
-  },
-  {
     id: "spine-care",
     title: "Spine care",
     category: "care",
@@ -146,7 +123,6 @@ const galleryImages: GalleryImage[] = [
     alt: hospitalConfig.standard.vision.imageAlt,
   },
   ...facilityImages,
-  ...specialistImages,
   {
     id: "before-visit",
     title: "Before your visit",
@@ -160,7 +136,7 @@ export const galleryPageContent = {
   hero: {
     eyebrow: "Hospital gallery",
     title: "A closer look at Ubuntu Hospital.",
-    text: "Explore the hospital spaces, care environments, team, and patient support areas.",
+    text: "Explore the hospital spaces, focused care environments, facilities, and patient support areas.",
   },
 
   images: galleryImages,

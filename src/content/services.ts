@@ -2,7 +2,8 @@ export type ServiceCategoryId =
   | "access"
   | "diagnostics"
   | "treatment"
-  | "medication";
+  | "medication"
+  | "support";
 
 export type ServiceIconName =
   | "activity"
@@ -103,6 +104,10 @@ export const serviceCategories = [
     id: "medication",
     label: "Medication support",
   },
+  {
+    id: "support",
+    label: "Patient support",
+  },
 ] as const;
 
 export const hospitalServices: readonly HospitalService[] = [
@@ -135,17 +140,45 @@ export const hospitalServices: readonly HospitalService[] = [
     ],
   },
   {
+    id: "general-surgery",
+    title: "General Surgery",
+    shortText: "Surgical assessment and coordinated operative care.",
+    description:
+      "General Surgery provides consultation, operative care, and follow-up through a coordinated surgical pathway built around patient safety.",
+    icon: "stethoscope",
+    category: "treatment",
+    highlights: [
+      "Surgical consultations",
+      "Elective and emergency procedures",
+      "Postoperative review",
+    ],
+  },
+  {
+    id: "medicine",
+    title: "Medicine",
+    shortText: "General medical assessment, treatment, and follow-up.",
+    description:
+      "The Medicine Department evaluates and manages general medical conditions, supporting patients with clear diagnosis, treatment, and ongoing clinical review.",
+    icon: "stethoscope",
+    category: "treatment",
+    highlights: [
+      "General medical consultations",
+      "Management of acute and chronic conditions",
+      "Clinical follow-up",
+    ],
+  },
+  {
     id: "x-ray",
     title: "X-Ray",
     shortText: "On-site imaging for faster clinical decisions.",
     description:
-      "X-Ray services support timely imaging and help the medical team make informed clinical decisions without unnecessary delays.",
+      "Our general X-Ray service provides timely diagnostic imaging to support clinical assessment, treatment planning, and follow-up care.",
     icon: "scan",
     category: "diagnostics",
     highlights: [
-      "On-site imaging",
-      "Faster clinical review",
-      "Coordinated reporting",
+      "General X-Ray services",
+      "On-site diagnostic imaging",
+      "Coordinated clinical reporting",
     ],
   },
   {
@@ -153,13 +186,14 @@ export const hospitalServices: readonly HospitalService[] = [
     title: "Laboratory",
     shortText: "Reliable testing within the hospital facility.",
     description:
-      "Laboratory services support the diagnostic process with testing that helps clinicians understand the patient's condition more clearly.",
+      "Our modern laboratory delivers accurate, timely, and reliable diagnostic testing across four core service areas.",
     icon: "flask",
     category: "diagnostics",
     highlights: [
-      "Clinical testing",
-      "Reliable support",
-      "Connected diagnosis",
+      "Chemical Pathology — liver and kidney function, electrolytes, lipid profile, glucose, urea, creatinine, PSA, HbA1c, C-reactive protein, and uric acid",
+      "Haematology — full blood count, blood film, ESR, coagulation profile, hepatitis screening, sickling, haemoglobin genotype, typhoid, and preoperative screening",
+      "Microbiology — wound swab, blood, urine, and other specimen cultures with sensitivity testing",
+      "Blood Bank — blood grouping, cross-matching, donor screening, and safe blood products",
     ],
   },
   {
@@ -167,13 +201,60 @@ export const hospitalServices: readonly HospitalService[] = [
     title: "Physiotherapy",
     shortText: "Guided rehabilitation focused on safe recovery.",
     description:
-      "Physiotherapy supports mobility, strength, and safe progress through guided rehabilitation designed around the patient's recovery needs.",
+      "Physiotherapy provides individualised rehabilitation, mobility support, and therapeutic care for recovery, independence, and long-term function.",
     icon: "activity",
     category: "treatment",
     highlights: [
-      "Guided rehabilitation",
-      "Mobility support",
-      "Recovery planning",
+      "Neurological rehabilitation, including stroke and spinal cord injury",
+      "Casting and splinting, including patella tendon-bearing, below-knee, and above-knee casts",
+      "Preoperative and postoperative rehabilitation",
+      "Gait training and mobility re-education",
+      "Full-body massage",
+      "Congenital musculoskeletal care, including clubfoot and cerebral palsy",
+      "Electrotherapy services",
+      "Sports injury rehabilitation",
+    ],
+  },
+  {
+    id: "neurosurgery",
+    title: "Neurosurgery",
+    shortText: "Specialist surgical care for neurological conditions.",
+    description:
+      "Neurosurgery offers specialist evaluation and surgical management for conditions affecting the brain, spinal cord, and peripheral nerves.",
+    icon: "activity",
+    category: "treatment",
+    highlights: [
+      "Specialist neurological assessment",
+      "Surgical treatment planning",
+      "Coordinated recovery support",
+    ],
+  },
+  {
+    id: "pain-management",
+    title: "Pain Management",
+    shortText: "Focused assessment and relief for persistent pain.",
+    description:
+      "Pain Management combines careful assessment with an individual care plan to reduce pain, restore function, and improve quality of life.",
+    icon: "activity",
+    category: "treatment",
+    highlights: [
+      "Individual pain assessment",
+      "Non-surgical pain interventions",
+      "Ongoing symptom review",
+    ],
+  },
+  {
+    id: "neurology",
+    title: "Neurology",
+    shortText: "Diagnosis and care for nervous system conditions.",
+    description:
+      "Neurology supports the diagnosis and medical management of conditions affecting the brain, spinal cord, nerves, and muscles.",
+    icon: "activity",
+    category: "treatment",
+    highlights: [
+      "Neurological consultation",
+      "Diagnostic assessment",
+      "Long-term condition management",
     ],
   },
   {
@@ -188,6 +269,20 @@ export const hospitalServices: readonly HospitalService[] = [
       "Prescription support",
       "Medication guidance",
       "Convenient access",
+    ],
+  },
+  {
+    id: "cafeteria",
+    title: "Cafeteria",
+    shortText: "Convenient refreshments for patients and visitors.",
+    description:
+      "The hospital cafeteria provides a convenient place for patients, visitors, and staff to access refreshments during their time at the hospital.",
+    icon: "pill",
+    category: "support",
+    highlights: [
+      "On-site convenience",
+      "Patient and visitor access",
+      "Refreshments during hospital hours",
     ],
   },
 ] as const;

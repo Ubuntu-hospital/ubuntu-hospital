@@ -47,15 +47,6 @@ export default function About() {
               </div>
             ))}
           </div>
-
-          <div className="about-stats">
-            {hospitalConfig.about.stats.map((item) => (
-              <div key={item.label}>
-                <strong>{item.value}</strong>
-                <span>{item.label}</span>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </section>
