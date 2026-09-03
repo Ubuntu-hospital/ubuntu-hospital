@@ -11,6 +11,8 @@ export const metadata: Metadata = {
     "Explore the clinical, recovery, and patient support facilities available at Ubuntu Orthopaedic & Spine Hospital.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function FacilitiesRoute() {
   const managedSpaces = await getManagedFacilitySpaces();
   return <FacilitiesPage managedSpaces={managedSpaces} />;

@@ -7,6 +7,8 @@ import PatientJourney from "@/components/sections/home/patient-journey/patient-j
 import Facilities from "@/components/sections/home/facilities/facilities";
 import { listTeamMembers } from "@/lib/team-members";
 
+export const dynamic = "force-dynamic";
+
 export default async function HomePage() {
   const managedMembers = await listTeamMembers();
   return (

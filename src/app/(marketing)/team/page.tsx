@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   description: teamPageContent.hero.text,
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function TeamRoute() {
   const managedMembers = await listTeamMembers();
   return <TeamPage managedMembers={managedMembers} />;

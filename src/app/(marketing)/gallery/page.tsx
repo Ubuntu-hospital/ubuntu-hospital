@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   description: galleryPageContent.hero.text,
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function GalleryRoute() {
   const additions = await listGalleryAdditions();
   return <GalleryPage images={[...galleryPageContent.images, ...additions]} />;
