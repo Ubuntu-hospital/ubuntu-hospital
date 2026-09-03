@@ -2,15 +2,12 @@ name: Continuous Integration
 
 on:
   push:
-    branches:
-      - main
-      - master
-      - develop
+    branches: [main]
   pull_request:
-    branches:
-      - main
-      - master
-      - develop
+    branches: [main]
+
+permissions:
+  contents: read
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -18,11 +15,10 @@ concurrency:
 
 jobs:
   validate:
-    name: Lint, Type Check & Build
+    name: Format, Lint, Type Check & Build
     runs-on: ubuntu-latest
 
     env:
-      NODE_ENV: production
       MONGODB_URI: ${{ secrets.MONGODB_URI }}
       ADMIN_SESSION_SECRET: ${{ secrets.ADMIN_SESSION_SECRET }}
       ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
@@ -38,22 +34,26 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
-      - name: Setup Node.js 20
-        uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
         with:
-          node-version: 20
-          cache: "yarn"
+          node-version: 22
+          cache: yarn
+          cache-dependency-path: yarn.lock
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile || yarn install
+        run: yarn install --frozen-lockfile
+
+      - name: Check formatting
+        run: yarn format:check
 
       - name: Run ESLint
         run: yarn lint
 
-      - name: Run TypeScript Type Check
+      - name: Run TypeScript check
         run: yarn type-check
 
-      - name: Build Next.js Application
+      - name: Build application
         run: yarn build
