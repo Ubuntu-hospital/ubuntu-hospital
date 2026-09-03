@@ -2,7 +2,6 @@ import Image from "next/image";
 import {
   CalendarDays,
   Check,
-  Clock3,
   Mail,
   MapPin,
   Navigation as NavigationIcon,
