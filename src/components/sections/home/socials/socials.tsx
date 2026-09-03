@@ -1,12 +1,10 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { hospitalConfig } from "@/config/hospital";
 import { socialIcons } from "@/components/ui/icons/Icons";
 import Reveal from "@/components/ui/reveal/reveal.client";
-
-const easing = [0.22, 1, 0.36, 1] as const;
 
 export default function Socials() {
   return (

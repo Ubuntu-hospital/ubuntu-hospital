@@ -18,8 +18,9 @@ export async function signInAdminAction(
   const email = readTextField(formData, "email");
   const password = readTextField(formData, "password");
   const redirectTo = readTextField(formData, "redirectTo");
-  const safeRedirectTarget =
-    redirectTo.startsWith("/admin") ? redirectTo : ADMIN_HOME_PATH;
+  const safeRedirectTarget = redirectTo.startsWith("/admin")
+    ? redirectTo
+    : ADMIN_HOME_PATH;
 
   const fieldErrors: AdminAuthActionState["fieldErrors"] = {};
 
@@ -40,9 +41,8 @@ export async function signInAdminAction(
   }
 
   try {
-    const { authenticateAdmin, createAdminSession } = await import(
-      "@/lib/admin-auth"
-    );
+    const { authenticateAdmin, createAdminSession } =
+      await import("@/lib/admin-auth");
 
     const adminSession = await authenticateAdmin(email, password);
 
@@ -63,9 +63,7 @@ export async function signInAdminAction(
     return {
       status: "error",
       message:
-        error instanceof Error
-          ? error.message
-          : "Unable to sign in right now.",
+        error instanceof Error ? error.message : "Unable to sign in right now.",
       fieldErrors: {},
     };
   }

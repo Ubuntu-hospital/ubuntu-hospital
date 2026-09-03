@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity,
@@ -29,6 +30,7 @@ import {
   facilityCategories,
   facilitySpaces,
   facilitiesPageContent,
+  type FacilitySpace,
   type FacilityCategoryId,
   type FacilityIconName,
 } from "@/content/facilities";
@@ -54,29 +56,28 @@ const facilityIcons: Record<FacilityIconName, IconComponent> = {
 
 const easing = [0.22, 1, 0.36, 1] as const;
 
-export function FacilityExplorer() {
+export function FacilityExplorer({
+  spaces = facilitySpaces,
+}: {
+  spaces?: readonly FacilitySpace[];
+}) {
   const [activeCategory, setActiveCategory] =
     useState<FacilityCategoryId>("all");
 
-  const [activeSpaceId, setActiveSpaceId] =
-    useState(facilitySpaces[0].id);
+  const [activeSpaceId, setActiveSpaceId] = useState(facilitySpaces[0].id);
+  const isUserClickRef = useRef(false);
 
   const explorerGridRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
-
-  const spaceButtonRefs = useRef(
-    new Map<string, HTMLButtonElement>(),
-  );
+  const spaceButtonRefs = useRef(new Map<string, HTMLButtonElement>());
 
   const visibleSpaces = useMemo(() => {
     if (activeCategory === "all") {
-      return facilitySpaces;
+      return spaces;
     }
 
-    return facilitySpaces.filter(
-      (space) => space.category === activeCategory,
-    );
-  }, [activeCategory]);
+    return spaces.filter((space) => space.category === activeCategory);
+  }, [activeCategory, spaces]);
 
   const activeSpace =
     visibleSpaces.find((space) => space.id === activeSpaceId) ??
@@ -97,28 +98,23 @@ export function FacilityExplorer() {
   );
 
   const updateActiveSpaceFromScroll = useCallback(() => {
-    const explorerGrid = explorerGridRef.current;
+    if (isUserClickRef.current) return;
 
+    const explorerGrid = explorerGridRef.current;
     if (!explorerGrid || visibleSpaces.length === 0) {
       return;
     }
 
     const explorerRect = explorerGrid.getBoundingClientRect();
-
     const explorerIsVisible =
-      explorerRect.bottom > 0 &&
-      explorerRect.top < window.innerHeight;
+      explorerRect.bottom > 0 && explorerRect.top < window.innerHeight;
 
     if (!explorerIsVisible) {
       return;
     }
 
-    const isMobile = window.matchMedia(
-      "(max-width: 699px)",
-    ).matches;
-
-    const stageBottom =
-      stageRef.current?.getBoundingClientRect().bottom ?? 0;
+    const isMobile = window.matchMedia("(max-width: 699px)").matches;
+    const stageBottom = stageRef.current?.getBoundingClientRect().bottom ?? 0;
 
     const activationLine = isMobile
       ? Math.min(
@@ -132,19 +128,13 @@ export function FacilityExplorer() {
 
     visibleSpaces.forEach((space) => {
       const button = spaceButtonRefs.current.get(space.id);
-
       if (!button) {
         return;
       }
 
       const buttonRect = button.getBoundingClientRect();
-
-      const buttonCenter =
-        buttonRect.top + buttonRect.height / 2;
-
-      const distance = Math.abs(
-        buttonCenter - activationLine,
-      );
+      const buttonCenter = buttonRect.top + buttonRect.height / 2;
+      const distance = Math.abs(buttonCenter - activationLine);
 
       if (distance < closestDistance) {
         closestDistance = distance;
@@ -153,9 +143,7 @@ export function FacilityExplorer() {
     });
 
     setActiveSpaceId((currentSpaceId) =>
-      currentSpaceId === closestSpaceId
-        ? currentSpaceId
-        : closestSpaceId,
+      currentSpaceId === closestSpaceId ? currentSpaceId : closestSpaceId,
     );
   }, [activeSpaceId, visibleSpaces]);
 
@@ -174,30 +162,52 @@ export function FacilityExplorer() {
     };
 
     scheduleUpdate();
-
-    window.addEventListener("scroll", scheduleUpdate, {
-      passive: true,
-    });
-
+    window.addEventListener("scroll", scheduleUpdate, { passive: true });
     window.addEventListener("resize", scheduleUpdate);
 
     return () => {
       if (animationFrameId !== null) {
         window.cancelAnimationFrame(animationFrameId);
       }
-
       window.removeEventListener("scroll", scheduleUpdate);
       window.removeEventListener("resize", scheduleUpdate);
     };
   }, [updateActiveSpaceFromScroll]);
 
+  // Handle clicking on an item: select immediately & smoothly adjust window scroll to the active position
+  const handleSpaceClick = (spaceId: string) => {
+    setActiveSpaceId(spaceId);
+    isUserClickRef.current = true;
+
+    const button = spaceButtonRefs.current.get(spaceId);
+    if (button) {
+      const isMobile = window.matchMedia("(max-width: 699px)").matches;
+      const stageBottom = stageRef.current?.getBoundingClientRect().bottom ?? 0;
+
+      const targetActivationLine = isMobile
+        ? Math.min(
+            window.innerHeight - 70,
+            Math.max(stageBottom + 62, window.innerHeight * 0.72),
+          )
+        : window.innerHeight * 0.52;
+
+      const buttonRect = button.getBoundingClientRect();
+      const buttonCenter = buttonRect.top + buttonRect.height / 2;
+      const scrollDelta = buttonCenter - targetActivationLine;
+
+      window.scrollBy({ top: scrollDelta, behavior: "smooth" });
+    }
+
+    setTimeout(() => {
+      isUserClickRef.current = false;
+    }, 600);
+  };
+
   const selectCategory = (categoryId: FacilityCategoryId) => {
     const nextSpaces =
       categoryId === "all"
-        ? facilitySpaces
-        : facilitySpaces.filter(
-            (space) => space.category === categoryId,
-          );
+        ? spaces
+        : spaces.filter((space) => space.category === categoryId);
 
     setActiveCategory(categoryId);
 
@@ -223,17 +233,14 @@ export function FacilityExplorer() {
               {facilitiesPageContent.explorer.title}
             </h2>
 
-            <p>
-              {facilitiesPageContent.explorer.text}
-            </p>
+            <p>{facilitiesPageContent.explorer.text}</p>
           </div>
 
           <div className={styles.explorerNote}>
             <MapPin size={18} strokeWidth={1.7} />
-
             <p>
-              Scroll through the directory or select a hospital
-              area to explore it.
+              Scroll through the directory or select a hospital area to explore
+              it.
             </p>
           </div>
         </div>
@@ -244,8 +251,7 @@ export function FacilityExplorer() {
           aria-label="Facility categories"
         >
           {facilityCategories.map((category) => {
-            const isActive =
-              category.id === activeCategory;
+            const isActive = category.id === activeCategory;
 
             return (
               <button
@@ -258,9 +264,7 @@ export function FacilityExplorer() {
                     : styles.categoryTab
                 }
                 key={category.id}
-                onClick={() =>
-                  selectCategory(category.id)
-                }
+                onClick={() => selectCategory(category.id)}
               >
                 {category.label}
               </button>
@@ -268,26 +272,19 @@ export function FacilityExplorer() {
           })}
         </div>
 
-        <div
-          className={styles.explorerGrid}
-          ref={explorerGridRef}
-        >
+        <div className={styles.explorerGrid} ref={explorerGridRef}>
           <div
             className={styles.spaceList}
             aria-label="Hospital facility directory"
           >
             {visibleSpaces.map((space, index) => {
               const Icon = facilityIcons[space.icon];
-
-              const isActive =
-                space.id === activeSpace.id;
+              const isActive = space.id === activeSpace.id;
 
               return (
                 <button
                   type="button"
-                  ref={(node) =>
-                    registerSpaceButton(space.id, node)
-                  }
+                  ref={(node) => registerSpaceButton(space.id, node)}
                   className={
                     isActive
                       ? `${styles.spaceButton} ${styles.spaceButtonActive}`
@@ -296,24 +293,18 @@ export function FacilityExplorer() {
                   aria-pressed={isActive}
                   aria-controls="active-facility-preview"
                   key={space.id}
-                  onClick={() =>
-                    setActiveSpaceId(space.id)
-                  }
+                  onClick={() => handleSpaceClick(space.id)}
                 >
                   <span className={styles.spaceNumber}>
                     {String(index + 1).padStart(2, "0")}
                   </span>
 
                   <span className={styles.spaceIcon}>
-                    <Icon
-                      size={18}
-                      strokeWidth={1.6}
-                    />
+                    <Icon size={18} strokeWidth={1.6} />
                   </span>
 
                   <span>
                     <strong>{space.title}</strong>
-
                     <small>{space.shortText}</small>
                   </span>
                 </button>
@@ -358,10 +349,7 @@ export function FacilityExplorer() {
                 <div className={styles.spaceStageOverlay} />
 
                 <span className={styles.spaceStageIcon}>
-                  <ActiveIcon
-                    size={24}
-                    strokeWidth={1.5}
-                  />
+                  <ActiveIcon size={24} strokeWidth={1.5} />
                 </span>
 
                 <div className={styles.spaceStageContent}>
@@ -377,22 +365,18 @@ export function FacilityExplorer() {
                     {activeSpace.features.map((feature) => (
                       <div key={feature}>
                         <span>
-                          <Check
-                            size={13}
-                            strokeWidth={2.1}
-                          />
+                          <Check size={13} strokeWidth={2.1} />
                         </span>
-
                         <p>{feature}</p>
                       </div>
                     ))}
                   </div>
 
                   <div className={styles.spaceStageActions}>
-                    <a href="/#booking">
+                    <Link href="/#booking">
                       <CalendarDays size={16} />
                       Book appointment
-                    </a>
+                    </Link>
 
                     <a href="/contact">
                       <MapPin size={16} />

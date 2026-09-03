@@ -18,13 +18,7 @@
 .hero {
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(
-      120deg,
-      #ffffff 0%,
-      #ffffff 48%,
-      #f3f8fb 100%
-    );
+  background: linear-gradient(120deg, #ffffff 0%, #ffffff 48%, #f3f8fb 100%);
 }
 
 .heroTexture {
@@ -32,18 +26,12 @@
   inset: 0;
   pointer-events: none;
   opacity: 0.17;
-  background-image:
-    radial-gradient(
-      rgba(77, 77, 77, 0.35) 0.55px,
-      transparent 0.55px
-    );
+  background-image: radial-gradient(
+    rgba(77, 77, 77, 0.35) 0.55px,
+    transparent 0.55px
+  );
   background-size: 5px 5px;
-  mask-image:
-    linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.78),
-      transparent 80%
-    );
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.78), transparent 80%);
 }
 
 .heroGlow {
@@ -53,12 +41,11 @@
   width: 490px;
   height: 490px;
   border-radius: 50%;
-  background:
-    radial-gradient(
-      circle,
-      rgba(255, 109, 18, 0.12),
-      rgba(255, 109, 18, 0) 70%
-    );
+  background: radial-gradient(
+    circle,
+    rgba(255, 109, 18, 0.12),
+    rgba(255, 109, 18, 0) 70%
+  );
 }
 
 .heroOrbitLarge,
@@ -211,12 +198,11 @@
 .heroMediaOverlay {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(19, 31, 43, 0.04),
-      rgba(19, 31, 43, 0.62)
-    );
+  background: linear-gradient(
+    180deg,
+    rgba(19, 31, 43, 0.04),
+    rgba(19, 31, 43, 0.62)
+  );
 }
 
 .heroMediaCurve {
@@ -567,19 +553,17 @@
   inset: 0;
   pointer-events: none;
   opacity: 0.26;
-  background-image:
-    radial-gradient(
-      rgba(255, 255, 255, 0.2) 0.7px,
-      transparent 0.7px
-    );
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.2) 0.7px,
+    transparent 0.7px
+  );
   background-size: 16px 16px;
-  mask-image:
-    linear-gradient(
-      to right,
-      transparent,
-      rgba(0, 0, 0, 0.8),
-      transparent
-    );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 0, 0, 0.8),
+    transparent
+  );
 }
 
 .visitGrid {

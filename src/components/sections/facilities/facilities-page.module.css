@@ -3,7 +3,7 @@
 .visitEyebrow {
   margin: 0;
   color: var(--orange-deep);
-  font-size: 10px;
+  font-size: clamp(0.8rem, 1.25vw, 0.95rem);
   font-weight: 800;
   letter-spacing: 0.18em;
   line-height: 1.4;
@@ -1066,5 +1066,12 @@
 
   .spaceButton {
     min-height: 128px;
+  }
+}
+
+/* Explorer bottom scroll buffer to keep stage sticky until last item */
+@media (min-width: 700px) {
+  .spaceList {
+    padding-bottom: clamp(180px, 30vh, 320px);
   }
 }

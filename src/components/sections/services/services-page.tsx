@@ -9,8 +9,23 @@ import ServiceBrowser from "./service-browser.client";
 import styles from "./services-page.module.css";
 import HeroHighlights from "../home/hero-highlights/hero-highlights";
 
-export default function ServicesPage() {
+export default function ServicesPage({
+  heroImageOverride,
+  beforeYouVisitImageOverride,
+}: {
+  heroImageOverride?: { image: string; alt: string };
+  beforeYouVisitImageOverride?: { image: string; alt: string };
+}) {
   const primaryPhone = hospitalConfig.contact.phoneNumbers[0];
+  const heroImageSrc =
+    heroImageOverride?.image || servicesPageContent.hero.image;
+  const heroImageAlt =
+    heroImageOverride?.alt || servicesPageContent.hero.imageAlt;
+
+  const visitImageSrc =
+    beforeYouVisitImageOverride?.image || servicesPageContent.support.image;
+  const visitImageAlt =
+    beforeYouVisitImageOverride?.alt || servicesPageContent.support.imageAlt;
 
   return (
     <>
@@ -45,10 +60,11 @@ export default function ServicesPage() {
 
           <Reveal className={styles.heroMedia} delay={0.08}>
             <Image
-              src={servicesPageContent.hero.image}
-              alt={servicesPageContent.hero.imageAlt}
+              src={heroImageSrc}
+              alt={heroImageAlt}
               fill
               priority
+              unoptimized
               sizes="(max-width: 980px) 100vw, 54vw"
             />
 
@@ -108,9 +124,10 @@ export default function ServicesPage() {
         <div className={`shell ${styles.supportGrid}`}>
           <Reveal className={styles.supportMedia}>
             <Image
-              src={servicesPageContent.support.image}
-              alt={servicesPageContent.support.imageAlt}
+              src={visitImageSrc}
+              alt={visitImageAlt}
               fill
+              unoptimized
               sizes="(max-width: 980px) 100vw, 42vw"
             />
 

@@ -1,8 +1,7 @@
 import { hospitalConfig } from "@/config/hospital";
 
 export function OpenGraphBrandCard({ markSrc }: { markSrc: string }) {
-  const phoneNumbers =
-    hospitalConfig.contact.phoneNumbers.slice(0, 2);
+  const phoneNumbers = hospitalConfig.contact.phoneNumbers.slice(0, 2);
 
   return (
     <div
@@ -132,9 +131,7 @@ export function OpenGraphBrandCard({ markSrc }: { markSrc: string }) {
               height: "100%",
               padding: "10px 22px",
               borderLeft:
-                index === 0
-                  ? "0"
-                  : "1px solid rgba(255, 255, 255, 0.16)",
+                index === 0 ? "0" : "1px solid rgba(255, 255, 255, 0.16)",
             }}
           >
             <span

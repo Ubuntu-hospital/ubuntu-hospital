@@ -171,7 +171,7 @@ export default function BookingForm({
                 ? "booking-feedback booking-feedback-success"
                 : state.status === "warning"
                   ? "booking-feedback booking-feedback-warning"
-                : "booking-feedback booking-feedback-error"
+                  : "booking-feedback booking-feedback-error"
             }
             aria-live="polite"
           >

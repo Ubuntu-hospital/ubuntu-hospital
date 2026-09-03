@@ -3,11 +3,7 @@ import { servicesPageContent } from "@/content/services";
 import { patientPageContent } from "@/content/patients";
 
 export type GalleryCategory =
-  | "all"
-  | "hospital"
-  | "care"
-  | "facilities"
-  | "patients";
+  "all" | "hospital" | "care" | "facilities" | "patients";
 
 export type GalleryImage = {
   id: string;
@@ -86,7 +82,7 @@ const galleryImages: GalleryImage[] = [
     image: patientPageContent.hero.image,
     alt: patientPageContent.hero.imageAlt,
     featured: true,
-  },                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+  },
   {
     id: "spine-care",
     title: "Spine care",

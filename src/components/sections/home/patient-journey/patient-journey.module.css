@@ -108,12 +108,12 @@
 }
 
 @media (min-width: 700px) {
-.journey-route {
+  .journey-route {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     border-top: 0;
   }
 
-.journey-route-line {
+  .journey-route-line {
     position: absolute;
     top: 18px;
     right: 12%;
@@ -129,29 +129,29 @@
     transform-origin: left;
   }
 
-.journey-stop {
+  .journey-stop {
     padding: 0 17px 10px;
     border-bottom: 0;
   }
 
-.journey-marker {
+  .journey-marker {
     position: relative;
     z-index: 3;
   }
 }
 
 @media (min-width: 980px) {
-.journey-heading {
+  .journey-heading {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 30px;
     align-items: end;
   }
 
-.journey-route {
+  .journey-route {
     margin-top: 58px;
   }
 
-.journey-stop {
+  .journey-stop {
     min-height: 245px;
     padding: 0 25px;
   }

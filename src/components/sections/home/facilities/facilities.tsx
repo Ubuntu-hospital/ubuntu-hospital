@@ -60,6 +60,7 @@ export default function Facilities() {
                 src={facility.image}
                 alt={facility.alt}
                 fill
+                unoptimized
                 sizes="(max-width: 980px) 100vw, 58vw"
               />
 

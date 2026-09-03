@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import "./brand.module.css";
 import { hospitalConfig } from "@/config/hospital";
@@ -12,7 +13,7 @@ export default function Brand({
 }) {
   if (inverse) {
     return (
-      <a
+      <Link
         href="/"
         className="brand-inverse-card"
         aria-label={`${hospitalConfig.name} homepage`}
@@ -25,12 +26,12 @@ export default function Brand({
           height={248}
           sizes="(max-width: 699px) 268px, 302px"
         />
-      </a>
+      </Link>
     );
   }
 
   return (
-    <a
+    <Link
       href="/"
       className={mobileLogomark ? "brand brand-mobile-logomark" : "brand"}
       aria-label={`${hospitalConfig.name} homepage`}
@@ -38,7 +39,9 @@ export default function Brand({
       <Image
         src={hospitalConfig.branding.logoSrc}
         alt={hospitalConfig.branding.logoAlt}
-        className={mobileLogomark ? "brand-logo brand-logo-desktop" : "brand-logo"}
+        className={
+          mobileLogomark ? "brand-logo brand-logo-desktop" : "brand-logo"
+        }
         width={604}
         height={248}
         sizes="(max-width: 979px) 154px, 172px"
@@ -54,6 +57,6 @@ export default function Brand({
           sizes="56px"
         />
       ) : null}
-    </a>
+    </Link>
   );
 }

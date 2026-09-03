@@ -73,21 +73,21 @@
 }
 
 @media (min-width: 700px) {
-.shell {
+  .shell {
     width: min(100% - 56px, 1280px);
   }
 }
 
 @media (min-width: 980px) {
-.shell {
+  .shell {
     width: min(100% - 88px, 1280px);
   }
 
-.section {
+  .section {
     padding: 108px 0;
   }
 
-.section-topline {
+  .section-topline {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 30px;
     align-items: end;

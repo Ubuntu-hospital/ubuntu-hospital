@@ -1,17 +1,8 @@
 export type ServiceCategoryId =
-  | "access"
-  | "diagnostics"
-  | "treatment"
-  | "medication"
-  | "support";
+  "access" | "diagnostics" | "treatment" | "medication" | "support";
 
 export type ServiceIconName =
-  | "activity"
-  | "flask"
-  | "pill"
-  | "scan"
-  | "siren"
-  | "stethoscope";
+  "activity" | "flask" | "pill" | "scan" | "siren" | "stethoscope";
 
 export type HospitalService = {
   id: string;

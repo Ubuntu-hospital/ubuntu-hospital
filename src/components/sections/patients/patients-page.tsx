@@ -11,8 +11,16 @@ import Booking from "@/components/sections/home/booking/booking";
 
 import styles from "./patients-page.module.css";
 
-export function PatientsPage() {
+export function PatientsPage({
+  heroImageOverride,
+}: {
+  heroImageOverride?: { image: string; alt: string };
+}) {
   const primaryPhone = hospitalConfig.contact.phoneNumbers[0];
+  const heroImageSrc =
+    heroImageOverride?.image || patientPageContent.hero.image;
+  const heroImageAlt =
+    heroImageOverride?.alt || patientPageContent.hero.imageAlt;
 
   return (
     <>
@@ -47,10 +55,11 @@ export function PatientsPage() {
 
           <Reveal className={styles.heroMedia} delay={0.1}>
             <Image
-              src={patientPageContent.hero.image}
-              alt={patientPageContent.hero.imageAlt}
+              src={heroImageSrc}
+              alt={heroImageAlt}
               fill
               priority
+              unoptimized
               sizes="(max-width: 980px) 100vw, 54vw"
             />
 

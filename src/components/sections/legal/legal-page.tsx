@@ -17,7 +17,10 @@ export default function LegalPage({ document }: { document: LegalDocument }) {
       </header>
 
       <div className={`shell ${styles.layout}`}>
-        <aside className={styles.navigation} aria-label={`${document.title} sections`}>
+        <aside
+          className={styles.navigation}
+          aria-label={`${document.title} sections`}
+        >
           <span>On this page</span>
           <nav>
             {document.sections.map((section) => (
@@ -30,7 +33,11 @@ export default function LegalPage({ document }: { document: LegalDocument }) {
 
         <article className={styles.document}>
           {document.sections.map((section, index) => (
-            <section className={styles.section} id={section.id} key={section.id}>
+            <section
+              className={styles.section}
+              id={section.id}
+              key={section.id}
+            >
               <span className={styles.sectionNumber}>
                 {String(index + 1).padStart(2, "0")}
               </span>

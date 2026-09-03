@@ -13,19 +13,21 @@ import {
 
 import styles from "./gallery-page.module.css";
 
-export default function GalleryPage() {
+export default function GalleryPage({
+  images = galleryPageContent.images,
+}: {
+  images?: GalleryImage[];
+}) {
   const [activeCategory, setActiveCategory] = useState<GalleryCategory>("all");
   const [activeImage, setActiveImage] = useState<GalleryImage | null>(null);
 
   const visibleImages = useMemo(() => {
     if (activeCategory === "all") {
-      return galleryPageContent.images;
+      return images;
     }
 
-    return galleryPageContent.images.filter(
-      (image) => image.category === activeCategory,
-    );
-  }, [activeCategory]);
+    return images.filter((image) => image.category === activeCategory);
+  }, [activeCategory, images]);
 
   return (
     <>
@@ -36,9 +38,7 @@ export default function GalleryPage() {
 
         <div className={`shell ${styles.heroInner}`}>
           <Reveal className={styles.heroCopy}>
-            <p className={styles.eyebrow}>
-              {galleryPageContent.hero.eyebrow}
-            </p>
+            <p className={styles.eyebrow}>{galleryPageContent.hero.eyebrow}</p>
 
             <h1>{galleryPageContent.hero.title}</h1>
 

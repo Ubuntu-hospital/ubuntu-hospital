@@ -7,13 +7,29 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { hospitalConfig } from "@/config/hospital";
 import SectionIntro from "@/components/ui/section-intro/section-intro";
 
-export default function Testimonials() {
+import type { ManagedTestimony } from "@/lib/testimonies";
+
+type TestimonialItem = {
+  quote: string;
+  name: string;
+  context: string;
+  image?: string | null;
+};
+
+export default function Testimonials({
+  items: propItems,
+}: {
+  items?: ManagedTestimony[] | TestimonialItem[];
+}) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const reduceMotion = useReducedMotion();
 
-  const items = hospitalConfig.testimonials.items;
-  const active = items[activeIndex];
+  const items: readonly TestimonialItem[] =
+    propItems && propItems.length > 0
+      ? propItems
+      : (hospitalConfig.testimonials.items as readonly TestimonialItem[]);
+  const active: TestimonialItem = items[activeIndex] || items[0];
 
   const move = (direction: number) => {
     setActiveIndex(
@@ -22,7 +38,7 @@ export default function Testimonials() {
   };
 
   useEffect(() => {
-    if (paused || reduceMotion) {
+    if (paused || reduceMotion || items.length <= 1) {
       return;
     }
 
@@ -32,6 +48,8 @@ export default function Testimonials() {
 
     return () => window.clearInterval(interval);
   }, [items.length, paused, reduceMotion]);
+
+  if (!items.length || !active) return null;
 
   return (
     <section className="testimonials-section texture-warm">
@@ -84,7 +102,16 @@ export default function Testimonials() {
               <blockquote>{active.quote}</blockquote>
 
               <div className="testimonial-person">
-                <span>{active.name.charAt(0)}</span>
+                {active.image ? (
+                  <img
+                    src={active.image}
+                    alt={active.name}
+                    className="testimonial-avatar-img"
+                    loading="lazy"
+                  />
+                ) : (
+                  <span>{active.name.charAt(0)}</span>
+                )}
 
                 <div>
                   <strong>{active.name}</strong>

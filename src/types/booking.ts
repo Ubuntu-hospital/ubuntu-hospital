@@ -1,18 +1,9 @@
-export const bookingStatusValues = [
-  "new",
-  "contacted",
-  "scheduled",
-] as const;
+export const bookingStatusValues = ["new", "contacted", "scheduled"] as const;
 
 export type BookingStatus = (typeof bookingStatusValues)[number];
 
 export type BookingFieldName =
-  | "fullName"
-  | "phone"
-  | "email"
-  | "preferredDate"
-  | "service"
-  | "note";
+  "fullName" | "phone" | "email" | "preferredDate" | "service" | "note";
 
 export interface BookingActionState {
   status: "idle" | "success" | "warning" | "error";

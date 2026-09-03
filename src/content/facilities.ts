@@ -1,13 +1,6 @@
-export type FacilityCategoryId =
-  | "all"
-  | "clinical"
-  | "recovery"
-  | "support";
+export type FacilityCategoryId = "all" | "clinical" | "recovery" | "support";
 
-export type FacilitySpaceCategoryId = Exclude<
-  FacilityCategoryId,
-  "all"
->;
+export type FacilitySpaceCategoryId = Exclude<FacilityCategoryId, "all">;
 
 export type FacilityIconName =
   | "activity"
@@ -41,8 +34,7 @@ export const facilitiesPageContent = {
     image:
       "https://images.pexels.com/photos/7563452/pexels-photo-7563452.jpeg?auto=compress&cs=tinysrgb&w=1800",
 
-    imageAlt:
-      "Modern hospital ward with clean beds and clinical equipment",
+    imageAlt: "Modern hospital ward with clean beds and clinical equipment",
 
     stats: [
       {
@@ -74,8 +66,7 @@ export const facilitiesPageContent = {
     image:
       "https://images.pexels.com/photos/16679932/pexels-photo-16679932.jpeg?auto=compress&cs=tinysrgb&w=1600",
 
-    imageAlt:
-      "Medical professionals working inside a modern operating room",
+    imageAlt: "Medical professionals working inside a modern operating room",
 
     points: [
       {
@@ -151,11 +142,7 @@ export const facilitySpaces: readonly FacilitySpace[] = [
     imageAlt: "Modern hospital diagnostic imaging environment",
     icon: "scan",
     category: "clinical",
-    features: [
-      "On-site imaging",
-      "Faster assessments",
-      "Connected reporting",
-    ],
+    features: ["On-site imaging", "Faster assessments", "Connected reporting"],
   },
   {
     id: "laboratory",
@@ -168,11 +155,7 @@ export const facilitySpaces: readonly FacilitySpace[] = [
     imageAlt: "Laboratory professional working inside a clinical laboratory",
     icon: "flask",
     category: "clinical",
-    features: [
-      "Clinical testing",
-      "Reliable support",
-      "Coordinated diagnosis",
-    ],
+    features: ["Clinical testing", "Reliable support", "Coordinated diagnosis"],
   },
   {
     id: "operating-rooms",
@@ -236,11 +219,7 @@ export const facilitySpaces: readonly FacilitySpace[] = [
     imageAlt: "Hospital pharmacy with organised medication shelves",
     icon: "pill",
     category: "support",
-    features: [
-      "Prescription support",
-      "Convenient access",
-      "Patient guidance",
-    ],
+    features: ["Prescription support", "Convenient access", "Patient guidance"],
   },
   {
     id: "cafeteria",
@@ -253,11 +232,7 @@ export const facilitySpaces: readonly FacilitySpace[] = [
     imageAlt: "Modern cafeteria seating area",
     icon: "coffee",
     category: "support",
-    features: [
-      "Visitor comfort",
-      "Refreshment area",
-      "Convenient access",
-    ],
+    features: ["Visitor comfort", "Refreshment area", "Convenient access"],
   },
   {
     id: "administration",
@@ -270,10 +245,23 @@ export const facilitySpaces: readonly FacilitySpace[] = [
     imageAlt: "Hospital administration professional assisting a visitor",
     icon: "building",
     category: "support",
+    features: ["Appointment guidance", "Patient enquiries", "Visitor support"],
+  },
+  {
+    id: "consultation",
+    title: "Consultation Rooms",
+    shortText: "Private spaces for specialist assessment and care planning.",
+    description:
+      "Consultation rooms give patients and specialists a calm, private setting for assessment, discussion, and treatment planning.",
+    image:
+      "https://images.pexels.com/photos/7659564/pexels-photo-7659564.jpeg?auto=compress&cs=tinysrgb&w=1600",
+    imageAlt: "Doctor consulting a patient in a modern consultation room",
+    icon: "stethoscope",
+    category: "clinical",
     features: [
-      "Appointment guidance",
-      "Patient enquiries",
-      "Visitor support",
+      "Private consultations",
+      "Specialist assessment",
+      "Clear treatment planning",
     ],
   },
 ] as const;

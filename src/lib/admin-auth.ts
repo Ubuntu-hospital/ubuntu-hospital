@@ -7,7 +7,10 @@ import {
   ADMIN_SESSION_COOKIE_NAME,
   getBootstrapAdminCredentials,
 } from "@/lib/env";
-import { createAdminSessionToken, verifyAdminSessionToken } from "@/lib/admin-session";
+import {
+  createAdminSessionToken,
+  verifyAdminSessionToken,
+} from "@/lib/admin-session";
 import type { AdminSessionData } from "@/types/admin";
 
 const sessionCookieOptions = {
@@ -28,16 +31,19 @@ async function syncBootstrapAdminUser() {
     return null;
   }
 
-  const [{ connectToDatabase }, { hashPassword, verifyPassword }, { AdminUserModel }] =
-    await Promise.all([
-      import("@/lib/mongodb"),
-      import("@/lib/password"),
-      import("@/models/admin-user"),
-    ]);
+  const [
+    { connectToDatabase },
+    { hashPassword, verifyPassword },
+    { AdminUserModel },
+  ] = await Promise.all([
+    import("@/lib/mongodb"),
+    import("@/lib/password"),
+    import("@/models/admin-user"),
+  ]);
 
   await connectToDatabase();
 
-  let adminUser = await AdminUserModel.findOne({
+  const adminUser = await AdminUserModel.findOne({
     email: bootstrapAdmin.email,
   });
 
@@ -50,9 +56,10 @@ async function syncBootstrapAdminUser() {
     });
   }
 
-  const shouldUpdatePassword = !(
-    await verifyPassword(bootstrapAdmin.password, adminUser.passwordHash)
-  );
+  const shouldUpdatePassword = !(await verifyPassword(
+    bootstrapAdmin.password,
+    adminUser.passwordHash,
+  ));
 
   let hasChanges = false;
 

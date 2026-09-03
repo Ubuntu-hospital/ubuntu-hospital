@@ -82,7 +82,8 @@ export default function Hero() {
               {hospitalConfig.brandName.primary}
             </span>
             <span>
-              {hospitalConfig.brandName.specialty} {hospitalConfig.brandName.facility}
+              {hospitalConfig.brandName.specialty}{" "}
+              {hospitalConfig.brandName.facility}
             </span>
           </p>
 
@@ -95,7 +96,9 @@ export default function Hero() {
                   key={area.title}
                   type="button"
                   className={
-                    isActive ? "hero-control hero-control-active" : "hero-control"
+                    isActive
+                      ? "hero-control hero-control-active"
+                      : "hero-control"
                   }
                   onClick={() => setActiveIndex(index)}
                   aria-label={`Show ${area.title}`}

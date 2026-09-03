@@ -2,7 +2,6 @@ import Image from "next/image";
 import {
   CalendarDays,
   Check,
-  Clock3,
   Mail,
   MapPin,
   Navigation as NavigationIcon,
@@ -33,11 +32,18 @@ type ContactChannel = {
   whatsapp?: boolean;
 };
 
-export function ContactPage() {
+export function ContactPage({
+  heroImageOverride,
+}: {
+  heroImageOverride?: { image: string; alt: string };
+}) {
   const primaryPhone = hospitalConfig.contact.phoneNumbers[0];
+  const heroImageSrc =
+    heroImageOverride?.image || hospitalConfig.hero.buildingImage;
+  const heroImageAlt =
+    heroImageOverride?.alt || hospitalConfig.hero.buildingAlt;
 
-  const directionsHref =
-    hospitalConfig.map.directionsHref;
+  const directionsHref = hospitalConfig.map.directionsHref;
 
   const phoneChannels: ContactChannel[] =
     hospitalConfig.contact.phoneNumbers.map((phone, index) => ({
@@ -92,15 +98,11 @@ export function ContactPage() {
 
         <div className={`shell ${styles.heroGrid}`}>
           <Reveal className={styles.heroCopy}>
-            <p className={styles.eyebrow}>
-              {contactPageContent.hero.eyebrow}
-            </p>
+            <p className={styles.eyebrow}>{contactPageContent.hero.eyebrow}</p>
 
             <h1>{contactPageContent.hero.title}</h1>
 
-            <p className={styles.heroText}>
-              {contactPageContent.hero.text}
-            </p>
+            <p className={styles.heroText}>{contactPageContent.hero.text}</p>
 
             <div className={styles.heroActions}>
               <a
@@ -111,10 +113,7 @@ export function ContactPage() {
                 Book appointment
               </a>
 
-              <a
-                className={styles.secondaryAction}
-                href={primaryPhone.href}
-              >
+              <a className={styles.secondaryAction} href={primaryPhone.href}>
                 <Phone size={16} />
                 Call hospital
               </a>
@@ -129,10 +128,11 @@ export function ContactPage() {
 
           <Reveal className={styles.heroMedia} delay={0.1}>
             <Image
-              src={hospitalConfig.hero.buildingImage}
-              alt={hospitalConfig.hero.buildingAlt}
+              src={heroImageSrc}
+              alt={heroImageAlt}
               fill
               priority
+              unoptimized
               sizes="(max-width: 980px) 100vw, 54vw"
             />
 
@@ -151,10 +151,7 @@ export function ContactPage() {
               </div>
             </div>
 
-            <a
-              className={styles.heroPhoneCard}
-              href={primaryPhone.href}
-            >
+            <a className={styles.heroPhoneCard} href={primaryPhone.href}>
               <Phone size={16} />
 
               <div>
@@ -233,9 +230,7 @@ export function ContactPage() {
               {contactPageContent.location.eyebrow}
             </p>
 
-            <h2 id="location-title">
-              {contactPageContent.location.title}
-            </h2>
+            <h2 id="location-title">{contactPageContent.location.title}</h2>
 
             <p className={styles.locationText}>
               {contactPageContent.location.text}
@@ -249,9 +244,7 @@ export function ContactPage() {
               <div>
                 <small>Hospital address</small>
 
-                <strong>
-                  {hospitalConfig.contact.address}
-                </strong>
+                <strong>{hospitalConfig.contact.address}</strong>
               </div>
             </address>
 
@@ -266,10 +259,7 @@ export function ContactPage() {
                 Get directions
               </a>
 
-              <a
-                className={styles.secondaryAction}
-                href={primaryPhone.href}
-              >
+              <a className={styles.secondaryAction} href={primaryPhone.href}>
                 <Phone size={16} />
                 Call for guidance
               </a>
@@ -293,9 +283,7 @@ export function ContactPage() {
               <div>
                 <small>Live map</small>
 
-                <strong>
-                  {hospitalConfig.map.label}
-                </strong>
+                <strong>{hospitalConfig.map.label}</strong>
               </div>
 
               <MapPin size={18} strokeWidth={1.7} />

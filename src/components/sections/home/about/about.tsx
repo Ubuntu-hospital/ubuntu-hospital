@@ -6,7 +6,14 @@ import { Check } from "lucide-react";
 import { hospitalConfig } from "@/config/hospital";
 import SectionIntro from "@/components/ui/section-intro/section-intro";
 
-export default function About() {
+export default function About({
+  imageOverride,
+}: {
+  imageOverride?: { image: string; alt: string };
+}) {
+  const imageSrc = imageOverride?.image || hospitalConfig.about.image;
+  const imageAlt = imageOverride?.alt || hospitalConfig.about.imageAlt;
+
   return (
     <section className="section about-section" id="about">
       <div className="about-orbit about-orbit-one" />
@@ -15,9 +22,10 @@ export default function About() {
       <div className="shell about-layout">
         <div className="about-media">
           <Image
-            src={hospitalConfig.about.image}
-            alt={hospitalConfig.about.imageAlt}
+            src={imageSrc}
+            alt={imageAlt}
             fill
+            unoptimized
             sizes="(max-width: 980px) 100vw, 52vw"
           />
 

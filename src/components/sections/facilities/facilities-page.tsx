@@ -1,21 +1,21 @@
 import Image from "next/image";
-import {
-  CalendarDays,
-  Check,
-  MapPin,
-  Phone,
-  ShieldCheck,
-} from "lucide-react";
+import Link from "next/link";
+import { CalendarDays, MapPin, Phone, ShieldCheck } from "lucide-react";
 
 import { hospitalConfig } from "@/config/hospital";
 import { facilitiesPageContent } from "@/content/facilities";
+import type { FacilitySpace } from "@/content/facilities";
 
 import { FacilityExplorer } from "./facility-explorer.client";
 import styles from "./facilities-page.module.css";
 import Reveal from "@/components/ui/reveal/reveal.client";
 import Tour from "../home/tour/tour.client";
 
-export function FacilitiesPage() {
+export function FacilitiesPage({
+  managedSpaces,
+}: {
+  managedSpaces?: FacilitySpace[];
+}) {
   const primaryPhone = hospitalConfig.contact.phoneNumbers[0];
 
   return (
@@ -34,25 +34,17 @@ export function FacilitiesPage() {
 
             <h1>{facilitiesPageContent.hero.title}</h1>
 
-            <p className={styles.heroText}>
-              {facilitiesPageContent.hero.text}
-            </p>
+            <p className={styles.heroText}>{facilitiesPageContent.hero.text}</p>
 
             <div className={styles.heroActions}>
-              <a
-                className={styles.primaryAction}
-                href="#facility-explorer"
-              >
+              <a className={styles.primaryAction} href="#facility-explorer">
                 Explore the facility
               </a>
 
-              <a
-                className={styles.secondaryAction}
-                href="/#booking"
-              >
+              <Link className={styles.secondaryAction} href="/#booking">
                 <CalendarDays size={16} />
                 Book appointment
-              </a>
+              </Link>
             </div>
 
             <div className={styles.heroStats}>
@@ -85,9 +77,7 @@ export function FacilitiesPage() {
             <div className={styles.heroMediaCard}>
               <span>Inside Ubuntu Hospital</span>
 
-              <strong>
-                Spaces designed for care and recovery.
-              </strong>
+              <strong>Spaces designed for care and recovery.</strong>
             </div>
           </Reveal>
         </div>
@@ -105,13 +95,11 @@ export function FacilitiesPage() {
             <h2>{hospitalConfig.contact.address}</h2>
           </div>
 
-          <a href="/contact">
-            Plan your visit
-          </a>
+          <a href="/contact">Plan your visit</a>
         </div>
       </section>
 
-      <FacilityExplorer />
+      <FacilityExplorer spaces={managedSpaces} />
 
       <section className={styles.standardSection}>
         <div className={styles.standardTexture} />
@@ -132,9 +120,7 @@ export function FacilitiesPage() {
             <div className={styles.standardMediaCard}>
               <span>Specialist facility</span>
 
-              <strong>
-                Clinical focus without losing the human touch.
-              </strong>
+              <strong>Clinical focus without losing the human touch.</strong>
             </div>
           </Reveal>
 
@@ -182,28 +168,18 @@ export function FacilitiesPage() {
             <p>{facilitiesPageContent.visit.text}</p>
           </Reveal>
 
-          <Reveal
-            className={styles.visitActions}
-            delay={0.08}
-          >
-            <a
-              className={styles.visitPrimary}
-              href="/#booking"
-            >
+          <Reveal className={styles.visitActions} delay={0.08}>
+            <Link className={styles.visitPrimary} href="/#booking">
               Book appointment
-            </a>
+            </Link>
 
-            <a
-              className={styles.visitSecondary}
-              href={primaryPhone.href}
-            >
+            <a className={styles.visitSecondary} href={primaryPhone.href}>
               <Phone size={16} />
               Call hospital
             </a>
           </Reveal>
         </div>
       </section>
-
     </>
   );
 }

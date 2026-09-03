@@ -181,11 +181,11 @@
 }
 
 @media (min-width: 980px) {
-.faq-section {
+  .faq-section {
     padding: 106px 0;
   }
 
-.faq-layout {
+  .faq-layout {
     grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
     gap: 64px;
     align-items: start;
@@ -193,16 +193,16 @@
 }
 
 @media (max-width: 540px) {
-.faq-question {
+  .faq-question {
     grid-template-columns: 27px minmax(0, 1fr) 32px;
     gap: 8px;
   }
 
-.faq-item.active .faq-question {
+  .faq-item.active .faq-question {
     padding-inline: 9px;
   }
 
-.faq-answer p {
+  .faq-answer p {
     padding: 0 40px 17px 36px;
   }
 }

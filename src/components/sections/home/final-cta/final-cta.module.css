@@ -51,11 +51,11 @@
 }
 
 @media (min-width: 980px) {
-.final-cta {
+  .final-cta {
     padding: 78px 0;
   }
 
-.final-cta-layout {
+  .final-cta-layout {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: 32px;
     align-items: end;

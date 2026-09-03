@@ -8,7 +8,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { Phone, UsersRound } from "lucide-react";
+import { Phone } from "lucide-react";
 
 import { hospitalConfig } from "@/config/hospital";
 import Button from "@/components/ui/button/button";

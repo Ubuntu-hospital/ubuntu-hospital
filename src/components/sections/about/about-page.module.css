@@ -18,13 +18,7 @@
 .hero {
   position: relative;
   overflow: hidden;
-  background:
-    linear-gradient(
-      120deg,
-      #ffffff 0%,
-      #ffffff 49%,
-      #f3f8fb 100%
-    );
+  background: linear-gradient(120deg, #ffffff 0%, #ffffff 49%, #f3f8fb 100%);
 }
 
 .heroTexture {
@@ -32,18 +26,12 @@
   inset: 0;
   pointer-events: none;
   opacity: 0.17;
-  background-image:
-    radial-gradient(
-      rgba(77, 77, 77, 0.36) 0.55px,
-      transparent 0.55px
-    );
+  background-image: radial-gradient(
+    rgba(77, 77, 77, 0.36) 0.55px,
+    transparent 0.55px
+  );
   background-size: 5px 5px;
-  mask-image:
-    linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0.8),
-      transparent 76%
-    );
+  mask-image: linear-gradient(to right, rgba(0, 0, 0, 0.8), transparent 76%);
 }
 
 .heroGlow {
@@ -53,12 +41,11 @@
   width: 480px;
   height: 480px;
   border-radius: 50%;
-  background:
-    radial-gradient(
-      circle,
-      rgba(255, 109, 18, 0.12),
-      rgba(255, 109, 18, 0) 70%
-    );
+  background: radial-gradient(
+    circle,
+    rgba(255, 109, 18, 0.12),
+    rgba(255, 109, 18, 0) 70%
+  );
 }
 
 .heroOrbitLarge,
@@ -190,12 +177,11 @@
 .heroMediaOverlay {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(19, 31, 43, 0.03),
-      rgba(19, 31, 43, 0.52)
-    );
+  background: linear-gradient(
+    180deg,
+    rgba(19, 31, 43, 0.03),
+    rgba(19, 31, 43, 0.52)
+  );
 }
 
 .heroMediaCurve {
@@ -303,19 +289,17 @@
   inset: 0;
   pointer-events: none;
   opacity: 0.2;
-  background-image:
-    radial-gradient(
-      rgba(255, 109, 18, 0.27) 0.7px,
-      transparent 0.7px
-    );
+  background-image: radial-gradient(
+    rgba(255, 109, 18, 0.27) 0.7px,
+    transparent 0.7px
+  );
   background-size: 15px 15px;
-  mask-image:
-    linear-gradient(
-      to right,
-      transparent,
-      rgba(0, 0, 0, 0.8),
-      transparent
-    );
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 0, 0, 0.8),
+    transparent
+  );
 }
 
 .storyGrid {
@@ -436,12 +420,11 @@
 .commitmentMediaOverlay {
   position: absolute;
   inset: 0;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(16, 28, 39, 0.03),
-      rgba(16, 28, 39, 0.7)
-    );
+  background: linear-gradient(
+    180deg,
+    rgba(16, 28, 39, 0.03),
+    rgba(16, 28, 39, 0.7)
+  );
 }
 
 .commitmentMediaCard {

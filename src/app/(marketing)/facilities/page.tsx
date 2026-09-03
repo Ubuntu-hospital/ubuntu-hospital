@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { FacilitiesPage } from "@/components/sections/facilities/facilities-page";
 import { hospitalConfig } from "@/config/hospital";
+import { getManagedFacilitySpaces } from "@/lib/facility-images";
 
 export const metadata: Metadata = {
   title: `Facilities | ${hospitalConfig.name}`,
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
     "Explore the clinical, recovery, and patient support facilities available at Ubuntu Orthopaedic & Spine Hospital.",
 };
 
-export default function FacilitiesRoute() {
-  return <FacilitiesPage />;
+export default async function FacilitiesRoute() {
+  const managedSpaces = await getManagedFacilitySpaces();
+  return <FacilitiesPage managedSpaces={managedSpaces} />;
 }

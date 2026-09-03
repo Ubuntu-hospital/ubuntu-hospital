@@ -3,11 +3,7 @@ import "server-only";
 import { Resend } from "resend";
 
 import { hospitalConfig } from "@/config/hospital";
-import {
-  getOptionalEnv,
-  getResendApiKey,
-  getResendFromEmail,
-} from "@/lib/env";
+import { getOptionalEnv, getResendApiKey, getResendFromEmail } from "@/lib/env";
 import type { BookingRecord } from "@/types/booking";
 
 let resendClient: Resend | null = null;
@@ -21,7 +17,9 @@ function getResendClient() {
 }
 
 function getBookingRecipientEmail() {
-  return getOptionalEnv("RESEND_BOOKING_TO_EMAIL") ?? hospitalConfig.contact.email;
+  return (
+    getOptionalEnv("RESEND_BOOKING_TO_EMAIL") ?? hospitalConfig.contact.email
+  );
 }
 
 function escapeHtml(value: string) {
@@ -34,8 +32,12 @@ function escapeHtml(value: string) {
 }
 
 function buildHospitalNotificationHtml(booking: BookingRecord) {
-  const note = booking.note ? escapeHtml(booking.note) : "No additional note provided.";
-  const email = booking.email ? escapeHtml(booking.email) : "No email provided.";
+  const note = booking.note
+    ? escapeHtml(booking.note)
+    : "No additional note provided.";
+  const email = booking.email
+    ? escapeHtml(booking.email)
+    : "No email provided.";
 
   return `
     <div style="font-family: Arial, sans-serif; color: #172033; line-height: 1.6;">

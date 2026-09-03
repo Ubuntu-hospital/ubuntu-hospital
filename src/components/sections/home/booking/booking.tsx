@@ -46,7 +46,9 @@ export default function Booking() {
           </div>
         </div>
 
-        <BookingForm services={homeContent.services.map((item) => item.title)} />
+        <BookingForm
+          services={homeContent.services.map((item) => item.title)}
+        />
       </div>
     </section>
   );

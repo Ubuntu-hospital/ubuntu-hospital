@@ -80,13 +80,13 @@
 }
 
 @media (min-width: 700px) {
-.footer-layout {
+  .footer-layout {
     grid-template-columns: 1.15fr 0.75fr 0.85fr 0.9fr;
   }
 }
 
 @media (min-width: 980px) {
-.footer-bottom-layout {
+  .footer-bottom-layout {
     grid-template-columns: 1fr auto;
     gap: 14px;
     align-items: center;

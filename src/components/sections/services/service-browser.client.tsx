@@ -199,7 +199,9 @@ export default function ServiceBrowser() {
                       {isExpanded ? "Show less" : "Learn more"}
                       <ChevronDown
                         aria-hidden="true"
-                        className={isExpanded ? styles.mobileServiceChevronOpen : ""}
+                        className={
+                          isExpanded ? styles.mobileServiceChevronOpen : ""
+                        }
                         size={18}
                         strokeWidth={2}
                       />

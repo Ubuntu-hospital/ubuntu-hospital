@@ -1,7 +1,7 @@
 .eyebrow {
   margin: 0;
   color: var(--orange-deep);
-  font-size: 10px;
+  font-size: clamp(0.8rem, 1.25vw, 0.95rem);
   font-weight: 800;
   letter-spacing: 0.19em;
   line-height: 1.4;
@@ -14,7 +14,11 @@
   padding: 112px 0 64px;
   background:
     linear-gradient(180deg, rgba(247, 248, 249, 0.96), rgba(255, 255, 255, 1)),
-    radial-gradient(circle at top right, rgba(255, 109, 18, 0.1), transparent 42%);
+    radial-gradient(
+      circle at top right,
+      rgba(255, 109, 18, 0.1),
+      transparent 42%
+    );
 }
 
 .heroTexture,
@@ -42,7 +46,11 @@
   width: 440px;
   height: 440px;
   border-radius: 999px;
-  background: radial-gradient(circle, rgba(255, 109, 18, 0.15), transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 109, 18, 0.15),
+    transparent 70%
+  );
   filter: blur(16px);
 }
 

@@ -149,28 +149,28 @@
 }
 
 @media (min-width: 980px) {
-.contact-layout {
+  .contact-layout {
     grid-template-columns: minmax(0, 1.28fr) minmax(0, 0.72fr);
     gap: 20px;
     margin-top: 42px;
   }
 
-.contact-map-frame iframe {
+  .contact-map-frame iframe {
     min-height: 540px;
   }
 
-.contact-panel {
+  .contact-panel {
     padding: 24px;
   }
 }
 
 @media (max-width: 699px) {
-.contact-map-topline {
+  .contact-map-topline {
     align-items: flex-start;
     flex-direction: column;
   }
 
-.contact-map-actions {
+  .contact-map-actions {
     justify-content: flex-start;
   }
 }

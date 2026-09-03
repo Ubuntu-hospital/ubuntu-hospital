@@ -1,0 +1,59 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Lint, Type Check & Build
+    runs-on: ubuntu-latest
+
+    env:
+      NODE_ENV: production
+      MONGODB_URI: ${{ secrets.MONGODB_URI }}
+      ADMIN_SESSION_SECRET: ${{ secrets.ADMIN_SESSION_SECRET }}
+      ADMIN_EMAIL: ${{ secrets.ADMIN_EMAIL }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      ADMIN_NAME: ${{ secrets.ADMIN_NAME }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      RESEND_FROM_EMAIL: ${{ secrets.RESEND_FROM_EMAIL }}
+      RESEND_BOOKING_TO_EMAIL: ${{ secrets.RESEND_BOOKING_TO_EMAIL }}
+      NEXT_PUBLIC_CLOUD_NAME: ${{ secrets.NEXT_PUBLIC_CLOUD_NAME }}
+      NEXT_PUBLIC_CLOUD_PRESET: ${{ secrets.NEXT_PUBLIC_CLOUD_PRESET }}
+      NEXT_PUBLIC_CLOUD_KEY: ${{ secrets.NEXT_PUBLIC_CLOUD_KEY }}
+      NEXT_PUBLIC_CLOUD_KEY_SECRET: ${{ secrets.NEXT_PUBLIC_CLOUD_KEY_SECRET }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile || yarn install
+
+      - name: Run ESLint
+        run: yarn lint
+
+      - name: Run TypeScript Type Check
+        run: yarn type-check
+
+      - name: Build Next.js Application
+        run: yarn build

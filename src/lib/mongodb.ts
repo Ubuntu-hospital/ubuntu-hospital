@@ -11,11 +11,10 @@ const globalForMongoose = globalThis as typeof globalThis & {
   __mongooseCache?: MongooseCache;
 };
 
-const mongooseCache =
-  globalForMongoose.__mongooseCache ?? {
-    conn: null,
-    promise: null,
-  };
+const mongooseCache = globalForMongoose.__mongooseCache ?? {
+  conn: null,
+  promise: null,
+};
 
 globalForMongoose.__mongooseCache = mongooseCache;
 

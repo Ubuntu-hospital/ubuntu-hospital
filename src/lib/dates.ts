@@ -1,4 +1,12 @@
-export const weekdayLabels = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"] as const;
+export const weekdayLabels = [
+  "Su",
+  "Mo",
+  "Tu",
+  "We",
+  "Th",
+  "Fr",
+  "Sa",
+] as const;
 
 export function toDateValue(date: Date) {
   const year = date.getFullYear();

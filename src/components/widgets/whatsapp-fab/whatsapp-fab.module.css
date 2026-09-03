@@ -300,28 +300,28 @@
 }
 
 @media (min-width: 980px) {
-.whatsapp-fab-root {
+  .whatsapp-fab-root {
     right: 26px;
     bottom: 24px;
   }
 
-.whatsapp-fab {
+  .whatsapp-fab {
     width: 62px;
     height: 62px;
   }
 
-.whatsapp-support-modal {
+  .whatsapp-support-modal {
     bottom: 80px;
   }
 }
 
 @media (max-width: 540px) {
-.whatsapp-fab-root {
+  .whatsapp-fab-root {
     right: 14px;
     bottom: 14px;
   }
 
-.whatsapp-support-modal {
+  .whatsapp-support-modal {
     position: fixed;
     right: 12px;
     bottom: 82px;
@@ -331,11 +331,11 @@
     overflow-y: auto;
   }
 
-.whatsapp-modal-body {
+  .whatsapp-modal-body {
     padding: 14px;
   }
 
-.whatsapp-enquiry-list button {
+  .whatsapp-enquiry-list button {
     grid-template-columns: 22px minmax(0, 1fr) 16px;
     padding: 9px;
   }

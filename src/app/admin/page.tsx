@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { unstable_noStore as noStore } from "next/cache";
+import { Calendar, Clock, Inbox, Phone, Mail, FileText } from "lucide-react";
 
-import { signOutAdminAction } from "@/actions/admin-auth";
 import { hospitalConfig } from "@/config/hospital";
 import { formatDisplayDate } from "@/lib/dates";
 import { requireAdminSession } from "@/lib/admin-auth";
@@ -10,10 +10,9 @@ import { listBookings } from "@/lib/bookings";
 import type { BookingRecord, BookingStatus } from "@/types/booking";
 
 import styles from "./admin.module.css";
-import { SignOutButton } from "./sign-out-button.client";
 
 export const metadata: Metadata = {
-  title: `Admin Dashboard | ${hospitalConfig.name}`,
+  title: `Bookings Dashboard | ${hospitalConfig.name}`,
   description: "Protected dashboard for hospital appointment bookings.",
 };
 
@@ -54,7 +53,6 @@ function getReplyHref(booking: BookingRecord) {
 
 function getCallHref(phone: string) {
   const callableNumber = phone.replace(/[^\d+]/g, "");
-
   return callableNumber ? `tel:${callableNumber}` : null;
 }
 
@@ -65,15 +63,22 @@ function ContactActions({ booking }: { booking: BookingRecord }) {
   return (
     <div className={styles.actionGroup}>
       {replyHref ? (
-        <a className={styles.actionButton} href={replyHref}>
-          Reply
+        <a
+          className={styles.actionButton}
+          href={replyHref}
+          title="Reply via Email"
+        >
+          <Mail size={13} />
+          <span>Reply</span>
         </a>
       ) : (
         <span
           aria-disabled="true"
           className={`${styles.actionButton} ${styles.actionButtonDisabled}`}
+          title="No email provided"
         >
-          Reply
+          <Mail size={13} />
+          <span>Reply</span>
         </span>
       )}
 
@@ -81,15 +86,19 @@ function ContactActions({ booking }: { booking: BookingRecord }) {
         <a
           className={`${styles.actionButton} ${styles.actionButtonPrimary}`}
           href={callHref}
+          title="Call patient"
         >
-          Call
+          <Phone size={13} />
+          <span>Call</span>
         </a>
       ) : (
         <span
           aria-disabled="true"
           className={`${styles.actionButton} ${styles.actionButtonDisabled}`}
+          title="No phone number"
         >
-          Call
+          <Phone size={13} />
+          <span>Call</span>
         </span>
       )}
     </div>
@@ -98,7 +107,6 @@ function ContactActions({ booking }: { booking: BookingRecord }) {
 
 function parsePage(value: string | string[] | undefined) {
   const parsedPage = Number(Array.isArray(value) ? value[0] : value);
-
   return Number.isInteger(parsedPage) && parsedPage > 0 ? parsedPage : 1;
 }
 
@@ -121,44 +129,66 @@ export default async function AdminDashboardPage({
   });
 
   return (
-    <>
-      <section className={styles.dashboardPanel}>
-        <div className={styles.dashboardHeader}>
-          <div className={styles.dashboardHeading}>
-            <h1>Appointment bookings</h1>
+    <div className={styles.adminPageContainer}>
+      {/* Modern KPI Cards */}
+      <section className={styles.statGrid}>
+        <article className={styles.statCard}>
+          <div className={styles.statCardHeader}>
+            <span>Total Bookings</span>
+            <div className={`${styles.statIcon} ${styles.statIconBlue}`}>
+              <FileText size={18} />
+            </div>
           </div>
+          <strong>{summary.totalBookings}</strong>
+          <small className={styles.statSubtext}>
+            Lifetime submitted requests
+          </small>
+        </article>
 
-          <form action={signOutAdminAction}>
-            <SignOutButton />
-          </form>
-        </div>
+        <article className={styles.statCard}>
+          <div className={styles.statCardHeader}>
+            <span>New Requests</span>
+            <div className={`${styles.statIcon} ${styles.statIconOrange}`}>
+              <Inbox size={18} />
+            </div>
+          </div>
+          <strong>{summary.newBookings}</strong>
+          <small className={styles.statSubtext}>Pending follow-up</small>
+        </article>
 
-        <div className={styles.statGrid}>
-          <article className={styles.statCard}>
-            <span>Total bookings</span>
-            <strong>{summary.totalBookings}</strong>
-          </article>
-
-          <article className={styles.statCard}>
-            <span>New requests</span>
-            <strong>{summary.newBookings}</strong>
-          </article>
-
-          <article className={styles.statCard}>
-            <span>Submitted today</span>
-            <strong>{summary.todayBookings}</strong>
-          </article>
-        </div>
+        <article className={styles.statCard}>
+          <div className={styles.statCardHeader}>
+            <span>Submitted Today</span>
+            <div className={`${styles.statIcon} ${styles.statIconGreen}`}>
+              <Clock size={18} />
+            </div>
+          </div>
+          <strong>{summary.todayBookings}</strong>
+          <small className={styles.statSubtext}>
+            Received in the last 24 hours
+          </small>
+        </article>
       </section>
 
-      <section className={styles.tableCard}>
-        <div className={styles.tableHeader}>
-          <h2>All booking requests</h2>
+      <section className={styles.contentSection}>
+        <div className={styles.sectionHeaderRow}>
+          <div>
+            <h2>All Booking Requests</h2>
+            <span className={styles.subtext}>
+              Review patient details and follow up.
+            </span>
+          </div>
         </div>
 
         {summary.totalBookings === 0 ? (
           <div className={styles.emptyState}>
-            <strong>No bookings yet.</strong>
+            <div className={styles.emptyStateIcon}>
+              <Inbox size={32} />
+            </div>
+            <strong>No booking requests yet.</strong>
+            <p>
+              New appointments submitted from the public site will appear here.
+            </p>
           </div>
         ) : (
           <>
@@ -168,9 +198,9 @@ export default async function AdminDashboardPage({
                   <thead>
                     <tr>
                       <th>Patient</th>
-                      <th>Contact</th>
+                      <th>Contact Details</th>
                       <th>Service</th>
-                      <th>Preferred date</th>
+                      <th>Preferred Date</th>
                       <th>Submitted</th>
                       <th>Status</th>
                       <th>Actions</th>
@@ -191,7 +221,12 @@ export default async function AdminDashboardPage({
 
                         <td>
                           <div className={styles.breakableText}>
-                            {booking.phone}
+                            <a
+                              href={`tel:${booking.phone}`}
+                              className={styles.phoneLink}
+                            >
+                              {booking.phone}
+                            </a>
                           </div>
                           {booking.email ? (
                             <span
@@ -202,16 +237,27 @@ export default async function AdminDashboardPage({
                           ) : null}
                         </td>
 
-                        <td>{booking.service}</td>
+                        <td>
+                          <span className={styles.servicePill}>
+                            {booking.service}
+                          </span>
+                        </td>
 
                         <td>
-                          <time dateTime={booking.preferredDate}>
+                          <time
+                            dateTime={booking.preferredDate}
+                            className={styles.dateCell}
+                          >
+                            <Calendar size={13} />
                             {formatDisplayDate(booking.preferredDate)}
                           </time>
                         </td>
 
                         <td>
-                          <time dateTime={booking.createdAt}>
+                          <time
+                            dateTime={booking.createdAt}
+                            className={styles.submittedTime}
+                          >
                             {formatDateTime(booking.createdAt)}
                           </time>
                         </td>
@@ -236,9 +282,11 @@ export default async function AdminDashboardPage({
               {bookings.map((booking) => (
                 <article className={styles.bookingCard} key={booking.id}>
                   <div className={styles.bookingCardHeader}>
-                    <div>
+                    <div className={styles.bookingCardTitleGroup}>
                       <p className={styles.patientName}>{booking.fullName}</p>
-                      <p className={styles.cardService}>{booking.service}</p>
+                      <span className={styles.servicePill}>
+                        {booking.service}
+                      </span>
                     </div>
                     <span className={getStatusClassName(booking.status)}>
                       {booking.status}
@@ -246,25 +294,36 @@ export default async function AdminDashboardPage({
                   </div>
 
                   <dl className={styles.bookingDetails}>
-                    <div>
+                    <div className={styles.detailItem}>
                       <dt>Phone</dt>
-                      <dd className={styles.breakableText}>{booking.phone}</dd>
+                      <dd>
+                        <a
+                          href={`tel:${booking.phone}`}
+                          className={styles.phoneLink}
+                        >
+                          {booking.phone}
+                        </a>
+                      </dd>
                     </div>
                     {booking.email ? (
-                      <div>
+                      <div
+                        className={`${styles.detailItem} ${styles.detailItemFull}`}
+                      >
                         <dt>Email</dt>
-                        <dd className={styles.breakableText}>{booking.email}</dd>
+                        <dd className={styles.breakableText}>
+                          {booking.email}
+                        </dd>
                       </div>
                     ) : null}
-                    <div>
-                      <dt>Preferred date</dt>
+                    <div className={styles.detailItem}>
+                      <dt>Preferred Date</dt>
                       <dd>
                         <time dateTime={booking.preferredDate}>
                           {formatDisplayDate(booking.preferredDate)}
                         </time>
                       </dd>
                     </div>
-                    <div>
+                    <div className={styles.detailItem}>
                       <dt>Submitted</dt>
                       <dd>
                         <time dateTime={booking.createdAt}>
@@ -312,6 +371,6 @@ export default async function AdminDashboardPage({
           </>
         )}
       </section>
-    </>
+    </div>
   );
 }

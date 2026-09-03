@@ -228,23 +228,23 @@
 }
 
 @media (min-width: 700px) {
-.booking-fields-two {
+  .booking-fields-two {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-.field-wide {
+  .field-wide {
     grid-column: span 2;
   }
 }
 
 @media (min-width: 980px) {
-.booking-layout {
+  .booking-layout {
     grid-template-columns: minmax(0, 0.76fr) minmax(0, 1.24fr);
     gap: 64px;
     align-items: center;
   }
 
-.booking-form {
+  .booking-form {
     padding: 25px;
   }
 }

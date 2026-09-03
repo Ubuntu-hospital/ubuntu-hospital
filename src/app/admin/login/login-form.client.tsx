@@ -7,11 +7,7 @@ import { initialAdminAuthActionState } from "@/types/admin";
 
 import styles from "../admin.module.css";
 
-export function AdminLoginForm({
-  redirectTo,
-}: {
-  redirectTo: string;
-}) {
+export function AdminLoginForm({ redirectTo }: { redirectTo: string }) {
   const [state, formAction, isPending] = useActionState(
     signInAdminAction,
     initialAdminAuthActionState,
@@ -59,7 +55,11 @@ export function AdminLoginForm({
         </p>
       ) : null}
 
-      <button className={styles.submitButton} type="submit" disabled={isPending}>
+      <button
+        className={styles.submitButton}
+        type="submit"
+        disabled={isPending}
+      >
         {isPending ? "Signing in..." : "Open dashboard"}
       </button>
     </form>

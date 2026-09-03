@@ -2,28 +2,56 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef, useState } from "react";
-
 import useDismiss from "@/components/ui/useDismiss";
 
 const easing = [0.22, 1, 0.36, 1] as const;
+
+export type SelectOption =
+  | string
+  | {
+      value: string;
+      label: string;
+    };
+
+function formatLabel(option: SelectOption): { value: string; label: string } {
+  if (typeof option === "object" && option !== null) {
+    return option;
+  }
+  const str = String(option || "").trim();
+  if (!str) return { value: "", label: "" };
+
+  // Convert kebab-case or underscore or lowercase into Title Case / User friendly
+  const formatted = str
+    .split(/[-_]/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+
+  return { value: str, label: formatted };
+}
 
 export default function CustomSelect({
   name,
   value,
   options,
-  placeholder,
+  placeholder = "Select an option",
   onChange,
 }: {
   name: string;
   value: string;
-  options: string[];
-  placeholder: string;
-  onChange: (value: string) => void;
+  options: (string | { value: string; label: string })[];
+  placeholder?: string;
+  onChange?: (value: string) => void;
 }) {
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
 
   useDismiss(rootRef, () => setOpen(false));
+
+  const normalizedOptions = options.map(formatLabel);
+  const currentSelected = normalizedOptions.find((opt) => opt.value === value);
+  const displayLabel = currentSelected
+    ? currentSelected.label
+    : formatLabel(value).label;
 
   return (
     <div className="custom-control" ref={rootRef}>
@@ -37,7 +65,7 @@ export default function CustomSelect({
         onClick={() => setOpen((current) => !current)}
       >
         <span className={!value ? "custom-placeholder" : ""}>
-          {value || placeholder}
+          {displayLabel || placeholder}
         </span>
 
         <span
@@ -59,22 +87,24 @@ export default function CustomSelect({
             className="custom-popover custom-select-menu"
             role="listbox"
           >
-            {options.map((option) => (
+            {normalizedOptions.map((option) => (
               <button
                 type="button"
                 role="option"
-                aria-selected={option === value}
+                aria-selected={option.value === value}
                 className={
-                  option === value ? "custom-option active" : "custom-option"
+                  option.value === value
+                    ? "custom-option active"
+                    : "custom-option"
                 }
-                key={option}
+                key={option.value}
                 onClick={() => {
-                  onChange(option);
+                  onChange?.(option.value);
                   setOpen(false);
                 }}
               >
-                {option}
-                {option === value ? (
+                <span>{option.label}</span>
+                {option.value === value ? (
                   <span className="custom-option-tick">✓</span>
                 ) : null}
               </button>

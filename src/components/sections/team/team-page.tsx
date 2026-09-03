@@ -3,13 +3,32 @@ import { CalendarDays, Phone } from "lucide-react";
 
 import { hospitalConfig } from "@/config/hospital";
 import { teamPageContent } from "@/content/team";
+import type { ManagedTeamMember } from "@/lib/team-members";
 import Reveal from "@/components/ui/reveal/reveal.client";
 import Booking from "@/components/sections/home/booking/booking";
 
 import styles from "./team-page.module.css";
 
-export function TeamPage() {
+export function TeamPage({
+  managedMembers = [],
+}: {
+  managedMembers?: ManagedTeamMember[];
+}) {
   const primaryPhone = hospitalConfig.contact.phoneNumbers[0];
+  const groups = managedMembers.length
+    ? Array.from(new Set(managedMembers.map((member) => member.group))).map(
+        (group) => ({
+          title: group,
+          members: managedMembers.filter((member) => member.group === group),
+        }),
+      )
+    : teamPageContent.directory.groups;
+  const getMemberAlt = (member: (typeof groups)[number]["members"][number]) =>
+    "imageAlt" in member && member.imageAlt
+      ? member.imageAlt
+      : `${member.name}, ${member.role}`;
+  const getMemberUnit = (member: (typeof groups)[number]["members"][number]) =>
+    "unit" in member ? member.unit : null;
 
   return (
     <>
@@ -63,13 +82,15 @@ export function TeamPage() {
       <section className={styles.teamSection} id="team-directory">
         <div className="shell">
           <Reveal className={styles.teamIntro}>
-            <p className={styles.eyebrow}>{teamPageContent.directory.eyebrow}</p>
+            <p className={styles.eyebrow}>
+              {teamPageContent.directory.eyebrow}
+            </p>
             <h2>{teamPageContent.directory.title}</h2>
             <p>{teamPageContent.directory.text}</p>
           </Reveal>
 
           <div className={styles.teamGroups}>
-            {teamPageContent.directory.groups.map((group, groupIndex) => {
+            {groups.map((group, groupIndex) => {
               const isLeadership = groupIndex === 0;
 
               return (
@@ -97,15 +118,22 @@ export function TeamPage() {
                           <div className={styles.leadershipPhoto}>
                             <Image
                               src={member.image}
-                              alt={`${member.name}, ${member.role}`}
+                              alt={getMemberAlt(member)}
                               fill
+                              unoptimized
                               sizes="(max-width: 699px) 100vw, (max-width: 980px) 45vw, 33vw"
+                              style={{ objectFit: "cover" }}
                             />
                           </div>
 
                           <div className={styles.leadershipInfo}>
                             <h4>{member.name}</h4>
-                            <p>{member.role}</p>
+                            <p>
+                              {member.role}
+                              {getMemberUnit(member)
+                                ? ` · ${getMemberUnit(member)}`
+                                : ""}
+                            </p>
                           </div>
                         </article>
                       ))}
@@ -117,15 +145,22 @@ export function TeamPage() {
                           <div className={styles.staffPhoto}>
                             <Image
                               src={member.image}
-                              alt={`${member.name}, ${member.role}`}
+                              alt={getMemberAlt(member)}
                               fill
+                              unoptimized
                               sizes="(max-width: 699px) 100vw, (max-width: 980px) 45vw, 25vw"
+                              style={{ objectFit: "cover" }}
                             />
                           </div>
 
                           <div className={styles.staffInfo}>
                             <h4>{member.name}</h4>
-                            <p>{member.role}</p>
+                            <p>
+                              {member.role}
+                              {getMemberUnit(member)
+                                ? ` · ${getMemberUnit(member)}`
+                                : ""}
+                            </p>
                           </div>
                         </article>
                       ))}

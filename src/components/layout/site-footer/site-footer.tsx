@@ -58,9 +58,7 @@ export default function SiteFooter() {
 
       <div className="footer-bottom">
         <div className="shell footer-bottom-layout">
-          <p>
-            {legalSiteContent.footer.copyright}
-          </p>
+          <p>{legalSiteContent.footer.copyright}</p>
 
           <nav className="footer-legal-links" aria-label="Legal information">
             {legalSiteContent.footer.links.map((link) => (

@@ -9,9 +9,18 @@ import SectionIntro from "@/components/ui/section-intro/section-intro";
 
 const easing = [0.22, 1, 0.36, 1] as const;
 
-export default function UbuntuStandard() {
+export default function UbuntuStandard({
+  visionImageOverride,
+}: {
+  visionImageOverride?: { image: string; alt: string };
+}) {
+  const visionSrc =
+    visionImageOverride?.image || hospitalConfig.standard.vision.image;
+  const visionAlt =
+    visionImageOverride?.alt || hospitalConfig.standard.vision.imageAlt;
+
   return (
-    <section className="standard-section">
+    <section className="standard-section" id="vision">
       <div className="standard-intro texture-warm">
         <div className="standard-intro-ring standard-intro-ring-one" />
         <div className="standard-intro-ring standard-intro-ring-two" />
@@ -86,9 +95,10 @@ export default function UbuntuStandard() {
 
           <Reveal className="vision-image">
             <Image
-              src={hospitalConfig.standard.vision.image}
-              alt={hospitalConfig.standard.vision.imageAlt}
+              src={visionSrc}
+              alt={visionAlt}
               fill
+              unoptimized
               sizes="(max-width: 980px) 100vw, 52vw"
             />
 

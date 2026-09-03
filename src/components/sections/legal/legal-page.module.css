@@ -9,7 +9,11 @@
   padding: clamp(90px, 12vw, 150px) 0 clamp(64px, 8vw, 96px);
   color: var(--white);
   background:
-    radial-gradient(circle at 85% 16%, rgba(255, 109, 18, 0.24), transparent 28%),
+    radial-gradient(
+      circle at 85% 16%,
+      rgba(255, 109, 18, 0.24),
+      transparent 28%
+    ),
     linear-gradient(135deg, #202428, var(--graphite-deep));
 }
 
