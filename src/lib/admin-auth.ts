@@ -43,7 +43,7 @@ async function syncBootstrapAdminUser() {
 
   await connectToDatabase();
 
-  const adminUser = await AdminUserModel.findOne({
+  let adminUser = await AdminUserModel.findOne({
     email: bootstrapAdmin.email,
   });
 

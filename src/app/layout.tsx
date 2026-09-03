@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import { hospitalConfig } from "@/config/hospital";
 
+// Suppress TS error for side-effect CSS import when no type declarations are present
+// @ts-ignore
 import "./globals.css";
 
 export const metadata: Metadata = {

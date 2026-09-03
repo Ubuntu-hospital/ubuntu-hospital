@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ChevronRight, Maximize2, Play } from "lucide-react";
+import { motion } from "framer-motion";
+import { Building2, ChevronRight, Maximize2, Play } from "lucide-react";
 import { useRef, useState } from "react";
 
 import { hospitalConfig } from "@/config/hospital";

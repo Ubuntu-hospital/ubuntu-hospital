@@ -10,6 +10,7 @@ import {
   MessageSquareQuote,
   Check,
   X,
+  User,
 } from "lucide-react";
 import {
   createTestimonyAction,

@@ -5,6 +5,7 @@ import {
   ExternalLink,
   Camera,
   CheckCircle2,
+  Image as ImageIcon,
   Loader2,
   Check,
   X,
