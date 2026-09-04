@@ -45,6 +45,7 @@ export default function Brand({
         }
         width={604}
         height={248}
+        priority
         sizes="(max-width: 979px) 154px, 172px"
       />
 

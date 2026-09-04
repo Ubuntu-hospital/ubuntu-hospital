@@ -11,6 +11,7 @@
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "type-check": "next typegen && tsc --noEmit",
+    "icons": "python scripts/generate_icons.py",
     "validate": "yarn format:check && yarn lint && yarn type-check && yarn build"
   },
   "dependencies": {

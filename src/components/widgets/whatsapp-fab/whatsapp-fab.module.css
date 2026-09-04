@@ -123,7 +123,7 @@
 .whatsapp-modal-brand h2 {
   margin: 5px 0 0;
   color: var(--white);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
   font-size: 27px;
   font-weight: 600;
   letter-spacing: -0.05em;

@@ -12,9 +12,19 @@ body {
   overflow-x: hidden;
   background: var(--white);
   color: var(--ink);
-  font-family: "Sora", Arial, sans-serif;
+  font-family: var(--font-sans), var(--font-sora), "Sora", Arial, sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family:
+    var(--font-serif), var(--font-fraunces), "Fraunces", Georgia, serif;
 }
 
 img {

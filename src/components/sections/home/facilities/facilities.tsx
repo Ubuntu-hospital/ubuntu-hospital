@@ -62,8 +62,8 @@ export default function Facilities() {
                 src={facility.image}
                 alt={facility.alt}
                 fill
-                unoptimized
-                sizes="(max-width: 980px) 100vw, 58vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 450px"
+                style={{ objectFit: "cover" }}
               />
 
               <div className="facility-tile-overlay" />

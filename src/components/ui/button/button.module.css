@@ -3,10 +3,10 @@
   min-height: 47px;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--orange);
+  border: 1px solid var(--orange-accessible);
   border-radius: 8px;
   padding: 13px 18px;
-  background: var(--orange);
+  background: var(--orange-accessible);
   color: var(--white);
   font-size: 12px;
   font-weight: 800;

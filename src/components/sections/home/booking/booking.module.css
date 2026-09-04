@@ -102,7 +102,7 @@
 .booking-form-header h3 {
   margin: 6px 0 0;
   color: var(--ink);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
   font-size: 29px;
   font-weight: 600;
   letter-spacing: -0.05em;

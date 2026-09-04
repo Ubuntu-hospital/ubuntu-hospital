@@ -49,7 +49,7 @@ export default function Tour() {
           <Link
             href={routes.facilities}
             className="tour-facilities-link"
-            aria-label="Explore Ubuntu Hospital facilities"
+            aria-label="Explore the facility - Wards, theatres, consultation rooms and recovery spaces"
           >
             <span className="tour-facilities-text">
               <strong>Explore the facility</strong>
@@ -94,7 +94,7 @@ export default function Tour() {
                   src={hospitalConfig.tour.poster}
                   alt="Modern hospital interior preview"
                   fill
-                  sizes="(max-width: 980px) 100vw, 62vw"
+                  sizes="(max-width: 980px) 100vw, (max-width: 1400px) 50vw, 760px"
                   className="tour-video-poster"
                 />
 

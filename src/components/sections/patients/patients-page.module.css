@@ -94,7 +94,7 @@
 }
 
 .heroCopy h1 {
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
   font-size: clamp(2.25rem, 6vw, 4.1rem);
   font-weight: 600;
   letter-spacing: -0.05em;

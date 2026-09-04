@@ -125,7 +125,7 @@
 
 .about-stats strong {
   color: var(--orange-deep);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
   font-size: 34px;
   font-weight: 600;
   letter-spacing: -0.05em;

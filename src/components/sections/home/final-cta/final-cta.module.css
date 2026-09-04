@@ -37,7 +37,7 @@
   max-width: 710px;
   margin: 12px 0 0;
   color: var(--white);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
   font-size: clamp(2.9rem, 6vw, 5.65rem);
   font-weight: 600;
   letter-spacing: -0.07em;

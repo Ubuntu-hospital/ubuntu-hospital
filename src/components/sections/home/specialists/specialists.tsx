@@ -63,8 +63,7 @@ export function SpecialistsSection({
                 src={lead.image}
                 alt={`${lead.name}, ${lead.role}`}
                 fill
-                unoptimized
-                sizes="(max-width: 980px) 100vw, 58vw"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 520px"
                 style={{ objectFit: "cover" }}
               />
 
@@ -92,8 +91,7 @@ export function SpecialistsSection({
                     src={specialist.image}
                     alt={`${specialist.name}, ${specialist.role}`}
                     fill
-                    unoptimized
-                    sizes="(max-width: 980px) 100vw, 30vw"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 320px"
                     style={{ objectFit: "cover" }}
                   />
 

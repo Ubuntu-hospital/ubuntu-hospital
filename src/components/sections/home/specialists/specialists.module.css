@@ -109,7 +109,7 @@
 .specialist-side-info h3 {
   margin: 7px 0 0;
   color: var(--ink);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
   font-size: 28px;
   font-weight: 600;
   letter-spacing: -0.05em;

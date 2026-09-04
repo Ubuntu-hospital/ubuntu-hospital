@@ -93,7 +93,7 @@
 .journey-stop h3 {
   margin: 18px 0 0;
   color: var(--ink);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
   font-size: 31px;
   font-weight: 600;
   letter-spacing: -0.05em;

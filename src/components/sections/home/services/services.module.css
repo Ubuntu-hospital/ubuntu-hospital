@@ -62,7 +62,7 @@
 .service-stage h3 {
   margin: 22px 0 0;
   color: var(--white);
-  font-family: "Fraunces", Georgia, serif;
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
   font-size: 54px;
   font-weight: 600;
   letter-spacing: -0.06em;

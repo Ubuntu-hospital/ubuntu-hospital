@@ -20,11 +20,18 @@
 }
 
 .brand-logo,
-.brand-inverse-logo,
+.brand-inverse-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 604 / 248;
+}
+
 .brand-logomark {
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 1 / 1;
 }
 
 .brand-logomark {

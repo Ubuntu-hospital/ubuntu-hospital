@@ -101,7 +101,7 @@ export default function Hero() {
                       : "hero-control"
                   }
                   onClick={() => setActiveIndex(index)}
-                  aria-label={`Show ${area.title}`}
+                  aria-label={`${String(index + 1).padStart(2, "0")} - Show ${area.title}`}
                   aria-pressed={isActive}
                 >
                   <span>{String(index + 1).padStart(2, "0")}</span>
