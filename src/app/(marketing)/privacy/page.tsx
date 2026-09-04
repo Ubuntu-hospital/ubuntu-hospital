@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
 
 import LegalPage from "@/components/sections/legal/legal-page";
-import { hospitalConfig } from "@/config/hospital";
+import JsonLd from "@/components/seo/json-ld";
+import { getPageMetadata, getBreadcrumbJsonLd, routes } from "@/config/seo";
 import { legalSiteContent } from "@/content/legal";
 
-export const metadata: Metadata = {
-  title: `Privacy Policy | ${hospitalConfig.name}`,
-  description: legalSiteContent.privacy.introduction,
-};
+export const metadata: Metadata = getPageMetadata("privacy");
 
 export default function PrivacyRoute() {
-  return <LegalPage document={legalSiteContent.privacy} />;
+  const breadcrumbsSchema = getBreadcrumbJsonLd([
+    { name: "Privacy Policy", path: routes.privacy },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={breadcrumbsSchema} />
+      <LegalPage document={legalSiteContent.privacy} />
+    </>
+  );
 }

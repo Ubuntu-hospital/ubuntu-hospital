@@ -1,3 +1,5 @@
+import { routes } from "@/config/routes";
+
 export const hospitalConfig = {
   name: "Ubuntu Orthopaedic & Spine Hospital",
 
@@ -20,33 +22,39 @@ export const hospitalConfig = {
     "Specialist orthopaedic and spine care delivered in a modern facility designed around confident recovery.",
 
   navigation: [
-    { label: "Home", href: "/" },
-    { label: "About Us", href: "/about" },
+    { label: "Home", href: routes.home },
+    { label: "About Us", href: routes.about },
     {
       label: "Services",
-      href: "/services",
+      href: routes.services,
       children: [
-        { label: "Service Overview", href: "/services#home" },
-        { label: "Clinical Services", href: "/services#services" },
-        { label: "Care Pathway", href: "/services#pathway" },
-        { label: "Before Your Visit", href: "/services#visit" },
+        { label: "Service Overview", href: `${routes.services}#home` },
+        { label: "Clinical Services", href: `${routes.services}#services` },
+        { label: "Care Pathway", href: `${routes.services}#pathway` },
+        { label: "Before Your Visit", href: `${routes.services}#visit` },
       ],
     },
-    { label: "Tour", href: "/#tour" },
+    { label: "Tour", href: routes.tour },
     {
       label: "Patients",
-      href: "/patients",
+      href: routes.patients,
       children: [
-        { label: "Emergency Care", href: "/patients#emergency-care" },
-        { label: "Visiting Hours", href: "/patients#visiting-hours" },
-        { label: "Inpatient Guide", href: "/patients#inpatient-guide" },
-        { label: "Outpatient Guide", href: "/patients#outpatient-guide" },
+        { label: "Emergency Care", href: `${routes.patients}#emergency-care` },
+        { label: "Visiting Hours", href: `${routes.patients}#visiting-hours` },
+        {
+          label: "Inpatient Guide",
+          href: `${routes.patients}#inpatient-guide`,
+        },
+        {
+          label: "Outpatient Guide",
+          href: `${routes.patients}#outpatient-guide`,
+        },
       ],
     },
-    { label: "Contact Us", href: "/contact" },
+    { label: "Contact Us", href: routes.contact },
     {
       label: "Gallery",
-      href: "/gallery",
+      href: routes.gallery,
     },
   ],
 
@@ -72,7 +80,7 @@ export const hospitalConfig = {
 
     email: "info@ubuntuhospital.com",
     address: "Mantukwa, Sunyani, Ghana",
-    appointmentHref: "/#booking",
+    appointmentHref: routes.booking,
   },
 
   whatsappSupport: {

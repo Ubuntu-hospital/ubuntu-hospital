@@ -1,14 +1,21 @@
 import type { Metadata } from "next";
 
 import LegalPage from "@/components/sections/legal/legal-page";
-import { hospitalConfig } from "@/config/hospital";
+import JsonLd from "@/components/seo/json-ld";
+import { getPageMetadata, getBreadcrumbJsonLd, routes } from "@/config/seo";
 import { legalSiteContent } from "@/content/legal";
 
-export const metadata: Metadata = {
-  title: `Terms of Use | ${hospitalConfig.name}`,
-  description: legalSiteContent.legal.introduction,
-};
+export const metadata: Metadata = getPageMetadata("legal");
 
 export default function LegalRoute() {
-  return <LegalPage document={legalSiteContent.legal} />;
+  const breadcrumbsSchema = getBreadcrumbJsonLd([
+    { name: "Terms & Legal", path: routes.legal },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={breadcrumbsSchema} />
+      <LegalPage document={legalSiteContent.legal} />
+    </>
+  );
 }

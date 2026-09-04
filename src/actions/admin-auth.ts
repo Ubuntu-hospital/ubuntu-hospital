@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 
-import { ADMIN_HOME_PATH } from "@/lib/env";
+import { ADMIN_HOME_PATH, ADMIN_LOGIN_PATH } from "@/lib/env";
 import type { AdminAuthActionState } from "@/types/admin";
 
 function readTextField(formData: FormData, key: string) {
@@ -18,7 +18,7 @@ export async function signInAdminAction(
   const email = readTextField(formData, "email");
   const password = readTextField(formData, "password");
   const redirectTo = readTextField(formData, "redirectTo");
-  const safeRedirectTarget = redirectTo.startsWith("/admin")
+  const safeRedirectTarget = redirectTo.startsWith(ADMIN_HOME_PATH)
     ? redirectTo
     : ADMIN_HOME_PATH;
 
@@ -75,5 +75,5 @@ export async function signOutAdminAction() {
   const { clearAdminSession } = await import("@/lib/admin-auth");
 
   await clearAdminSession();
-  redirect("/admin/login");
+  redirect(ADMIN_LOGIN_PATH);
 }

@@ -2,16 +2,12 @@ import type { Metadata } from "next";
 
 import { hospitalConfig } from "@/config/hospital";
 import { AboutPage } from "@/components/sections/about/about-client";
-
+import JsonLd from "@/components/seo/json-ld";
+import { getPageMetadata, getBreadcrumbJsonLd, routes } from "@/config/seo";
 import { getSectionImage } from "@/lib/section-images";
 import { listTestimonies } from "@/lib/testimonies";
 
-export const metadata: Metadata = {
-  title: `About | ${hospitalConfig.name}`,
-
-  description:
-    "Learn about Ubuntu Orthopaedic & Spine Hospital, its patient-focused approach, mission, vision, values, modern facility, and commitment to specialist care.",
-};
+export const metadata: Metadata = getPageMetadata("about");
 
 export const dynamic = "force-dynamic";
 
@@ -30,11 +26,18 @@ export default async function AboutRoute() {
     listTestimonies(),
   ]);
 
+  const breadcrumbsSchema = getBreadcrumbJsonLd([
+    { name: "About Us", path: routes.about },
+  ]);
+
   return (
-    <AboutPage
-      visionImage={visionImage}
-      aboutImage={aboutImage}
-      testimonies={testimonies}
-    />
+    <>
+      <JsonLd data={breadcrumbsSchema} />
+      <AboutPage
+        visionImage={visionImage}
+        aboutImage={aboutImage}
+        testimonies={testimonies}
+      />
+    </>
   );
 }

@@ -4,6 +4,7 @@ import { ExternalLink } from "lucide-react";
 import Brand from "@/components/layout/brand/brand";
 import { ToastProvider } from "@/components/ui/toast/toast-context";
 import { readAdminSession } from "@/lib/admin-auth";
+import { routes } from "@/config/routes";
 import AdminSidebar from "./admin-sidebar.client";
 
 import styles from "./admin.module.css";
@@ -33,7 +34,7 @@ export default async function AdminLayout({
             {/* View live site on desktop header, hidden on mobile header */}
             <a
               className={styles.adminTopbarLink}
-              href="/"
+              href={routes.home}
               target="_blank"
               rel="noreferrer"
             >

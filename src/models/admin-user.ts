@@ -7,6 +7,8 @@ export interface AdminUserDocument {
   email: string;
   passwordHash: string;
   role: AdminRole;
+  resetPasswordToken?: string | null;
+  resetPasswordExpires?: Date | null;
   lastLoginAt: Date | null;
   createdAt: Date;
   updatedAt: Date;
@@ -37,6 +39,15 @@ const adminUserSchema = new Schema<AdminUserDocument>(
       enum: [...adminRoles],
       default: "staff",
       required: true,
+    },
+    resetPasswordToken: {
+      type: String,
+      default: null,
+      index: true,
+    },
+    resetPasswordExpires: {
+      type: Date,
+      default: null,
     },
     lastLoginAt: {
       type: Date,

@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useActionState } from "react";
+import Link from "next/link";
 import { Eye, EyeOff } from "lucide-react";
 
 import { signInAdminAction } from "@/actions/admin-auth";
+import { routes } from "@/config/routes";
 import { initialAdminAuthActionState } from "@/types/admin";
 
 import styles from "../admin.module.css";
@@ -61,6 +63,26 @@ export function AdminLoginForm({ redirectTo }: { redirectTo: string }) {
           </small>
         ) : null}
       </label>
+
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginTop: "-6px",
+        }}
+      >
+        <Link
+          href={routes.admin.forgotPassword}
+          style={{
+            fontSize: "12px",
+            color: "var(--orange, #ff6d12)",
+            textDecoration: "none",
+            fontWeight: 500,
+          }}
+        >
+          Forgot password?
+        </Link>
+      </div>
 
       {state.message ? (
         <p className={styles.authMessage} aria-live="polite">

@@ -6,6 +6,7 @@ import { ChevronRight, Maximize2, Play } from "lucide-react";
 import { useRef, useState } from "react";
 
 import { hospitalConfig } from "@/config/hospital";
+import { routes } from "@/config/routes";
 import Reveal from "@/components/ui/reveal/reveal.client";
 import SectionIntro from "@/components/ui/section-intro/section-intro";
 
@@ -46,7 +47,7 @@ export default function Tour() {
           </div>
 
           <Link
-            href="/facilities"
+            href={routes.facilities}
             className="tour-facilities-link"
             aria-label="Explore Ubuntu Hospital facilities"
           >

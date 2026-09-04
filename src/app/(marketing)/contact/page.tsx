@@ -2,15 +2,11 @@ import type { Metadata } from "next";
 
 import { ContactPage } from "@/components/sections/contact/contact-page";
 import { hospitalConfig } from "@/config/hospital";
-
+import JsonLd from "@/components/seo/json-ld";
+import { getPageMetadata, getBreadcrumbJsonLd, routes } from "@/config/seo";
 import { getSectionImage } from "@/lib/section-images";
 
-export const metadata: Metadata = {
-  title: `Contact | ${hospitalConfig.name}`,
-
-  description:
-    "Contact Ubuntu Orthopaedic & Spine Hospital for appointments, directions, hospital enquiries, WhatsApp support, and specialist care guidance.",
-};
+export const metadata: Metadata = getPageMetadata("contact");
 
 export const dynamic = "force-dynamic";
 
@@ -21,5 +17,14 @@ export default async function ContactRoute() {
     hospitalConfig.hero.buildingAlt,
   );
 
-  return <ContactPage heroImageOverride={heroImage} />;
+  const breadcrumbsSchema = getBreadcrumbJsonLd([
+    { name: "Contact & Directions", path: routes.contact },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={breadcrumbsSchema} />
+      <ContactPage heroImageOverride={heroImage} />
+    </>
+  );
 }

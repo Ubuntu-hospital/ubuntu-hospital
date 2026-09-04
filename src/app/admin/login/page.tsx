@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { hospitalConfig } from "@/config/hospital";
 import { redirectIfAuthenticatedAdmin } from "@/lib/admin-auth";
 
+import { routes } from "@/config/routes";
 import { AdminLoginForm } from "./login-form.client";
 import styles from "../admin.module.css";
 
@@ -24,7 +25,7 @@ export default async function AdminLoginPage() {
           Enter your credentials to access the admin portal.
         </p>
 
-        <AdminLoginForm redirectTo="/admin" />
+        <AdminLoginForm redirectTo={routes.admin.dashboard} />
       </section>
     </div>
   );

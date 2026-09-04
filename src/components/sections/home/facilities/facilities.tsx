@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { hospitalConfig } from "@/config/hospital";
+import { routes } from "@/config/routes";
 import SectionIntro from "@/components/ui/section-intro/section-intro";
 
 export default function Facilities() {
@@ -20,9 +22,9 @@ export default function Facilities() {
             text={hospitalConfig.facilities.text}
           />
 
-          <a className="text-link" href="/facilities">
+          <Link className="text-link" href={routes.facilities}>
             View all spaces
-          </a>
+          </Link>
         </div>
 
         <motion.div

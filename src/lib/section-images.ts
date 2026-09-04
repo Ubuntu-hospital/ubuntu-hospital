@@ -1,4 +1,5 @@
 import { hospitalConfig } from "@/config/hospital";
+import { routes } from "@/config/routes";
 import { patientPageContent } from "@/content/patients";
 import { servicesPageContent } from "@/content/services";
 
@@ -20,7 +21,7 @@ export const MANAGED_SECTIONS: SectionDefinition[] = [
     location: "Hero Header Section",
     defaultImage: patientPageContent.hero.image,
     defaultAlt: patientPageContent.hero.imageAlt,
-    publicUrl: "/patients",
+    publicUrl: routes.patients,
   },
   {
     sectionId: "hero-contact",
@@ -29,7 +30,7 @@ export const MANAGED_SECTIONS: SectionDefinition[] = [
     location: "Hero Header Section",
     defaultImage: hospitalConfig.hero.buildingImage,
     defaultAlt: hospitalConfig.hero.buildingAlt,
-    publicUrl: "/contact",
+    publicUrl: routes.contact,
   },
   {
     sectionId: "hero-services",
@@ -38,7 +39,7 @@ export const MANAGED_SECTIONS: SectionDefinition[] = [
     location: "Hero Header Section",
     defaultImage: servicesPageContent.hero.image,
     defaultAlt: servicesPageContent.hero.imageAlt,
-    publicUrl: "/services",
+    publicUrl: routes.services,
   },
   {
     sectionId: "services-before-you-visit",
@@ -47,7 +48,7 @@ export const MANAGED_SECTIONS: SectionDefinition[] = [
     location: "Come Prepared / Support Section",
     defaultImage: servicesPageContent.support.image,
     defaultAlt: servicesPageContent.support.imageAlt,
-    publicUrl: "/services#visit",
+    publicUrl: `${routes.services}#visit`,
   },
   {
     sectionId: "about-our-vision",
@@ -56,7 +57,7 @@ export const MANAGED_SECTIONS: SectionDefinition[] = [
     location: "Ubuntu Standard & Vision Section",
     defaultImage: hospitalConfig.standard.vision.image,
     defaultAlt: hospitalConfig.standard.vision.imageAlt,
-    publicUrl: "/about#vision",
+    publicUrl: `${routes.about}#vision`,
   },
   {
     sectionId: "about-the-hospital",
@@ -65,7 +66,7 @@ export const MANAGED_SECTIONS: SectionDefinition[] = [
     location: "About Hospital Care Section",
     defaultImage: hospitalConfig.about.image,
     defaultAlt: hospitalConfig.about.imageAlt,
-    publicUrl: "/about#about",
+    publicUrl: `${routes.about}#about`,
   },
 ];
 

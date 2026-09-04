@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { uploadFile } from "@/lib/cloudinary-upload";
 import { useToast } from "@/components/ui/toast/toast-context";
+import { routes } from "@/config/routes";
 import styles from "../admin.module.css";
 
 type FacilityAction = (
@@ -193,7 +194,7 @@ export default function FacilityCard({
 
       <div className={styles.facilityCardFooter}>
         <a
-          href="/facilities#facility-explorer"
+          href={`${routes.facilities}#facility-explorer`}
           target="_blank"
           rel="noreferrer"
           className={styles.facilityExploreLink}

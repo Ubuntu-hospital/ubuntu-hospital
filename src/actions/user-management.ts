@@ -1,9 +1,15 @@
 "use server";
 
+import crypto from "crypto";
 import { revalidatePath } from "next/cache";
 import { requireSuperAdminSession } from "@/lib/admin-auth";
 import { hashPassword } from "@/lib/password";
 import { getBootstrapAdminCredentials } from "@/lib/env";
+import { routes } from "@/config/routes";
+import {
+  sendUserInvitationEmail,
+  sendPasswordResetEmail,
+} from "@/lib/admin-email";
 
 function text(formData: FormData, key: string) {
   const value = formData.get(key);
@@ -45,19 +51,77 @@ export async function createAdminUserAction(formData: FormData) {
   }
 
   const passwordHash = await hashPassword(password);
+  const rawResetToken = crypto.randomBytes(32).toString("hex");
+  const hashedResetToken = crypto
+    .createHash("sha256")
+    .update(rawResetToken)
+    .digest("hex");
+  const resetPasswordExpires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
 
   await AdminUserModel.create({
     name,
     email,
     passwordHash,
     role,
+    resetPasswordToken: hashedResetToken,
+    resetPasswordExpires,
     lastLoginAt: null,
   });
 
-  revalidatePath("/admin/users");
+  let emailSent = true;
+  try {
+    await sendUserInvitationEmail({
+      email,
+      name,
+      role,
+      initialPassword: password,
+      resetToken: rawResetToken,
+    });
+  } catch (emailErr) {
+    emailSent = false;
+    console.error("Failed to send employee invitation email:", emailErr);
+  }
+
+  revalidatePath(routes.admin.users);
   return {
     success: true,
-    message: `Account for "${name}" (${role === "admin" ? "Super Admin" : "Staff"}) created successfully.`,
+    message: emailSent
+      ? `Account created and invitation email sent to ${email}.`
+      : `Account created for "${name}", but email delivery failed. Please check Resend configuration.`,
+  };
+}
+
+export async function resendUserInviteOrResetAction(userId: string) {
+  await requireSuperAdminSession();
+
+  const [{ connectToDatabase }, { AdminUserModel }] = await Promise.all([
+    import("@/lib/mongodb"),
+    import("@/models/admin-user"),
+  ]);
+  await connectToDatabase();
+
+  const user = await AdminUserModel.findById(userId);
+  if (!user) {
+    throw new Error("User account not found.");
+  }
+
+  const rawResetToken = crypto.randomBytes(32).toString("hex");
+  user.resetPasswordToken = crypto
+    .createHash("sha256")
+    .update(rawResetToken)
+    .digest("hex");
+  user.resetPasswordExpires = new Date(Date.now() + 24 * 60 * 60 * 1000); // 24 hours
+  await user.save();
+
+  await sendPasswordResetEmail({
+    email: user.email,
+    name: user.name,
+    resetToken: rawResetToken,
+  });
+
+  return {
+    success: true,
+    message: `Password reset link sent to ${user.email}.`,
   };
 }
 
@@ -111,7 +175,7 @@ export async function updateAdminUserAction(formData: FormData) {
 
   await targetUser.save();
 
-  revalidatePath("/admin/users");
+  revalidatePath(routes.admin.users);
   return {
     success: true,
     message: `Updated account details for "${name}".`,
@@ -151,7 +215,7 @@ export async function deleteAdminUserAction(formData: FormData) {
 
   await AdminUserModel.findByIdAndDelete(id);
 
-  revalidatePath("/admin/users");
+  revalidatePath(routes.admin.users);
   return {
     success: true,
     message: `User account "${targetUser.name}" removed successfully.`,

@@ -1,6 +1,8 @@
+import { routes } from "@/config/routes";
+
 export const ADMIN_SESSION_COOKIE_NAME = "ubuntu_admin_session";
-export const ADMIN_LOGIN_PATH = "/admin/login";
-export const ADMIN_HOME_PATH = "/admin";
+export const ADMIN_LOGIN_PATH = routes.admin.login;
+export const ADMIN_HOME_PATH = routes.admin.dashboard;
 
 export function getOptionalEnv(name: string) {
   const value = process.env[name];
@@ -49,4 +51,22 @@ export function getResendApiKey() {
 
 export function getResendFromEmail() {
   return getRequiredEnv("RESEND_FROM_EMAIL");
+}
+
+export function getGoogleAnalyticsId() {
+  return getOptionalEnv("NEXT_PUBLIC_GA_ID");
+}
+
+export function getAppUrl() {
+  const envUrl =
+    getOptionalEnv("NEXT_PUBLIC_APP_URL") ??
+    getOptionalEnv("APP_URL") ??
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null);
+
+  if (envUrl) {
+    return envUrl.replace(/\/+$/, "");
+  }
+
+  const port = process.env.PORT || "3000";
+  return `http://localhost:${port}`;
 }

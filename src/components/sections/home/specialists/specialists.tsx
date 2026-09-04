@@ -1,8 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import { hospitalConfig } from "@/config/hospital";
+import { routes } from "@/config/routes";
 import SectionIntro from "@/components/ui/section-intro/section-intro";
 import Reveal from "@/components/ui/reveal/reveal.client";
 import type { ManagedTeamMember } from "@/lib/team-members";
@@ -48,9 +50,9 @@ export function SpecialistsSection({
           />
 
           {showFullTeamLink ? (
-            <a className="text-link" href="/team">
+            <Link className="text-link" href={routes.team}>
               Meet the full team
-            </a>
+            </Link>
           ) : null}
         </div>
 

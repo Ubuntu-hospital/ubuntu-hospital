@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { routes } from "@/config/routes";
 import { requireAdminSession } from "@/lib/admin-auth";
 import { requireSuperAdminSession } from "@/lib/admin-auth";
 
@@ -59,9 +60,9 @@ export async function createTeamMemberAction(formData: FormData) {
 
   await TeamMemberModel.create(member);
 
-  revalidatePath("/");
-  revalidatePath("/team");
-  revalidatePath("/admin/team");
+  revalidatePath(routes.home);
+  revalidatePath(routes.team);
+  revalidatePath(routes.admin.team);
   return {
     success: true,
     message: `Team member ${member.name} added successfully.`,
@@ -80,9 +81,9 @@ export async function deleteTeamMemberAction(formData: FormData) {
   await connectToDatabase();
   await TeamMemberModel.findByIdAndDelete(id);
 
-  revalidatePath("/");
-  revalidatePath("/team");
-  revalidatePath("/admin/team");
+  revalidatePath(routes.home);
+  revalidatePath(routes.team);
+  revalidatePath(routes.admin.team);
   return { success: true, message: "Team member removed." };
 }
 
@@ -135,9 +136,9 @@ export async function updateTeamMemberAction(formData: FormData) {
 
   await TeamMemberModel.findByIdAndUpdate(id, update);
 
-  revalidatePath("/");
-  revalidatePath("/team");
-  revalidatePath("/admin/team");
+  revalidatePath(routes.home);
+  revalidatePath(routes.team);
+  revalidatePath(routes.admin.team);
   return { success: true, message: `Updated details for ${name}.` };
 }
 
@@ -160,10 +161,10 @@ export async function saveFacilityImageAction(formData: FormData) {
     { upsert: true, new: true, setDefaultsOnInsert: true },
   );
 
-  revalidatePath("/");
-  revalidatePath("/facilities");
-  revalidatePath("/gallery");
-  revalidatePath("/admin/facilities");
+  revalidatePath(routes.home);
+  revalidatePath(routes.facilities);
+  revalidatePath(routes.gallery);
+  revalidatePath(routes.admin.facilities);
   return { success: true, message: "Facility photo updated successfully." };
 }
 
@@ -205,9 +206,9 @@ export async function createGalleryImageAction(formData: FormData) {
 
   await GalleryImageModel.create(image);
 
-  revalidatePath("/");
-  revalidatePath("/gallery");
-  revalidatePath("/admin/gallery");
+  revalidatePath(routes.home);
+  revalidatePath(routes.gallery);
+  revalidatePath(routes.admin.gallery);
   return { success: true, message: `Image "${title}" added to gallery.` };
 }
 
@@ -223,9 +224,9 @@ export async function deleteGalleryImageAction(formData: FormData) {
   await connectToDatabase();
   await GalleryImageModel.findByIdAndDelete(id);
 
-  revalidatePath("/");
-  revalidatePath("/gallery");
-  revalidatePath("/admin/gallery");
+  revalidatePath(routes.home);
+  revalidatePath(routes.gallery);
+  revalidatePath(routes.admin.gallery);
   return { success: true, message: "Gallery image removed." };
 }
 
@@ -248,12 +249,12 @@ export async function saveSectionImageAction(formData: FormData) {
     { upsert: true, new: true, setDefaultsOnInsert: true },
   );
 
-  revalidatePath("/");
-  revalidatePath("/patients");
-  revalidatePath("/contact");
-  revalidatePath("/services");
-  revalidatePath("/about");
-  revalidatePath("/admin/sections");
+  revalidatePath(routes.home);
+  revalidatePath(routes.patients);
+  revalidatePath(routes.contact);
+  revalidatePath(routes.services);
+  revalidatePath(routes.about);
+  revalidatePath(routes.admin.sections);
   return { success: true, message: "Section photo updated successfully." };
 }
 
@@ -293,9 +294,9 @@ export async function createTestimonyAction(formData: FormData) {
     sortOrder,
   });
 
-  revalidatePath("/");
-  revalidatePath("/about");
-  revalidatePath("/admin/testimonies");
+  revalidatePath(routes.home);
+  revalidatePath(routes.about);
+  revalidatePath(routes.admin.testimonies);
   return {
     success: true,
     message: `Testimony from "${name}" added successfully.`,
@@ -333,9 +334,9 @@ export async function updateTestimonyAction(formData: FormData) {
   await connectToDatabase();
   await TestimonyModel.findByIdAndUpdate(id, update);
 
-  revalidatePath("/");
-  revalidatePath("/about");
-  revalidatePath("/admin/testimonies");
+  revalidatePath(routes.home);
+  revalidatePath(routes.about);
+  revalidatePath(routes.admin.testimonies);
   return { success: true, message: `Updated testimony for "${name}".` };
 }
 
@@ -351,8 +352,8 @@ export async function deleteTestimonyAction(formData: FormData) {
   await connectToDatabase();
   await TestimonyModel.findByIdAndDelete(id);
 
-  revalidatePath("/");
-  revalidatePath("/about");
-  revalidatePath("/admin/testimonies");
+  revalidatePath(routes.home);
+  revalidatePath(routes.about);
+  revalidatePath(routes.admin.testimonies);
   return { success: true, message: "Testimony removed successfully." };
 }

@@ -10,7 +10,8 @@
     "format:check": "prettier --check .",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "type-check": "next typegen && tsc --noEmit"
+    "type-check": "next typegen && tsc --noEmit",
+    "validate": "yarn format:check && yarn lint && yarn type-check && yarn build"
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.3.7",

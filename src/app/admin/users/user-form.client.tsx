@@ -147,7 +147,7 @@ export default function UserForm({
             <span>
               {isEditing
                 ? "New password (leave blank to keep current)"
-                : "Account password"}
+                : "Initial password (sent via invite email)"}
             </span>
             <div className={styles.passwordInputWrapper}>
               <input

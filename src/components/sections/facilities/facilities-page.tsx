@@ -3,6 +3,7 @@ import Link from "next/link";
 import { CalendarDays, MapPin, Phone, ShieldCheck } from "lucide-react";
 
 import { hospitalConfig } from "@/config/hospital";
+import { routes } from "@/config/routes";
 import { facilitiesPageContent } from "@/content/facilities";
 import type { FacilitySpace } from "@/content/facilities";
 
@@ -41,7 +42,7 @@ export function FacilitiesPage({
                 Explore the facility
               </a>
 
-              <Link className={styles.secondaryAction} href="/#booking">
+              <Link className={styles.secondaryAction} href={routes.booking}>
                 <CalendarDays size={16} />
                 Book appointment
               </Link>
@@ -95,7 +96,7 @@ export function FacilitiesPage({
             <h2>{hospitalConfig.contact.address}</h2>
           </div>
 
-          <a href="/contact">Plan your visit</a>
+          <Link href={routes.contact}>Plan your visit</Link>
         </div>
       </section>
 
@@ -169,7 +170,7 @@ export function FacilitiesPage({
           </Reveal>
 
           <Reveal className={styles.visitActions} delay={0.08}>
-            <Link className={styles.visitPrimary} href="/#booking">
+            <Link className={styles.visitPrimary} href={routes.booking}>
               Book appointment
             </Link>
 

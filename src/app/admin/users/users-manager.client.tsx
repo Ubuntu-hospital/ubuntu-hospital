@@ -1,8 +1,11 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Plus, Trash2, Edit2, X } from "lucide-react";
-import { deleteAdminUserAction } from "@/actions/user-management";
+import { Plus, Trash2, Edit2, X, Mail } from "lucide-react";
+import {
+  deleteAdminUserAction,
+  resendUserInviteOrResetAction,
+} from "@/actions/user-management";
 import { useToast } from "@/components/ui/toast/toast-context";
 import ConfirmModal from "@/components/ui/confirm-modal/confirm-modal.client";
 import UserForm from "./user-form.client";
@@ -29,8 +32,25 @@ export default function UsersManager({ users }: { users: ManagedUser[] }) {
   const [showAddForm, setShowAddForm] = useState(false);
   const [editingUser, setEditingUser] = useState<ManagedUser | null>(null);
   const [deletingUser, setDeletingUser] = useState<ManagedUser | null>(null);
+  const [sendingInviteId, setSendingInviteId] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
+
+  function handleSendReset(u: ManagedUser) {
+    setSendingInviteId(u.id);
+    startTransition(async () => {
+      try {
+        const res = await resendUserInviteOrResetAction(u.id);
+        toast.success(res.message);
+      } catch (err) {
+        toast.error(
+          err instanceof Error ? err.message : "Failed to send reset email.",
+        );
+      } finally {
+        setSendingInviteId(null);
+      }
+    });
+  }
 
   function handleConfirmDelete() {
     if (!deletingUser) return;
@@ -175,6 +195,21 @@ export default function UsersManager({ users }: { users: ManagedUser[] }) {
                           <button
                             type="button"
                             className={styles.actionButton}
+                            onClick={() => handleSendReset(u)}
+                            disabled={isPending && sendingInviteId === u.id}
+                            title="Send password reset or invite email"
+                          >
+                            <Mail size={13} />
+                            <span>
+                              {sendingInviteId === u.id
+                                ? "Sending..."
+                                : "Send Reset"}
+                            </span>
+                          </button>
+
+                          <button
+                            type="button"
+                            className={styles.actionButton}
                             onClick={() => {
                               setEditingUser(isBeingEdited ? null : u);
                               setShowAddForm(false);
@@ -255,6 +290,19 @@ export default function UsersManager({ users }: { users: ManagedUser[] }) {
                 </dl>
 
                 <div className={styles.actionGroup}>
+                  <button
+                    type="button"
+                    className={styles.actionButton}
+                    onClick={() => handleSendReset(u)}
+                    disabled={isPending && sendingInviteId === u.id}
+                    title="Send password reset or invite email"
+                  >
+                    <Mail size={13} />
+                    <span>
+                      {sendingInviteId === u.id ? "Sending..." : "Send Reset"}
+                    </span>
+                  </button>
+
                   <button
                     type="button"
                     className={styles.actionButton}

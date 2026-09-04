@@ -3,6 +3,7 @@ import Link from "next/link";
 import { unstable_noStore as noStore } from "next/cache";
 import { Calendar, Clock, Inbox, Phone, Mail, FileText } from "lucide-react";
 
+import { routes } from "@/config/routes";
 import { hospitalConfig } from "@/config/hospital";
 import { formatDisplayDate } from "@/lib/dates";
 import { requireAdminSession } from "@/lib/admin-auth";
@@ -348,7 +349,9 @@ export default async function AdminDashboardPage({
             {pagination.totalPages > 1 ? (
               <nav className={styles.pagination} aria-label="Bookings pages">
                 {pagination.currentPage > 1 ? (
-                  <Link href={`/admin?page=${pagination.currentPage - 1}`}>
+                  <Link
+                    href={`${routes.admin.dashboard}?page=${pagination.currentPage - 1}`}
+                  >
                     Previous
                   </Link>
                 ) : (
@@ -360,7 +363,9 @@ export default async function AdminDashboardPage({
                 </strong>
 
                 {pagination.currentPage < pagination.totalPages ? (
-                  <Link href={`/admin?page=${pagination.currentPage + 1}`}>
+                  <Link
+                    href={`${routes.admin.dashboard}?page=${pagination.currentPage + 1}`}
+                  >
                     Next
                   </Link>
                 ) : (

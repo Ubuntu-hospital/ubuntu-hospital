@@ -1,9 +1,11 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 import { useState } from "react";
 
 import { hospitalConfig } from "@/config/hospital";
+import { routes } from "@/config/routes";
 import SectionIntro from "@/components/ui/section-intro/section-intro";
 import { icons } from "@/components/ui/icons/Icons";
 
@@ -73,7 +75,7 @@ export default function Services() {
                 <h3>{activeService.title}</h3>
                 <p>{activeService.text}</p>
 
-                <a href="#booking">Request an appointment</a>
+                <Link href={routes.booking}>Request an appointment</Link>
               </motion.div>
             </AnimatePresence>
 

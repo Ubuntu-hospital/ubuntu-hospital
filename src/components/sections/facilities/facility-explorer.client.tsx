@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { routes } from "@/config/routes";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   Activity,
@@ -373,15 +374,15 @@ export function FacilityExplorer({
                   </div>
 
                   <div className={styles.spaceStageActions}>
-                    <Link href="/#booking">
+                    <Link href={routes.booking}>
                       <CalendarDays size={16} />
                       Book appointment
                     </Link>
 
-                    <a href="/contact">
+                    <Link href={routes.contact}>
                       <MapPin size={16} />
                       Plan your visit
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </motion.article>

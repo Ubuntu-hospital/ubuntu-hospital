@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import "./brand.module.css";
 import { hospitalConfig } from "@/config/hospital";
+import { routes } from "@/config/routes";
 
 export default function Brand({
   inverse = false,
@@ -14,7 +15,7 @@ export default function Brand({
   if (inverse) {
     return (
       <Link
-        href="/"
+        href={routes.home}
         className="brand-inverse-card"
         aria-label={`${hospitalConfig.name} homepage`}
       >
@@ -32,7 +33,7 @@ export default function Brand({
 
   return (
     <Link
-      href="/"
+      href={routes.home}
       className={mobileLogomark ? "brand brand-mobile-logomark" : "brand"}
       aria-label={`${hospitalConfig.name} homepage`}
     >

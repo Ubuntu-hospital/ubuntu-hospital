@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 
+import { routes } from "@/config/routes";
 import { hospitalConfig } from "@/config/hospital";
 import { startOfToday } from "@/lib/dates";
 import type { BookingActionState } from "@/types/booking";
@@ -85,7 +86,7 @@ export async function requestAppointmentAction(
     source: "website",
   });
 
-  revalidatePath("/admin");
+  revalidatePath(routes.admin.dashboard);
 
   try {
     const { sendBookingEmails } = await import("@/lib/booking-email");

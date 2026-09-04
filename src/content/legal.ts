@@ -1,3 +1,6 @@
+import { routes } from "@/config/routes";
+import { hospitalConfig } from "@/config/hospital";
+
 export type LegalSection = {
   id: string;
   title: string;
@@ -18,8 +21,8 @@ export const legalSiteContent = {
     copyright:
       "Copyright 2026 Ubuntu Orthopaedic & Spine Hospital. All rights reserved.",
     links: [
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms of Use", href: "/legal" },
+      { label: "Privacy Policy", href: routes.privacy },
+      { label: "Terms of Use", href: routes.legal },
     ],
   },
 
@@ -92,7 +95,7 @@ export const legalSiteContent = {
         id: "contact",
         title: "Contact us",
         paragraphs: [
-          "Questions about these terms can be sent to info@ubuntuhospital.com or raised by calling +233 20 143 4000.",
+          `Questions about these terms can be sent to ${hospitalConfig.contact.email} or raised by calling ${hospitalConfig.contact.phoneNumbers[0].display}.`,
         ],
       },
     ],
@@ -172,7 +175,7 @@ export const legalSiteContent = {
         id: "contact",
         title: "Privacy enquiries",
         paragraphs: [
-          "Send privacy requests or questions to info@ubuntuhospital.com, call +233 20 143 4000, or write to Ubuntu Orthopaedic & Spine Hospital, Mantukwa, Sunyani, Ghana. Please do not send urgent medical requests through a privacy enquiry.",
+          `Send privacy requests or questions to ${hospitalConfig.contact.email}, call ${hospitalConfig.contact.phoneNumbers[0].display}, or write to ${hospitalConfig.name}, ${hospitalConfig.contact.address}. Please do not send urgent medical requests through a privacy enquiry.`,
         ],
       },
       {

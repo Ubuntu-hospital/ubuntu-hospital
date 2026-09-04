@@ -1,19 +1,24 @@
 import type { Metadata } from "next";
 
 import { FacilitiesPage } from "@/components/sections/facilities/facilities-page";
-import { hospitalConfig } from "@/config/hospital";
+import JsonLd from "@/components/seo/json-ld";
+import { getPageMetadata, getBreadcrumbJsonLd, routes } from "@/config/seo";
 import { getManagedFacilitySpaces } from "@/lib/facility-images";
 
-export const metadata: Metadata = {
-  title: `Facilities | ${hospitalConfig.name}`,
-
-  description:
-    "Explore the clinical, recovery, and patient support facilities available at Ubuntu Orthopaedic & Spine Hospital.",
-};
+export const metadata: Metadata = getPageMetadata("facilities");
 
 export const dynamic = "force-dynamic";
 
 export default async function FacilitiesRoute() {
   const managedSpaces = await getManagedFacilitySpaces();
-  return <FacilitiesPage managedSpaces={managedSpaces} />;
+  const breadcrumbsSchema = getBreadcrumbJsonLd([
+    { name: "Facilities", path: routes.facilities },
+  ]);
+
+  return (
+    <>
+      <JsonLd data={breadcrumbsSchema} />
+      <FacilitiesPage managedSpaces={managedSpaces} />
+    </>
+  );
 }
