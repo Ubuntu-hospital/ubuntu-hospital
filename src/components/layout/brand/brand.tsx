@@ -24,7 +24,7 @@ export default function Brand({
           alt={hospitalConfig.branding.logoAlt}
           className="brand-inverse-logo"
           width={604}
-          height={248}
+          height={217}
           sizes="(max-width: 699px) 268px, 302px"
         />
       </Link>
@@ -44,7 +44,7 @@ export default function Brand({
           mobileLogomark ? "brand-logo brand-logo-desktop" : "brand-logo"
         }
         width={604}
-        height={248}
+        height={217}
         priority
         sizes="(max-width: 979px) 154px, 172px"
       />
@@ -54,8 +54,8 @@ export default function Brand({
           src={hospitalConfig.branding.logomarkSrc}
           alt={hospitalConfig.branding.logomarkAlt}
           className="brand-logomark"
-          width={248}
-          height={248}
+          width={1448}
+          height={1086}
           sizes="56px"
         />
       ) : null}

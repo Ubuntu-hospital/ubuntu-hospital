@@ -24,18 +24,14 @@
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 604 / 248;
-}
-
-.brand-logomark {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 604 / 217;
 }
 
 .brand-logomark {
   display: none;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1448 / 1086;
 }
 
 .brand-inverse-card {
