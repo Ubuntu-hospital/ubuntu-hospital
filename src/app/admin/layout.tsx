@@ -46,7 +46,11 @@ export default async function AdminLayout({
         <div className={styles.adminFrame}>
           {session ? (
             <div className={styles.adminWorkspace}>
-              <AdminSidebar email={session.email} />
+              <AdminSidebar
+                email={session.email}
+                name={session.name}
+                role={session.role}
+              />
               <main className={styles.adminContent}>{children}</main>
             </div>
           ) : (

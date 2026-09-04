@@ -179,3 +179,35 @@ export async function redirectIfAuthenticatedAdmin() {
     redirect(ADMIN_HOME_PATH);
   }
 }
+
+export async function requireSuperAdminSession() {
+  const session = await requireAdminSession();
+
+  if (session.role !== "admin") {
+    redirect(ADMIN_HOME_PATH);
+  }
+
+  return session;
+}
+
+export async function listAdminUsersForManagement() {
+  await requireSuperAdminSession();
+  const [{ connectToDatabase }, { AdminUserModel }] = await Promise.all([
+    import("@/lib/mongodb"),
+    import("@/models/admin-user"),
+  ]);
+  await connectToDatabase();
+
+  const users = await AdminUserModel.find({}).sort({ createdAt: -1 }).lean();
+
+  return users.map((u: any) => ({
+    id: String(u._id),
+    name: u.name as string,
+    email: u.email as string,
+    role: u.role as "admin" | "staff",
+    lastLoginAt: u.lastLoginAt ? new Date(u.lastLoginAt).toISOString() : null,
+    createdAt: u.createdAt
+      ? new Date(u.createdAt).toISOString()
+      : new Date().toISOString(),
+  }));
+}

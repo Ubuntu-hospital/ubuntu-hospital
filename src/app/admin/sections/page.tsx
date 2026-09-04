@@ -4,6 +4,7 @@ import { Sparkles } from "lucide-react";
 import { saveSectionImageAction } from "@/actions/content-management";
 import { getManagedSectionImages } from "@/lib/section-images";
 import { requireAdminSession } from "@/lib/admin-auth";
+import { requireSuperAdminSession } from "@/lib/admin-auth";
 import { hospitalConfig } from "@/config/hospital";
 import SectionCard from "./section-card.client";
 
@@ -18,6 +19,7 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminSectionsPage() {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const sections = await getManagedSectionImages();
 
   return (

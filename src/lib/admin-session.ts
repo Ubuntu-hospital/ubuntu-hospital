@@ -58,7 +58,7 @@ export async function verifyAdminSessionToken(token: string) {
     if (
       typeof typedPayload.email !== "string" ||
       typeof typedPayload.name !== "string" ||
-      typedPayload.role !== "admin" ||
+      !["admin", "staff"].includes(typedPayload.role) ||
       typeof typedPayload.exp !== "number"
     ) {
       return null;

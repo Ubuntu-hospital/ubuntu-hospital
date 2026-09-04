@@ -5,6 +5,7 @@ import { saveFacilityImageAction } from "@/actions/content-management";
 import { facilitySpaces } from "@/content/facilities";
 import { listFacilityImageOverrides } from "@/lib/facility-images";
 import { requireAdminSession } from "@/lib/admin-auth";
+import { requireSuperAdminSession } from "@/lib/admin-auth";
 import { hospitalConfig } from "@/config/hospital";
 import FacilityCard from "./facility-card.client";
 
@@ -18,6 +19,7 @@ export const dynamic = "force-dynamic";
 
 export default async function AdminFacilitiesPage() {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const overrides = await listFacilityImageOverrides();
   const overrideMap = new Map(overrides.map((item) => [item.facilityId, item]));
 

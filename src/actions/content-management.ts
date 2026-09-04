@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireAdminSession } from "@/lib/admin-auth";
+import { requireSuperAdminSession } from "@/lib/admin-auth";
 
 type GalleryCategory = "hospital" | "care" | "facilities" | "patients";
 
@@ -22,6 +23,7 @@ function required(value: string, label: string) {
 
 export async function createTeamMemberAction(formData: FormData) {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const name = required(text(formData, "name"), "Name");
   const role = required(text(formData, "role"), "Role");
   const unit = required(text(formData, "unit"), "Unit");
@@ -68,6 +70,7 @@ export async function createTeamMemberAction(formData: FormData) {
 
 export async function deleteTeamMemberAction(formData: FormData) {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const id = required(text(formData, "id"), "Member ID");
 
   const [{ connectToDatabase }, { TeamMemberModel }] = await Promise.all([
@@ -85,6 +88,7 @@ export async function deleteTeamMemberAction(formData: FormData) {
 
 export async function updateTeamMemberAction(formData: FormData) {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const id = required(text(formData, "id"), "Member ID");
   const name = required(text(formData, "name"), "Name");
   const role = required(text(formData, "role"), "Role");
@@ -139,6 +143,7 @@ export async function updateTeamMemberAction(formData: FormData) {
 
 export async function saveFacilityImageAction(formData: FormData) {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const facilityId = required(text(formData, "facilityId"), "Facility");
   const image = required(text(formData, "image"), "Image URL");
   const imageAlt = text(formData, "imageAlt") || facilityId;
@@ -164,6 +169,7 @@ export async function saveFacilityImageAction(formData: FormData) {
 
 export async function createGalleryImageAction(formData: FormData) {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const title = required(text(formData, "title"), "Title");
   const category = text(formData, "category") as GalleryCategory;
   if (!["hospital", "care", "facilities", "patients"].includes(category)) {
@@ -207,6 +213,7 @@ export async function createGalleryImageAction(formData: FormData) {
 
 export async function deleteGalleryImageAction(formData: FormData) {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const id = required(text(formData, "id"), "Image ID");
 
   const [{ connectToDatabase }, { GalleryImageModel }] = await Promise.all([
@@ -224,6 +231,7 @@ export async function deleteGalleryImageAction(formData: FormData) {
 
 export async function saveSectionImageAction(formData: FormData) {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const sectionId = required(text(formData, "sectionId"), "Section ID");
   const image = required(text(formData, "image"), "Image URL");
   const imageAlt = text(formData, "imageAlt") || sectionId;
@@ -251,6 +259,7 @@ export async function saveSectionImageAction(formData: FormData) {
 
 export async function createTestimonyAction(formData: FormData) {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const name = required(text(formData, "name"), "Patient Name");
   const context = required(
     text(formData, "context"),
@@ -295,6 +304,7 @@ export async function createTestimonyAction(formData: FormData) {
 
 export async function updateTestimonyAction(formData: FormData) {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const id = required(text(formData, "id"), "Testimony ID");
   const name = required(text(formData, "name"), "Patient Name");
   const context = required(
@@ -331,6 +341,7 @@ export async function updateTestimonyAction(formData: FormData) {
 
 export async function deleteTestimonyAction(formData: FormData) {
   await requireAdminSession();
+  await requireSuperAdminSession();
   const id = required(text(formData, "id"), "Testimony ID");
 
   const [{ connectToDatabase }, { TestimonyModel }] = await Promise.all([

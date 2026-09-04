@@ -8,6 +8,7 @@ import {
   Images,
   Layers,
   MessageSquareQuote,
+  UserCog,
   Menu,
   X,
   ShieldCheck,
@@ -18,26 +19,56 @@ import { usePathname } from "next/navigation";
 import { useState, useTransition } from "react";
 import { signOutAdminAction } from "@/actions/admin-auth";
 import { useToast } from "@/components/ui/toast/toast-context";
+import type { AdminRole } from "@/types/admin";
 import styles from "./admin.module.css";
 
-const navigation = [
-  { href: "/admin", label: "Bookings", icon: Calendar },
-  { href: "/admin/team", label: "Specialist team", icon: Users },
-  { href: "/admin/facilities", label: "Facilities", icon: Building2 },
-  { href: "/admin/sections", label: "Sections", icon: Layers },
-  { href: "/admin/gallery", label: "Gallery", icon: Images },
+const allNavigation = [
+  { href: "/admin", label: "Bookings", icon: Calendar, adminOnly: false },
+  {
+    href: "/admin/team",
+    label: "Specialist team",
+    icon: Users,
+    adminOnly: true,
+  },
+  {
+    href: "/admin/facilities",
+    label: "Facilities",
+    icon: Building2,
+    adminOnly: true,
+  },
+  { href: "/admin/sections", label: "Sections", icon: Layers, adminOnly: true },
+  { href: "/admin/gallery", label: "Gallery", icon: Images, adminOnly: true },
   {
     href: "/admin/testimonies",
     label: "Testimonies",
     icon: MessageSquareQuote,
+    adminOnly: true,
+  },
+  {
+    href: "/admin/users",
+    label: "User Accounts",
+    icon: UserCog,
+    adminOnly: true,
   },
 ];
 
-export default function AdminSidebar({ email }: { email: string }) {
+export default function AdminSidebar({
+  email,
+  name,
+  role = "staff",
+}: {
+  email: string;
+  name?: string;
+  role?: AdminRole;
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [isLoggingOut, startTransition] = useTransition();
   const { toast } = useToast();
+
+  const navigation = allNavigation.filter(
+    (item) => !item.adminOnly || role === "admin",
+  );
 
   function handleSignOut(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -136,11 +167,13 @@ export default function AdminSidebar({ email }: { email: string }) {
         <div className={styles.sidebarFooter}>
           <div className={styles.userSection}>
             <div className={styles.userAvatar}>
-              {email.slice(0, 2).toUpperCase()}
+              {(name || email).slice(0, 2).toUpperCase()}
             </div>
             <div className={styles.userInfo}>
-              <span>Signed in as</span>
-              <strong title={email}>{email}</strong>
+              <div className={styles.userRoleTag}>
+                {role === "admin" ? "Super Admin" : "Staff"}
+              </div>
+              <strong title={email}>{name || email}</strong>
             </div>
           </div>
 

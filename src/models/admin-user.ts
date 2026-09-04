@@ -1,6 +1,6 @@
 import { Schema, model, models, type Model } from "mongoose";
 
-import type { AdminRole } from "@/types/admin";
+import { adminRoles, type AdminRole } from "@/types/admin";
 
 export interface AdminUserDocument {
   name: string;
@@ -34,8 +34,8 @@ const adminUserSchema = new Schema<AdminUserDocument>(
     },
     role: {
       type: String,
-      enum: ["admin"],
-      default: "admin",
+      enum: [...adminRoles],
+      default: "staff",
       required: true,
     },
     lastLoginAt: {

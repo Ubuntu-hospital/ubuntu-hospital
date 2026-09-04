@@ -8,7 +8,7 @@ import styles from "../admin.module.css";
 
 export const metadata: Metadata = {
   title: `Admin Login | ${hospitalConfig.name}`,
-  description: "Secure admin access for Ubuntu Hospital booking management.",
+  description: "Sign in to Ubuntu Hospital Admin Portal.",
 };
 
 export const dynamic = "force-dynamic";
@@ -19,10 +19,9 @@ export default async function AdminLoginPage() {
   return (
     <div className={styles.loginWrap}>
       <section className={styles.loginCard}>
-        <p className={styles.eyebrow}>Admin authentication</p>
-        <h1>Manage booking requests securely.</h1>
+        <h1>Sign In</h1>
         <p className={styles.loginIntro}>
-          Sign in to access the protected Ubuntu Hospital booking dashboard.
+          Enter your credentials to access the admin portal.
         </p>
 
         <AdminLoginForm redirectTo="/admin" />
