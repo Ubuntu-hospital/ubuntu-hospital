@@ -1,0 +1,16 @@
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+yarn-error.log
+yarn.lock
+.git
+.github
+.next
+.vscode
+.env
+.env.local
+.env.production
+.env.development
+README.md
+

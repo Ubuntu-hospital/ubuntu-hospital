@@ -1,0 +1,41 @@
+{
+  "name": "ubuntu-hospital-homepage",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix",
+    "type-check": "next typegen && tsc --noEmit",
+    "icons": "python scripts/generate_icons.py",
+    "validate": "yarn format:check && yarn lint && yarn type-check && yarn build"
+  },
+  "dependencies": {
+    "@eslint/eslintrc": "^3.3.7",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.6",
+    "eslint-config-prettier": "^10.1.8",
+    "format": "^0.2.2",
+    "framer-motion": "^12.23.24",
+    "jose": "^6.2.3",
+    "lucide-react": "^0.468.0",
+    "mongoose": "^9.7.0",
+    "next": "^15.5.6",
+    "prettier": "^3.9.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "resend": "^6.14.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "playwright-core": "^1.60.0",
+    "typescript": "^5.7.0"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

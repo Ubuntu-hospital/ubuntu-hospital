@@ -1,0 +1,106 @@
+.facility-tile img {
+  object-fit: cover;
+  transition: transform 700ms ease;
+}
+
+.facility-tile:hover img {
+  transform: scale(1.045);
+}
+
+.facilities-section {
+  background: var(--warm-surface);
+}
+
+.facility-mosaic {
+  display: grid;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.facility-tile {
+  position: relative;
+  min-height: 290px;
+  overflow: hidden;
+  background: #dce2e5;
+}
+
+.facility-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 17, 22, 0.02),
+    rgba(12, 17, 22, 0.78)
+  );
+}
+
+.facility-tile > span {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  display: grid;
+  width: 35px;
+  height: 35px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.2);
+  color: var(--white);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  backdrop-filter: blur(8px);
+}
+
+.facility-tile > div:last-child {
+  position: absolute;
+  right: 17px;
+  bottom: 17px;
+  left: 17px;
+}
+
+.facility-tile h3 {
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
+  font-size: 31px;
+  font-weight: 600;
+  letter-spacing: -0.055em;
+  line-height: 0.96;
+}
+
+.facility-tile p {
+  max-width: 360px;
+  margin: 8px 0 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+@media (min-width: 700px) {
+  .facility-mosaic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 980px) {
+  .facility-mosaic {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 42px;
+  }
+
+  .facility-tile-1,
+  .facility-tile-4 {
+    grid-column: span 7;
+  }
+
+  .facility-tile-2,
+  .facility-tile-3 {
+    grid-column: span 5;
+  }
+
+  .facility-tile {
+    min-height: 365px;
+  }
+}

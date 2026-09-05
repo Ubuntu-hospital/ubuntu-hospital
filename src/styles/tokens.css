@@ -1,0 +1,25 @@
+:root {
+  --font-sans: var(--font-sora), "Sora", Arial, sans-serif;
+  --font-serif: var(--font-fraunces), "Fraunces", Georgia, serif;
+  --orange: #ff6d12;
+  --orange-accessible: #c84400;
+  --orange-deep: #d94f00;
+  --orange-soft: #fff0e6;
+  --graphite: #4d4d4d;
+  --graphite-deep: #25282b;
+  --graphite-soft: #34383c;
+  --ink: #172033;
+  --muted: #667085;
+  --line: #e4e7ec;
+  --surface: #f7f8f9;
+  --warm-surface: #fbf5ef;
+  --white: #ffffff;
+  --shadow: 0 24px 70px rgba(20, 30, 42, 0.12);
+}
+
+:root {
+  --whatsapp: #25d366;
+  --whatsapp-deep: #128c7e;
+  --whatsapp-dark: #075e54;
+  --whatsapp-soft: #e8f8ee;
+}

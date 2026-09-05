@@ -1,0 +1,420 @@
+.hero {
+  position: relative;
+  min-height: calc(100svh - 78px);
+  overflow: hidden;
+  color: var(--white);
+  background: var(--ink);
+}
+
+.hero-media,
+.hero-image,
+.hero-shade,
+.hero-orange-wash,
+.hero-texture {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-media {
+  z-index: 1;
+  background: var(--ink);
+}
+
+.hero-image img {
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero-shade {
+  z-index: 2;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(15, 23, 42, 0.94) 0%,
+      rgba(15, 23, 42, 0.88) 24%,
+      rgba(15, 23, 42, 0.58) 52%,
+      rgba(15, 23, 42, 0.18) 100%
+    ),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.16), rgba(15, 23, 42, 0.5));
+}
+
+.hero-orange-wash {
+  z-index: 3;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 15% 38%,
+      rgba(255, 109, 18, 0.2),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 84% 12%,
+      rgba(255, 109, 18, 0.16),
+      transparent 26%
+    );
+  mix-blend-mode: screen;
+}
+
+.hero-texture {
+  z-index: 4;
+  pointer-events: none;
+  opacity: 0.15;
+  background-image:
+    radial-gradient(rgba(255, 255, 255, 0.22) 0.65px, transparent 0.65px),
+    radial-gradient(rgba(255, 109, 18, 0.28) 0.75px, transparent 0.75px);
+  background-position:
+    0 0,
+    8px 8px;
+  background-size:
+    16px 16px,
+    22px 22px;
+}
+
+.hero-shell {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  min-height: calc(100svh - 78px);
+  grid-template-rows: auto 1fr;
+  gap: clamp(34px, 5vh, 56px);
+  padding: clamp(28px, 5vh, 46px) 0 clamp(36px, 6vh, 58px);
+}
+
+.hero-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+.hero-hospital-name {
+  display: inline-flex;
+  gap: 12px;
+  align-items: center;
+  margin: 0;
+  color: var(--white);
+  font-size: clamp(0.8rem, 1.05vw, 1rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+}
+
+.hero-hospital-brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 7px 12px;
+  color: var(--white);
+  background: var(--orange-accessible);
+  box-shadow: 0 12px 28px rgba(200, 68, 0, 0.3);
+  letter-spacing: 0.14em;
+}
+
+.hero-controls {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.hero-control {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: 58px;
+  height: 56px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  transition:
+    color 200ms ease,
+    border-color 200ms ease,
+    background-color 200ms ease,
+    transform 200ms ease;
+}
+
+.hero-control:hover,
+.hero-control-active {
+  border-color: var(--orange-accessible);
+  background: var(--orange-accessible);
+  transform: translateY(-2px);
+}
+
+.hero-control i {
+  position: absolute;
+  right: 10px;
+  bottom: 8px;
+  left: 10px;
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.hero-control i::before {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background: var(--white);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.hero-control-active i::before {
+  animation: heroFocusProgress 5200ms linear forwards;
+}
+
+.hero-content {
+  --hero-copy-height: clamp(235px, 30vh, 315px);
+
+  display: grid;
+  grid-template-rows: auto var(--hero-copy-height) auto;
+  align-content: center;
+  max-width: 820px;
+  padding-bottom: 0;
+}
+
+.hero-label {
+  width: fit-content;
+  margin: 0 0 20px;
+  color: #ffc49d;
+  font-size: clamp(0.8rem, 1.25vw, 0.95rem);
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.hero-copy-slide {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  max-width: 820px;
+  min-height: var(--hero-copy-height);
+}
+
+.hero h1 {
+  max-width: 820px;
+  margin: 0;
+  color: var(--white);
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
+  font-size: clamp(4.35rem, 7vw, 6.85rem);
+  font-weight: 600;
+  letter-spacing: -0.075em;
+  line-height: 0.88;
+  text-wrap: balance;
+}
+
+.hero-copy-slide p {
+  max-width: 590px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(1.05rem, 1.28vw, 1.2rem);
+  font-weight: 650;
+  line-height: 1.52;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 0;
+}
+
+.hero-actions > a:first-child {
+  color: var(--ink) !important;
+  background: var(--white) !important;
+  border: 1px solid rgba(255, 255, 255, 0.28) !important;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.18) !important;
+}
+
+.hero-actions > a:first-child:hover {
+  color: var(--white) !important;
+  background: var(--orange-deep) !important;
+  border-color: var(--orange-deep) !important;
+  box-shadow: 0 12px 26px rgba(217, 79, 0, 0.2) !important;
+}
+
+.hero-call-action {
+  display: inline-flex;
+  min-height: 47px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  color: var(--white);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1;
+  transition:
+    color 220ms ease,
+    background-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.hero-call-action:hover {
+  color: var(--white);
+  background: var(--orange-deep);
+  box-shadow: 0 12px 26px rgba(217, 79, 0, 0.18);
+  transform: translateY(-2px);
+}
+
+@keyframes heroFocusProgress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (min-width: 980px) {
+  .hero-content {
+    --hero-copy-height: clamp(245px, 31vh, 325px);
+
+    transform: translateY(12px);
+  }
+}
+
+@media (max-width: 979px) {
+  .hero {
+    min-height: calc(100svh - 72px);
+  }
+
+  .hero-shell {
+    min-height: calc(100svh - 72px);
+    gap: 32px;
+    padding: 34px 0 56px;
+  }
+
+  .hero-shade {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(15, 23, 42, 0.94) 0%,
+        rgba(15, 23, 42, 0.84) 58%,
+        rgba(15, 23, 42, 0.4) 100%
+      ),
+      linear-gradient(180deg, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.58));
+  }
+
+  .hero-content {
+    --hero-copy-height: 265px;
+
+    max-width: 680px;
+  }
+
+  .hero h1 {
+    font-size: clamp(4rem, 14vw, 6.4rem);
+  }
+}
+
+@media (max-width: 699px) {
+  .hero {
+    min-height: calc(100svh - 72px);
+  }
+
+  .hero-shell {
+    min-height: calc(100svh - 72px);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 28px;
+    padding: 24px 0 42px;
+  }
+
+  .hero-top {
+    display: block;
+  }
+
+  .hero-hospital-name {
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 9px;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    line-height: 1.5;
+    text-wrap: balance;
+  }
+
+  .hero-hospital-brand {
+    min-height: 30px;
+    padding: 6px 9px;
+  }
+
+  .hero-controls {
+    display: none;
+  }
+
+  .hero-content {
+    --hero-copy-height: 238px;
+
+    display: grid;
+    grid-template-rows: auto var(--hero-copy-height) auto;
+    align-content: center;
+    max-width: 100%;
+    padding-bottom: 0;
+  }
+
+  .hero-label {
+    margin-bottom: 16px;
+    font-size: 0.8rem;
+    letter-spacing: 0.19em;
+  }
+
+  .hero-copy-slide {
+    gap: 16px;
+    min-height: var(--hero-copy-height);
+  }
+
+  .hero h1 {
+    font-size: clamp(3.7rem, 17vw, 5.35rem);
+    line-height: 0.9;
+  }
+
+  .hero-copy-slide p {
+    max-width: 330px;
+    font-size: 1rem;
+    line-height: 1.55;
+  }
+
+  .hero-actions {
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .hero-actions a {
+    width: 100%;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-content {
+    --hero-copy-height: 230px;
+  }
+
+  .hero h1 {
+    font-size: clamp(3.15rem, 15vw, 4.35rem);
+  }
+
+  .hero-copy-slide p {
+    font-size: 0.96rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-control-active i::before {
+    animation: none;
+    transform: scaleX(1);
+  }
+}

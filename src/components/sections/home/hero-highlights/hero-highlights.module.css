@@ -1,0 +1,140 @@
+.hero-highlights-section {
+  position: relative;
+  z-index: 20;
+  padding: 22px 0 34px;
+  background: var(--white);
+}
+
+.hero-overview-topline {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+.hero-overview-topline h2 {
+  margin: 0;
+  max-width: 620px;
+  color: var(--ink);
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  font-weight: 600;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.hero-focus-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.hero-focus-card {
+  overflow: hidden;
+  border: 1px solid rgba(255, 109, 18, 0.22);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 109, 18, 0.98),
+    rgba(217, 79, 0, 0.92)
+  );
+  box-shadow: 0 22px 44px rgba(217, 79, 0, 0.16);
+}
+
+.hero-focus-image {
+  position: relative;
+  min-height: 220px;
+}
+
+.hero-focus-image img {
+  object-fit: cover;
+}
+
+.hero-focus-list {
+  display: grid;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero-focus-list li {
+  position: relative;
+  padding-left: 15px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.hero-focus-list li::before {
+  position: absolute;
+  top: 0.7em;
+  left: 0;
+  width: 5px;
+  height: 5px;
+  content: "";
+  background: rgba(255, 255, 255, 0.72);
+  transform: translateY(-50%);
+}
+
+.hero-focus-wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 109, 18, 0.14),
+    rgba(29, 24, 22, 0.52)
+  );
+}
+
+.hero-focus-copy {
+  display: grid;
+  gap: 10px;
+  min-height: 190px;
+  padding: 18px 16px 22px;
+  color: var(--white);
+}
+
+.hero-focus-copy h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.hero-focus-list li {
+  font-size: 1.08rem;
+  line-height: 1.42;
+}
+
+@media (min-width: 700px) {
+  .hero-focus-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero-focus-copy {
+    min-height: 220px;
+  }
+}
+
+@media (min-width: 980px) {
+  .hero-highlights-section {
+    padding: 26px 0 40px;
+  }
+
+  .hero-focus-image {
+    min-height: 256px;
+  }
+
+  .hero-focus-copy {
+    min-height: 250px;
+    padding: 20px 18px 24px;
+  }
+
+  .hero-focus-copy h3 {
+    font-size: 1.25rem;
+  }
+
+  .hero-focus-copy p {
+    font-size: 1.08rem;
+    line-height: 1.45;
+  }
+}

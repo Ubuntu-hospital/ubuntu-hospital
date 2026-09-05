@@ -1,0 +1,49 @@
+.section-intro {
+  max-width: 630px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: var(--orange-deep);
+  font-size: clamp(0.8rem, 1.25vw, 0.95rem);
+  font-weight: 800;
+  letter-spacing: 0.19em;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.eyebrow-inverse {
+  color: #ffc49d;
+}
+
+.section-intro-centered {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.section-title {
+  max-width: 680px;
+  margin: 15px 0 0;
+  color: var(--ink);
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
+  font-size: clamp(2.45rem, 5vw, 4.4rem);
+  font-weight: 600;
+  letter-spacing: -0.062em;
+  line-height: 0.96;
+}
+
+.section-title-inverse {
+  color: var(--white);
+}
+
+.section-text {
+  max-width: 570px;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.section-text-inverse {
+  color: rgba(255, 255, 255, 0.67);
+}

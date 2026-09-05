@@ -1,0 +1,63 @@
+.final-cta {
+  position: relative;
+  overflow: hidden;
+  padding: 68px 0;
+  background: var(--orange);
+}
+
+.final-cta-ring {
+  position: absolute;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 50%;
+}
+
+.final-cta-ring-one {
+  top: -150px;
+  right: -70px;
+  width: 350px;
+  height: 350px;
+}
+
+.final-cta-ring-two {
+  right: 150px;
+  bottom: -220px;
+  width: 300px;
+  height: 300px;
+}
+
+.final-cta-layout {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  gap: 24px;
+}
+
+.final-cta h2 {
+  max-width: 710px;
+  margin: 12px 0 0;
+  color: var(--white);
+  font-family: var(--font-fraunces), "Fraunces", Georgia, serif;
+  font-size: clamp(2.9rem, 6vw, 5.65rem);
+  font-weight: 600;
+  letter-spacing: -0.07em;
+  line-height: 0.91;
+}
+
+.final-cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+}
+
+@media (min-width: 980px) {
+  .final-cta {
+    padding: 78px 0;
+  }
+
+  .final-cta-layout {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 32px;
+    align-items: end;
+  }
+}

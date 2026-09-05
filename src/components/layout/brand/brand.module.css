@@ -1,0 +1,81 @@
+.brand,
+.brand-inverse-card {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 10px;
+  transition:
+    box-shadow 220ms ease,
+    transform 220ms ease,
+    opacity 220ms ease;
+}
+
+.brand {
+  max-width: min(172px, 36vw);
+}
+
+.brand:hover,
+.brand-inverse-card:hover {
+  transform: translateY(-1px);
+}
+
+.brand-logo,
+.brand-inverse-logo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 604 / 248;
+  aspect-ratio: 604 / 217;
+}
+
+.brand-logomark {
+  display: block;
+  display: none;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  aspect-ratio: 1448 / 1086;
+}
+
+.brand-logomark {
+  display: none;
+}
+
+.brand-inverse-card {
+  width: min(100%, 302px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.18),
+    0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.brand-inverse-card:hover {
+  box-shadow:
+    0 17px 34px rgba(0, 0, 0, 0.22),
+    0 0 0 1px rgba(255, 109, 18, 0.18);
+}
+
+@media (max-width: 979px) {
+  .brand {
+    max-width: min(154px, calc(100vw - 92px));
+  }
+
+  .brand-mobile-logomark {
+    max-width: 56px;
+  }
+
+  .brand-mobile-logomark .brand-logo-desktop {
+    display: none;
+  }
+
+  .brand-mobile-logomark .brand-logomark {
+    display: block;
+  }
+}
+
+@media (max-width: 699px) {
+  .brand-inverse-card {
+    width: min(100%, 268px);
+  }
+}
