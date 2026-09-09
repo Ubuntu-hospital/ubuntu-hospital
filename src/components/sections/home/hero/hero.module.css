@@ -20,9 +20,17 @@
   background: var(--ink);
 }
 
-.hero-image img {
+.hero-image-backdrop {
   object-fit: cover;
   object-position: center;
+  filter: blur(28px) brightness(0.48) saturate(0.75);
+  transform: scale(1.08);
+}
+
+.hero-image-subject {
+  object-fit: contain;
+  object-position: center;
+  filter: brightness(0.82) contrast(1.05);
 }
 
 .hero-shade {

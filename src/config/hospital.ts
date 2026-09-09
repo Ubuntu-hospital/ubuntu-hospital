@@ -146,14 +146,14 @@ export const hospitalConfig = {
       {
         title: "Trauma",
         text: ["Bone injuries", "Muscle injuries", "Joint injuries"],
-        image: "/images/hospital/ubuntu-knee-replacement.png",
-        alt: "A total knee joint replacement",
+        image: "/images/hospital/knee-replacement.jpeg",
+        alt: "Trauma, bone, muscle and joint injury care",
       },
       {
         title: "General orthopaedics",
         text: ["Joint replacement", "Sports medicine", "Rehabilitation"],
-        image: "/images/hospital/emergency_room_wound_care.png",
-        alt: "An image showing a traumatic hand fracture",
+        image: "/images/hospital/ubuntu-knee-replacement.png",
+        alt: "A total knee joint replacement",
       },
     ],
   },

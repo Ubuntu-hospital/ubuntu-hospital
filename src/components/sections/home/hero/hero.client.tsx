@@ -61,6 +61,16 @@ export default function Hero() {
             transition={{ duration: 0.72, ease: easing }}
           >
             <Image
+              className="hero-image-backdrop"
+              src={activeArea.image}
+              alt=""
+              aria-hidden="true"
+              fill
+              priority={activeIndex === 0}
+              sizes="100vw"
+            />
+            <Image
+              className="hero-image-subject"
               src={activeArea.image}
               alt={activeArea.alt}
               fill
