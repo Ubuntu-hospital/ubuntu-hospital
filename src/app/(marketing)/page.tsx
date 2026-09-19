@@ -5,6 +5,7 @@ import Hero from "@/components/sections/home/hero/hero.client";
 import JsonLd from "@/components/seo/json-ld";
 import { getPageMetadata, getFaqJsonLd } from "@/config/seo";
 import { listTeamMembers } from "@/lib/team-members";
+import { getManagedFacilitySectionItems } from "@/lib/facility-images";
 
 const Tour = nextDynamic(
   () => import("@/components/sections/home/tour/tour.client"),
@@ -30,7 +31,10 @@ export const metadata: Metadata = getPageMetadata("home");
 export const dynamic = "force-dynamic";
 
 export default async function HomePage() {
-  const managedMembers = await listTeamMembers();
+  const [managedMembers, facilityItems] = await Promise.all([
+    listTeamMembers(),
+    getManagedFacilitySectionItems(),
+  ]);
   const faqSchema = getFaqJsonLd();
 
   return (
@@ -38,7 +42,7 @@ export default async function HomePage() {
       <JsonLd data={faqSchema} />
       <Hero />
       <Tour />
-      <Facilities />
+      <Facilities items={facilityItems} />
       <Specialists people={managedMembers} />
       <PatientJourney />
       <Testimonials />

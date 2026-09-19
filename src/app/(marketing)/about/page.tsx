@@ -6,25 +6,28 @@ import JsonLd from "@/components/seo/json-ld";
 import { getPageMetadata, getBreadcrumbJsonLd, routes } from "@/config/seo";
 import { getSectionImage } from "@/lib/section-images";
 import { listTestimonies } from "@/lib/testimonies";
+import { getManagedFacilitySectionItems } from "@/lib/facility-images";
 
 export const metadata: Metadata = getPageMetadata("about");
 
 export const dynamic = "force-dynamic";
 
 export default async function AboutRoute() {
-  const [visionImage, aboutImage, testimonies] = await Promise.all([
-    getSectionImage(
-      "about-our-vision",
-      hospitalConfig.standard.vision.image,
-      hospitalConfig.standard.vision.imageAlt,
-    ),
-    getSectionImage(
-      "about-the-hospital",
-      hospitalConfig.about.image,
-      hospitalConfig.about.imageAlt,
-    ),
-    listTestimonies(),
-  ]);
+  const [visionImage, aboutImage, testimonies, facilityItems] =
+    await Promise.all([
+      getSectionImage(
+        "about-our-vision",
+        hospitalConfig.standard.vision.image,
+        hospitalConfig.standard.vision.imageAlt,
+      ),
+      getSectionImage(
+        "about-the-hospital",
+        hospitalConfig.about.image,
+        hospitalConfig.about.imageAlt,
+      ),
+      listTestimonies(),
+      getManagedFacilitySectionItems(),
+    ]);
 
   const breadcrumbsSchema = getBreadcrumbJsonLd([
     { name: "About Us", path: routes.about },
@@ -37,6 +40,7 @@ export default async function AboutRoute() {
         visionImage={visionImage}
         aboutImage={aboutImage}
         testimonies={testimonies}
+        facilityItems={facilityItems}
       />
     </>
   );

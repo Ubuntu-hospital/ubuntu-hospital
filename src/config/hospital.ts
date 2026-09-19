@@ -362,6 +362,7 @@ export const hospitalConfig = {
 
     items: [
       {
+        id: "wards",
         title: "Modern wards",
         text: "Comfortable spaces for attentive inpatient care.",
 
@@ -371,6 +372,7 @@ export const hospitalConfig = {
         alt: "Modern hospital ward with patient beds",
       },
       {
+        id: "operating-rooms",
         title: "Operating rooms",
         text: "Purpose-built environments for specialist procedures.",
 
@@ -380,6 +382,7 @@ export const hospitalConfig = {
         alt: "Medical professionals inside an operating room",
       },
       {
+        id: "consultation",
         title: "Consultation spaces",
         text: "Calm clinical rooms for assessments and care planning.",
 
@@ -389,6 +392,7 @@ export const hospitalConfig = {
         alt: "Clean modern hospital consultation room",
       },
       {
+        id: "physiotherapy",
         title: "Physiotherapy support",
         text: "Rehabilitation spaces built around safe progress.",
 

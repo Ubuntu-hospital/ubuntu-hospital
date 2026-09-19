@@ -7,8 +7,16 @@ import { motion } from "framer-motion";
 import { hospitalConfig } from "@/config/hospital";
 import { routes } from "@/config/routes";
 import SectionIntro from "@/components/ui/section-intro/section-intro";
+import type { ManagedFacilitySectionItem } from "@/lib/facility-images";
 
-export default function Facilities() {
+export default function Facilities({
+  items,
+}: {
+  items?: ManagedFacilitySectionItem[];
+} = {}) {
+  const displayItems =
+    items && items.length > 0 ? items : hospitalConfig.facilities.items;
+
   return (
     <section
       className="section facilities-section texture-warm"
@@ -43,7 +51,7 @@ export default function Facilities() {
           }}
           className="facility-mosaic"
         >
-          {hospitalConfig.facilities.items.map((facility, index) => (
+          {displayItems.map((facility, index) => (
             <motion.article
               key={facility.title}
               variants={{

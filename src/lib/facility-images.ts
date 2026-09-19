@@ -1,17 +1,31 @@
 import { facilitySpaces } from "@/content/facilities";
+import { hospitalConfig } from "@/config/hospital";
+
+export type ManagedFacilitySectionItem = {
+  id: string;
+  title: string;
+  text: string;
+  image: string;
+  alt: string;
+};
 
 export async function listFacilityImageOverrides() {
-  const [{ connectToDatabase }, { FacilityImageModel }] = await Promise.all([
-    import("@/lib/mongodb"),
-    import("@/models/facility-image"),
-  ]);
-  await connectToDatabase();
-  const overrides = await FacilityImageModel.find().lean();
-  return overrides.map((item) => ({
-    facilityId: item.facilityId,
-    image: item.image,
-    imageAlt: item.imageAlt,
-  }));
+  try {
+    const [{ connectToDatabase }, { FacilityImageModel }] = await Promise.all([
+      import("@/lib/mongodb"),
+      import("@/models/facility-image"),
+    ]);
+    await connectToDatabase();
+    const overrides = await FacilityImageModel.find().lean();
+    return overrides.map((item) => ({
+      facilityId: item.facilityId,
+      image: item.image,
+      imageAlt: item.imageAlt,
+    }));
+  } catch (error) {
+    console.error("Failed to load facility image overrides:", error);
+    return [];
+  }
 }
 
 export async function getManagedFacilitySpaces() {
@@ -21,4 +35,39 @@ export async function getManagedFacilitySpaces() {
     ...space,
     ...(overrideMap.get(space.id) ?? {}),
   }));
+}
+
+export async function getManagedFacilitySectionItems(): Promise<
+  ManagedFacilitySectionItem[]
+> {
+  const overrides = await listFacilityImageOverrides();
+  const overrideMap = new Map(overrides.map((item) => [item.facilityId, item]));
+
+  const defaultMapping: Record<string, string> = {
+    "Modern wards": "wards",
+    "Operating rooms": "operating-rooms",
+    "Consultation spaces": "consultation",
+    "Physiotherapy support": "physiotherapy",
+  };
+
+  return hospitalConfig.facilities.items.map((item) => {
+    const facilityId =
+      item.id ??
+      defaultMapping[item.title] ??
+      item.title.toLowerCase().replace(/\s+/g, "-");
+
+    const override =
+      overrideMap.get(facilityId) ??
+      (facilityId === "consultation"
+        ? overrideMap.get("reception-opd")
+        : undefined);
+
+    return {
+      id: facilityId,
+      title: item.title,
+      text: item.text,
+      image: override?.image || item.image,
+      alt: override?.imageAlt || item.alt,
+    };
+  });
 }

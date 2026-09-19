@@ -162,6 +162,7 @@ export async function saveFacilityImageAction(formData: FormData) {
   );
 
   revalidatePath(routes.home);
+  revalidatePath(routes.about);
   revalidatePath(routes.facilities);
   revalidatePath(routes.gallery);
   revalidatePath(routes.admin.facilities);
