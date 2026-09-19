@@ -51,10 +51,18 @@ export async function getManagedFacilitySectionItems(): Promise<
   };
 
   return hospitalConfig.facilities.items.map((item) => {
+    const rawItem = item as {
+      id?: string;
+      title: string;
+      text: string;
+      image: string;
+      alt: string;
+    };
+
     const facilityId =
-      item.id ??
-      defaultMapping[item.title] ??
-      item.title.toLowerCase().replace(/\s+/g, "-");
+      rawItem.id ??
+      defaultMapping[rawItem.title] ??
+      rawItem.title.toLowerCase().replace(/\s+/g, "-");
 
     const override =
       overrideMap.get(facilityId) ??
@@ -64,10 +72,10 @@ export async function getManagedFacilitySectionItems(): Promise<
 
     return {
       id: facilityId,
-      title: item.title,
-      text: item.text,
-      image: override?.image || item.image,
-      alt: override?.imageAlt || item.alt,
+      title: rawItem.title,
+      text: rawItem.text,
+      image: override?.image || rawItem.image,
+      alt: override?.imageAlt || rawItem.alt,
     };
   });
 }
