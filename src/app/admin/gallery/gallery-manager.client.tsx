@@ -1,15 +1,14 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Plus, Trash2, Sparkles, Tag, Eye, Star, Pencil } from "lucide-react";
+import { Plus, Trash2, Sparkles, Tag, Eye, Star } from "lucide-react";
 import {
   createGalleryImageAction,
-  updateGalleryImageAction,
   deleteGalleryImageAction,
 } from "@/actions/content-management";
 import { useToast } from "@/components/ui/toast/toast-context";
 import ConfirmModal from "@/components/ui/confirm-modal/confirm-modal.client";
-import GalleryForm, { type GalleryFormItem } from "./gallery-form.client";
+import GalleryForm from "./gallery-form.client";
 import styles from "../admin.module.css";
 
 interface GalleryImageItem {
@@ -19,7 +18,6 @@ interface GalleryImageItem {
   image: string;
   alt: string;
   featured?: boolean;
-  sortOrder?: number;
 }
 
 export default function GalleryManager({
@@ -29,9 +27,6 @@ export default function GalleryManager({
 }) {
   const { toast } = useToast();
   const [showAddForm, setShowAddForm] = useState(false);
-  const [editingImage, setEditingImage] = useState<GalleryImageItem | null>(
-    null,
-  );
   const [deletingImage, setDeletingImage] = useState<GalleryImageItem | null>(
     null,
   );
@@ -77,6 +72,7 @@ export default function GalleryManager({
     );
   }
 
+  // When data exists: hide form by default, show "+ Add Image" CTA button at top
   return (
     <div className={styles.adminPageContainer}>
       <ConfirmModal
@@ -103,19 +99,13 @@ export default function GalleryManager({
             </span>
           </div>
           <h1>Gallery Management</h1>
-          <p className={styles.headerDescription}>
-            Manage, edit, or upload photos shown on the public gallery page.
-          </p>
         </div>
 
         <div className={styles.pageHeaderActions}>
           <button
             type="button"
             className={styles.primaryActionButton}
-            onClick={() => {
-              setEditingImage(null);
-              setShowAddForm((prev) => !prev);
-            }}
+            onClick={() => setShowAddForm((prev) => !prev)}
             aria-expanded={showAddForm}
           >
             <Plus size={16} strokeWidth={2.5} />
@@ -130,20 +120,6 @@ export default function GalleryManager({
             action={createGalleryImageAction}
             initialOpen={true}
             onClose={() => setShowAddForm(false)}
-          />
-        </section>
-      ) : null}
-
-      {editingImage ? (
-        <section
-          className={styles.collapsibleFormSection}
-          style={{ marginBottom: "28px" }}
-        >
-          <GalleryForm
-            action={updateGalleryImageAction}
-            initialData={editingImage as GalleryFormItem}
-            initialOpen={true}
-            onClose={() => setEditingImage(null)}
           />
         </section>
       ) : null}
@@ -178,11 +154,6 @@ export default function GalleryManager({
                   <h3 className={styles.galleryItemTitle} title={item.title}>
                     {item.title}
                   </h3>
-                  {item.alt && item.alt !== item.title ? (
-                    <p className={styles.galleryItemAlt} title={item.alt}>
-                      {item.alt}
-                    </p>
-                  ) : null}
                 </div>
 
                 <div className={styles.galleryItemFooter}>
@@ -194,44 +165,20 @@ export default function GalleryManager({
                     title="Open full size image"
                   >
                     <Eye size={14} />
-                    <span>View</span>
+                    <span>View full size</span>
                   </a>
 
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "8px",
-                    }}
+                  <button
+                    type="button"
+                    className={styles.deleteIconButton}
+                    onClick={() => triggerDelete(item)}
+                    disabled={isPending}
+                    aria-label={`Remove ${item.title}`}
+                    title="Remove from gallery"
                   >
-                    <button
-                      type="button"
-                      className={styles.editIconButton}
-                      onClick={() => {
-                        setShowAddForm(false);
-                        setEditingImage(item);
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
-                      disabled={isPending}
-                      aria-label={`Edit ${item.title}`}
-                      title="Edit gallery item"
-                    >
-                      <Pencil size={13} />
-                      <span>Edit</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      className={styles.deleteIconButton}
-                      onClick={() => triggerDelete(item)}
-                      disabled={isPending}
-                      aria-label={`Remove ${item.title}`}
-                      title="Remove from gallery"
-                    >
-                      <Trash2 size={13} />
-                      <span>Remove</span>
-                    </button>
-                  </div>
+                    <Trash2 size={15} />
+                    <span>Remove</span>
+                  </button>
                 </div>
               </div>
             </article>
