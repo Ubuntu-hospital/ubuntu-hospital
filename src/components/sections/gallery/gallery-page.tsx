@@ -13,6 +13,62 @@ import {
 
 import styles from "./gallery-page.module.css";
 
+type CardSpan = "single" | "wide" | "full";
+
+function computeCardSpans(items: GalleryImage[]): CardSpan[] {
+  const spans: CardSpan[] = new Array(items.length).fill("single");
+  let col = 0; // Current column in row (0, 1, 2)
+  let alternateWideRight = false;
+
+  for (let i = 0; i < items.length; i++) {
+    const isFeatured = Boolean(items[i].featured);
+    const spaceInRow = 3 - col;
+
+    if (isFeatured) {
+      if (spaceInRow === 3) {
+        // Start of row: can we make it wide (span 2)?
+        if (i + 1 < items.length) {
+          if (alternateWideRight) {
+            // First item single (col 0), next item can be wide (cols 1 & 2)
+            spans[i] = "single";
+            col = 1;
+          } else {
+            // First item wide (cols 0 & 1), next item will be single (col 2)
+            spans[i] = "wide";
+            col = 2;
+          }
+          alternateWideRight = !alternateWideRight;
+        } else {
+          // Last item alone in row: make it full (span 3)
+          spans[i] = "full";
+          col = 3;
+        }
+      } else if (spaceInRow === 2) {
+        // Exactly 2 columns left in this row (col === 1):
+        // This featured item takes cols 1 & 2, completing the row cleanly!
+        spans[i] = "wide";
+        col = 3;
+      } else {
+        // Only 1 column left in this row (col === 2):
+        // A wide card cannot fit here without wrapping and leaving an empty hole.
+        // So it takes 1 column, completing the row cleanly!
+        spans[i] = "single";
+        col = 3;
+      }
+    } else {
+      // Normal item: takes 1 column
+      spans[i] = "single";
+      col += 1;
+    }
+
+    if (col >= 3) {
+      col = 0;
+    }
+  }
+
+  return spans;
+}
+
 export default function GalleryPage({
   images = galleryPageContent.images,
 }: {
@@ -28,6 +84,8 @@ export default function GalleryPage({
 
     return images.filter((image) => image.category === activeCategory);
   }, [activeCategory, images]);
+
+  const spans = useMemo(() => computeCardSpans(visibleImages), [visibleImages]);
 
   return (
     <>
@@ -71,42 +129,50 @@ export default function GalleryPage({
           </div>
 
           <div className={styles.galleryGrid}>
-            {visibleImages.map((item, index) => (
-              <Reveal
-                key={item.id}
-                delay={(index % 6) * 0.04}
-                className={
-                  item.featured
-                    ? `${styles.galleryCard} ${styles.galleryCardFeatured}`
-                    : styles.galleryCard
-                }
-              >
-                <button
-                  type="button"
-                  className={styles.galleryButton}
-                  onClick={() => setActiveImage(item)}
-                  aria-label={`Open ${item.title}`}
+            {visibleImages.map((item, index) => {
+              const span = spans[index];
+              const cardClassName =
+                span === "wide"
+                  ? `${styles.galleryCard} ${styles.galleryCardWide}`
+                  : span === "full"
+                    ? `${styles.galleryCard} ${styles.galleryCardFull}`
+                    : styles.galleryCard;
+
+              return (
+                <Reveal
+                  key={item.id}
+                  delay={(index % 6) * 0.04}
+                  className={cardClassName}
                 >
-                  <Image
-                    src={item.image}
-                    alt={item.alt}
-                    fill
-                    sizes={
-                      item.featured
-                        ? "(max-width: 980px) 100vw, 50vw"
-                        : "(max-width: 699px) 100vw, (max-width: 980px) 50vw, 33vw"
-                    }
-                  />
+                  <button
+                    type="button"
+                    className={styles.galleryButton}
+                    onClick={() => setActiveImage(item)}
+                    aria-label={`Open ${item.title}`}
+                  >
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      fill
+                      sizes={
+                        span === "full"
+                          ? "100vw"
+                          : span === "wide"
+                            ? "(max-width: 700px) 100vw, (max-width: 980px) 100vw, 66vw"
+                            : "(max-width: 699px) 100vw, (max-width: 980px) 50vw, 33vw"
+                      }
+                    />
 
-                  <span className={styles.galleryWash} />
+                    <span className={styles.galleryWash} />
 
-                  <span className={styles.galleryCaption}>
-                    <small>{item.category}</small>
-                    <strong>{item.title}</strong>
-                  </span>
-                </button>
-              </Reveal>
-            ))}
+                    <span className={styles.galleryCaption}>
+                      <small>{item.category}</small>
+                      <strong>{item.title}</strong>
+                    </span>
+                  </button>
+                </Reveal>
+              );
+            })}
           </div>
         </div>
       </section>

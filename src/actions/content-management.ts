@@ -231,6 +231,62 @@ export async function deleteGalleryImageAction(formData: FormData) {
   return { success: true, message: "Gallery image removed." };
 }
 
+export async function updateGalleryImageAction(formData: FormData) {
+  await requireAdminSession();
+  await requireSuperAdminSession();
+  const id = required(text(formData, "id"), "Image ID");
+  const title = required(text(formData, "title"), "Title");
+  const category = text(formData, "category") as GalleryCategory;
+  if (!["hospital", "care", "facilities", "patients"].includes(category)) {
+    throw new Error("Choose a valid gallery category.");
+  }
+  const image = required(text(formData, "image"), "Image URL");
+  const alt = text(formData, "alt") || title;
+  const featured =
+    formData.get("featured") === "on" || formData.get("featured") === "true";
+
+  const [{ connectToDatabase }, { GalleryImageModel }] = await Promise.all([
+    import("@/lib/mongodb"),
+    import("@/models/gallery-image"),
+  ]);
+  await connectToDatabase();
+
+  const updateFields: Record<string, unknown> = {
+    title,
+    category,
+    image,
+    alt,
+    featured,
+  };
+
+  const publicId = text(formData, "publicId");
+  if (publicId) {
+    updateFields.publicId = publicId;
+  }
+
+  const sortOrder = number(formData, "sortOrder");
+  if (
+    sortOrder !== null &&
+    sortOrder !== undefined &&
+    !Number.isNaN(sortOrder)
+  ) {
+    updateFields.sortOrder = sortOrder;
+  }
+
+  const updated = await GalleryImageModel.findByIdAndUpdate(id, updateFields, {
+    new: true,
+  });
+
+  if (!updated) {
+    throw new Error("Gallery image not found.");
+  }
+
+  revalidatePath(routes.home);
+  revalidatePath(routes.gallery);
+  revalidatePath(routes.admin.gallery);
+  return { success: true, message: `Image "${title}" updated successfully.` };
+}
+
 export async function saveSectionImageAction(formData: FormData) {
   await requireAdminSession();
   await requireSuperAdminSession();
